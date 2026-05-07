@@ -1,16 +1,696 @@
-## Hi there 👋
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;--gold-light:#E8C96A;--gold-dark:#9A7A2E;
+  --navy:#0A1628;--navy-mid:#0F2040;--navy-light:#1A3050;
+  --ocean:#0E4A6E;--ocean-bright:#1A7AAD;--ocean-light:#4db8d4;
+  --coral:#D4581A;--coral-light:#F07840;
+  --sand:#F5EDD8;--sand-dark:#E8D4A8;
+  --text-light:#F0EAD6;--text-muted:#A8B8C8;
+  --green-tropical:#2D6A2A;
+}
+body{font-family:'Georgia',serif;background:var(--navy);color:var(--text-light);overflow-x:hidden}
+.sans{font-family:system-ui,-apple-system,sans-serif}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:rgba(10,22,40,0.97);border-bottom:0.5px solid rgba(201,168,76,0.3)}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-icon{width:36px;height:36px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--navy)}
+.nav-brand{font-size:17px;font-weight:700;color:var(--gold);letter-spacing:2px}
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a{font-size:12px;color:var(--text-muted);text-decoration:none;letter-spacing:1.5px;cursor:pointer;font-family:system-ui,sans-serif}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{padding:7px 18px;background:var(--gold);color:var(--navy);border-radius:3px;font-size:12px;letter-spacing:1.5px;cursor:pointer;border:none;font-weight:700;font-family:system-ui,sans-serif}
+.nav-cta:hover{background:var(--gold-light)}
+.hero{position:relative;min-height:520px;background:var(--navy);overflow:hidden;display:flex;align-items:center}
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+.hero-sky{position:absolute;inset:0;background:#0a1628}
+.hero-sunset{position:absolute;bottom:200px;left:0;right:0;height:180px;background:linear-gradient(to top,#8B3A1A,#C4581A,transparent);opacity:0.7}
+.hero-ocean{position:absolute;bottom:0;left:0;right:0;height:210px;background:linear-gradient(to bottom,#0e4a6e,#0a3050)}
+.hero-waves{position:absolute;bottom:170px;left:0;right:0}
+.hero-content{position:relative;z-index:2;padding:60px 40px;max-width:600px}
+.hero-eyebrow{font-size:11px;letter-spacing:4px;color:var(--gold);font-family:system-ui,sans-serif;margin-bottom:14px;opacity:0.9}
+.hero-title{font-size:42px;font-weight:700;line-height:1.15;color:#fff;margin-bottom:12px}
+.hero-title span{color:var(--gold)}
+.hero-subtitle{font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:28px;font-family:system-ui,sans-serif}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-gold{padding:12px 28px;background:var(--gold);color:var(--navy);border:none;border-radius:3px;font-size:13px;letter-spacing:1.5px;cursor:pointer;font-weight:700;font-family:system-ui,sans-serif}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-outline{padding:12px 28px;background:transparent;color:var(--gold);border:1px solid var(--gold);border-radius:3px;font-size:13px;letter-spacing:1.5px;cursor:pointer;font-family:system-ui,sans-serif}
+.btn-outline:hover{background:rgba(201,168,76,0.1)}
+.hero-badges{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
+.hero-badge{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);font-family:system-ui,sans-serif}
+.hero-badge i{color:var(--gold);font-size:14px}
+.hero-arch{position:absolute;right:60px;bottom:0;z-index:1}
+.search-bar{background:rgba(255,255,255,0.06);border:0.5px solid rgba(201,168,76,0.3);border-radius:6px;padding:18px 24px;margin:0 28px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.search-field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:120px}
+.search-label{font-size:10px;letter-spacing:2px;color:var(--gold);font-family:system-ui,sans-serif}
+.search-input{background:transparent;border:none;border-bottom:0.5px solid rgba(201,168,76,0.4);padding:6px 0;font-size:13px;color:var(--text-light);font-family:system-ui,sans-serif;outline:none}
+.search-input::placeholder{color:var(--text-muted)}
+.search-divider{width:0.5px;height:40px;background:rgba(201,168,76,0.2);align-self:center}
+.section{padding:56px 28px}
+.section-eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);font-family:system-ui,sans-serif;text-align:center;margin-bottom:8px}
+.section-title{font-size:28px;font-weight:700;text-align:center;color:#fff;margin-bottom:6px}
+.section-sub{font-size:14px;color:var(--text-muted);text-align:center;margin-bottom:36px;font-family:system-ui,sans-serif;line-height:1.6}
+.cats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+.cat-btn{padding:7px 18px;border-radius:20px;font-size:12px;cursor:pointer;font-family:system-ui,sans-serif;letter-spacing:0.5px;border:0.5px solid rgba(201,168,76,0.4);background:transparent;color:var(--text-muted)}
+.cat-btn:hover,.cat-btn.active{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:700}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.exp-card{background:var(--navy-mid);border:0.5px solid rgba(201,168,76,0.2);border-radius:8px;overflow:hidden;cursor:pointer;transition:border-color 0.2s}
+.exp-card:hover{border-color:var(--gold)}
+.exp-card-img{height:160px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.exp-card-body{padding:14px}
+.exp-card-tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:1px;margin-bottom:8px;font-family:system-ui,sans-serif}
+.exp-card-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:5px}
+.exp-card-desc{font-size:12px;color:var(--text-muted);line-height:1.5;margin-bottom:10px;font-family:system-ui,sans-serif}
+.exp-card-footer{display:flex;align-items:center;justify-content:space-between}
+.exp-price{font-size:16px;font-weight:700;color:var(--gold)}
+.exp-price span{font-size:11px;color:var(--text-muted);font-family:system-ui,sans-serif}
+.exp-stars{font-size:11px;color:var(--gold);font-family:system-ui,sans-serif}
+.pkg-card{background:linear-gradient(135deg,#0F2040,#1A3050);border:1px solid rgba(201,168,76,0.35);border-radius:10px;padding:22px;position:relative}
+.pkg-card.featured{border-color:var(--gold);border-width:1.5px}
+.pkg-badge{position:absolute;top:16px;right:16px;background:var(--gold);color:var(--navy);font-size:10px;padding:3px 10px;border-radius:10px;font-weight:700;letter-spacing:1px;font-family:system-ui,sans-serif}
+.pkg-name{font-size:18px;font-weight:700;color:var(--gold);margin-bottom:4px}
+.pkg-sub{font-size:12px;color:var(--text-muted);margin-bottom:14px;font-family:system-ui,sans-serif}
+.pkg-price{font-size:28px;font-weight:700;color:#fff;margin-bottom:14px}
+.pkg-price small{font-size:13px;color:var(--text-muted);font-family:system-ui,sans-serif}
+.pkg-includes{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+.pkg-includes li{font-size:12px;color:var(--text-muted);display:flex;gap:8px;align-items:flex-start;font-family:system-ui,sans-serif}
+.pkg-includes li i{color:var(--gold);font-size:13px;margin-top:1px;flex-shrink:0}
+.ai-chat{background:var(--navy-mid);border:0.5px solid rgba(201,168,76,0.3);border-radius:10px;padding:0;overflow:hidden;max-width:560px;margin:0 auto}
+.ai-header{background:linear-gradient(90deg,#0F2040,#1A3050);padding:14px 18px;display:flex;align-items:center;gap:10px;border-bottom:0.5px solid rgba(201,168,76,0.2)}
+.ai-avatar{width:36px;height:36px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;color:var(--navy)}
+.ai-name{font-size:13px;font-weight:700;color:var(--gold)}
+.ai-status{font-size:11px;color:#4db8d4;font-family:system-ui,sans-serif}
+.ai-online{width:7px;height:7px;border-radius:50%;background:#4ade80;display:inline-block;margin-right:4px}
+.chat-body{padding:14px;display:flex;flex-direction:column;gap:10px;min-height:220px;max-height:220px;overflow-y:auto}
+.msg{max-width:82%;display:flex;flex-direction:column;gap:3px}
+.msg.bot{align-self:flex-start}
+.msg.user{align-self:flex-end}
+.msg-bubble{padding:8px 12px;border-radius:10px;font-size:12px;line-height:1.5;font-family:system-ui,sans-serif}
+.msg.bot .msg-bubble{background:rgba(255,255,255,0.06);color:var(--text-light);border-bottom-left-radius:3px}
+.msg.user .msg-bubble{background:var(--gold);color:var(--navy);font-weight:500;border-bottom-right-radius:3px}
+.msg-time{font-size:10px;color:var(--text-muted);font-family:system-ui,sans-serif;padding:0 4px}
+.msg.user .msg-time{text-align:right}
+.chat-quick{display:flex;gap:6px;padding:8px 14px;flex-wrap:wrap;border-top:0.5px solid rgba(201,168,76,0.15)}
+.quick-btn{padding:5px 11px;border-radius:12px;font-size:11px;border:0.5px solid rgba(201,168,76,0.4);color:var(--gold);background:transparent;cursor:pointer;font-family:system-ui,sans-serif}
+.quick-btn:hover{background:rgba(201,168,76,0.1)}
+.chat-input-row{display:flex;gap:0;border-top:0.5px solid rgba(201,168,76,0.2)}
+.chat-input{flex:1;background:transparent;border:none;padding:12px 16px;color:var(--text-light);font-size:13px;font-family:system-ui,sans-serif;outline:none}
+.chat-input::placeholder{color:var(--text-muted)}
+.chat-send{padding:10px 16px;background:var(--gold);border:none;color:var(--navy);cursor:pointer;font-size:16px}
+.chat-send:hover{background:var(--gold-light)}
+.review-card{background:var(--navy-mid);border:0.5px solid rgba(201,168,76,0.15);border-radius:8px;padding:18px}
+.review-stars{color:var(--gold);font-size:13px;margin-bottom:8px}
+.review-text{font-size:13px;color:var(--text-muted);line-height:1.65;margin-bottom:12px;font-family:system-ui,sans-serif}
+.review-author{display:flex;align-items:center;gap:8px}
+.review-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.review-name{font-size:12px;font-weight:700;color:#fff}
+.review-trip{font-size:11px;color:var(--text-muted);font-family:system-ui,sans-serif}
+.trust-bar{background:rgba(201,168,76,0.06);border-top:0.5px solid rgba(201,168,76,0.15);border-bottom:0.5px solid rgba(201,168,76,0.15);padding:18px 28px;display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:14px}
+.trust-item{text-align:center}
+.trust-num{font-size:22px;font-weight:700;color:var(--gold)}
+.trust-label{font-size:11px;color:var(--text-muted);font-family:system-ui,sans-serif;letter-spacing:0.5px}
+.footer{background:#050D1A;padding:36px 28px;border-top:0.5px solid rgba(201,168,76,0.2)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;margin-bottom:28px}
+.footer-brand{font-size:16px;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:8px}
+.footer-tagline{font-size:12px;color:var(--text-muted);line-height:1.6;font-family:system-ui,sans-serif;margin-bottom:14px}
+.footer-heading{font-size:11px;letter-spacing:2px;color:var(--gold);margin-bottom:10px;font-family:system-ui,sans-serif}
+.footer-links{display:flex;flex-direction:column;gap:7px}
+.footer-links a{font-size:12px;color:var(--text-muted);cursor:pointer;font-family:system-ui,sans-serif;text-decoration:none}
+.footer-links a:hover{color:var(--gold)}
+.footer-bottom{border-top:0.5px solid rgba(201,168,76,0.1);padding-top:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.footer-copy{font-size:11px;color:var(--text-muted);font-family:system-ui,sans-serif}
+.float-concierge{background:var(--gold);border-radius:50px;padding:10px 18px;display:flex;align-items:center;gap:8px;cursor:pointer;border:none;font-family:system-ui,sans-serif;font-size:12px;font-weight:700;color:var(--navy);margin:10px auto;width:fit-content}
+.float-concierge:hover{background:var(--gold-light)}
+.music-bar{display:flex;align-items:center;gap:10px;padding:10px 18px;background:rgba(201,168,76,0.08);border-radius:6px;margin:0 28px 0;border:0.5px solid rgba(201,168,76,0.2)}
+.music-btn{width:30px;height:30px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:14px;flex-shrink:0}
+.music-info{flex:1}
+.music-title{font-size:12px;color:var(--text-light);font-family:system-ui,sans-serif;font-weight:500}
+.music-artist{font-size:10px;color:var(--text-muted);font-family:system-ui,sans-serif}
+.music-bar-visual{display:flex;align-items:center;gap:2px;height:20px}
+.music-bar-visual span{width:3px;background:var(--gold);border-radius:2px;opacity:0.7}
+.wa-btn{background:#25D366;border:none;border-radius:20px;padding:8px 16px;color:#fff;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:system-ui,sans-serif;font-weight:700}
+.service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:0}
+.service-card{background:var(--navy-mid);border:0.5px solid rgba(201,168,76,0.15);border-radius:8px;padding:16px;text-align:center;cursor:pointer}
+.service-card:hover{border-color:var(--gold)}
+.service-icon{width:44px;height:44px;border-radius:50%;background:rgba(201,168,76,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:20px;color:var(--gold)}
+.service-name{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px}
+.service-desc{font-size:11px;color:var(--text-muted);font-family:system-ui,sans-serif;line-height:1.4}
+.tab{display:none}
+.tab.active{display:block}
+.tab-btns{display:flex;border-bottom:0.5px solid rgba(201,168,76,0.2);margin-bottom:24px}
+.tab-btn{padding:10px 20px;font-size:13px;cursor:pointer;color:var(--text-muted);border:none;background:transparent;font-family:system-ui,sans-serif;border-bottom:2px solid transparent;letter-spacing:0.5px}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.booking-form{background:var(--navy-mid);border:0.5px solid rgba(201,168,76,0.25);border-radius:10px;padding:24px;max-width:560px;margin:0 auto}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-label{font-size:11px;letter-spacing:1.5px;color:var(--gold);font-family:system-ui,sans-serif}
+.form-input{background:rgba(255,255,255,0.05);border:0.5px solid rgba(201,168,76,0.3);border-radius:4px;padding:9px 12px;color:var(--text-light);font-size:13px;font-family:system-ui,sans-serif;outline:none}
+.form-input:focus{border-color:var(--gold)}
+.total-box{background:rgba(201,168,76,0.08);border:0.5px solid rgba(201,168,76,0.3);border-radius:6px;padding:14px;margin-bottom:14px}
+.total-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;font-family:system-ui,sans-serif}
+.total-row.total{font-size:16px;font-weight:700;color:var(--gold);border-top:0.5px solid rgba(201,168,76,0.3);padding-top:8px;margin-top:8px}
+</style>
 
-<!--
-**Los-Cabos-Tours/Los-Cabos-Tours** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<div id="site-root">
 
-Here are some ideas to get you started:
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-icon"><i class="ti ti-anchor" aria-hidden="true"></i></div>
+    <div>
+      <div class="nav-brand">LOS CABOS TOURS</div>
+      <div style="font-size:9px;color:var(--text-muted);letter-spacing:2px;font-family:system-ui,sans-serif">BAJA CALIFORNIA SUR</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a onclick="goSection('experiences')">Experiences</a>
+    <a onclick="goSection('packages')">Packages</a>
+    <a onclick="goSection('services')">Services</a>
+    <a onclick="goSection('restaurants')">Dining</a>
+    <a onclick="goSection('hotels')">Resorts</a>
+    <a onclick="goSection('book')">Book now</a>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <button class="wa-btn"><i class="ti ti-brand-whatsapp" style="font-size:14px" aria-hidden="true"></i> WhatsApp</button>
+    <button class="nav-cta" onclick="goSection('book')">BOOK NOW</button>
+  </div>
+</nav>
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+<div id="music-player" style="padding:10px 28px 0">
+  <div class="music-bar">
+    <button class="music-btn" id="play-btn" onclick="toggleMusic()" aria-label="Play music"><i class="ti ti-player-play" id="play-icon" aria-hidden="true"></i></button>
+    <div class="music-info">
+      <div class="music-title" id="song-title">Cabo Sunset Vibes</div>
+      <div class="music-artist" id="song-artist">Ambient Lounge — Los Cabos Edition</div>
+    </div>
+    <div class="music-bar-visual" id="vis">
+      <span style="height:8px"></span><span style="height:14px"></span><span style="height:10px"></span><span style="height:18px"></span><span style="height:12px"></span><span style="height:16px"></span><span style="height:9px"></span>
+    </div>
+    <div style="font-size:11px;color:var(--text-muted);font-family:system-ui,sans-serif" id="song-time">2:34</div>
+    <select style="background:transparent;border:0.5px solid rgba(201,168,76,0.3);color:var(--gold);border-radius:4px;padding:3px 6px;font-size:11px;font-family:system-ui,sans-serif" onchange="changeSong(this.value)">
+      <option value="0">Cabo Sunset Vibes</option>
+      <option value="1">Ocean Breeze Jazz</option>
+      <option value="2">Baja Fiesta Mix</option>
+      <option value="3">Yacht Club Lounge</option>
+    </select>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-bg">
+    <div class="hero-sky"></div>
+    <div class="hero-sunset"></div>
+    <div class="hero-ocean"></div>
+    <svg class="hero-waves" viewBox="0 0 680 30" width="100%" preserveAspectRatio="none">
+      <path d="M0,15 Q40,5 80,15 Q120,25 160,15 Q200,5 240,15 Q280,25 320,15 Q360,5 400,15 Q440,25 480,15 Q520,5 560,15 Q620,25 680,15" fill="none" stroke="#4db8d4" stroke-width="1.2" opacity="0.5"/>
+      <path d="M0,22 Q60,12 120,22 Q180,32 240,22 Q300,12 360,22 Q420,32 480,22 Q560,12 680,22" fill="none" stroke="#4db8d4" stroke-width="0.7" opacity="0.3"/>
+    </svg>
+    <svg style="position:absolute;right:40px;bottom:0;width:220px;height:200px" viewBox="0 0 220 200">
+      <path d="M110,200 L110,90 Q110,30 95,10 Q82,-5 75,8 Q60,30 60,90 L60,200Z" fill="#1a2a1a"/>
+      <path d="M155,200 L155,100 Q155,55 143,38 Q133,24 127,36 Q115,55 115,100 L115,200Z" fill="#0f1f0f" opacity="0.7"/>
+      <ellipse cx="110" cy="100" rx="50" ry="40" fill="none"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">WELCOME TO PARADISE</div>
+    <h1 class="hero-title">Live the <span>Cabo</span><br>experience</h1>
+    <p class="hero-subtitle">Luxury tours, yacht charters, adventure, fine dining, resort stays — we handle everything so you can focus on the magic of Baja California Sur.</p>
+    <div class="hero-actions">
+      <button class="btn-gold" onclick="goSection('book')">BOOK YOUR ADVENTURE</button>
+      <button class="btn-outline" onclick="openAI()">TALK TO OUR AI CONCIERGE</button>
+    </div>
+    <div class="hero-badges">
+      <div class="hero-badge"><i class="ti ti-star" aria-hidden="true"></i> 4.9 / 5.0 rating</div>
+      <div class="hero-badge"><i class="ti ti-users" aria-hidden="true"></i> 50,000+ guests</div>
+      <div class="hero-badge"><i class="ti ti-shield-check" aria-hidden="true"></i> Fully insured & licensed</div>
+      <div class="hero-badge"><i class="ti ti-clock-24" aria-hidden="true"></i> 24/7 concierge</div>
+    </div>
+  </div>
+</div>
+
+<div class="search-bar">
+  <div class="search-field">
+    <div class="search-label">EXPERIENCE</div>
+    <select class="search-input" style="cursor:pointer">
+      <option>All experiences</option>
+      <option>Yacht charter</option><option>Water sports</option><option>ATV adventure</option>
+      <option>Whale watching</option><option>Fine dining</option><option>Resort stay</option><option>City tour</option>
+    </select>
+  </div>
+  <div class="search-divider"></div>
+  <div class="search-field">
+    <div class="search-label">DATE</div>
+    <input type="date" class="search-input" placeholder="Select date"/>
+  </div>
+  <div class="search-divider"></div>
+  <div class="search-field">
+    <div class="search-label">GUESTS</div>
+    <select class="search-input">
+      <option>1 guest</option><option>2 guests</option><option>3–4 guests</option><option>5–8 guests</option><option>9+ guests</option>
+    </select>
+  </div>
+  <div class="search-divider"></div>
+  <div class="search-field">
+    <div class="search-label">BUDGET</div>
+    <select class="search-input">
+      <option>Any budget</option><option>Under $100</option><option>$100–$300</option><option>$300–$800</option><option>$800+</option>
+    </select>
+  </div>
+  <button class="btn-gold" style="padding:10px 24px;white-space:nowrap" onclick="goSection('experiences')"><i class="ti ti-search" aria-hidden="true"></i> SEARCH</button>
+</div>
+
+<div class="trust-bar">
+  <div class="trust-item"><div class="trust-num">50K+</div><div class="trust-label">Happy guests</div></div>
+  <div class="trust-item"><div class="trust-num">120+</div><div class="trust-label">Tours & experiences</div></div>
+  <div class="trust-item"><div class="trust-num">4.9★</div><div class="trust-label">Average rating</div></div>
+  <div class="trust-item"><div class="trust-num">24/7</div><div class="trust-label">Concierge support</div></div>
+  <div class="trust-item"><div class="trust-num">15+</div><div class="trust-label">Years in Los Cabos</div></div>
+</div>
+
+<div class="section" id="services">
+  <div class="section-eyebrow">EVERYTHING YOU NEED</div>
+  <div class="section-title">One call. Total freedom.</div>
+  <div class="section-sub">From your first inquiry to your last sunset — we handle every detail of your Cabo experience.</div>
+  <div class="service-grid">
+    <div class="service-card" onclick="goSection('experiences')"><div class="service-icon"><i class="ti ti-sailing" aria-hidden="true"></i></div><div class="service-name">Tours & adventures</div><div class="service-desc">120+ curated experiences on land and sea</div></div>
+    <div class="service-card" onclick="goSection('hotels')"><div class="service-icon"><i class="ti ti-building" aria-hidden="true"></i></div><div class="service-name">Resort stays</div><div class="service-desc">Luxury hotels, boutique villas & beachfront resorts</div></div>
+    <div class="service-card" onclick="goSection('restaurants')"><div class="service-icon"><i class="ti ti-meat" aria-hidden="true"></i></div><div class="service-name">Fine dining</div><div class="service-desc">Top restaurants, private chefs & sunset dinners</div></div>
+    <div class="service-card"><div class="service-icon"><i class="ti ti-car" aria-hidden="true"></i></div><div class="service-name">Taxi & transfers</div><div class="service-desc">Airport pickups, private cars & 24/7 transport</div></div>
+    <div class="service-card"><div class="service-icon"><i class="ti ti-moon" aria-hidden="true"></i></div><div class="service-name">Nightlife</div><div class="service-desc">VIP club access, bar crawls & private parties</div></div>
+    <div class="service-card"><div class="service-icon"><i class="ti ti-spa" aria-hidden="true"></i></div><div class="service-name">Wellness & spa</div><div class="service-desc">Beach massages, yoga & rejuvenation packages</div></div>
+    <div class="service-card"><div class="service-icon"><i class="ti ti-fish" aria-hidden="true"></i></div><div class="service-name">Sport fishing</div><div class="service-desc">Trophy marlin, tuna & deep-sea fishing trips</div></div>
+    <div class="service-card"><div class="service-icon"><i class="ti ti-headset" aria-hidden="true"></i></div><div class="service-name">24/7 concierge</div><div class="service-desc">Any request, anytime — we make it happen</div></div>
+  </div>
+</div>
+
+<div class="section" id="experiences" style="background:var(--navy-mid);padding:48px 28px">
+  <div class="section-eyebrow">ADVENTURES AWAIT</div>
+  <div class="section-title">Explore Los Cabos</div>
+  <div class="section-sub">From the deep blue sea to dusty desert trails — every day is an unforgettable story.</div>
+  <div class="cats">
+    <button class="cat-btn active" onclick="filterCat('all',this)">All</button>
+    <button class="cat-btn" onclick="filterCat('yacht',this)">Yacht & Sailing</button>
+    <button class="cat-btn" onclick="filterCat('water',this)">Water sports</button>
+    <button class="cat-btn" onclick="filterCat('atv',this)">ATV & off-road</button>
+    <button class="cat-btn" onclick="filterCat('nature',this)">Whale & nature</button>
+    <button class="cat-btn" onclick="filterCat('culture',this)">Culture & food</button>
+    <button class="cat-btn" onclick="filterCat('fishing',this)">Fishing</button>
+  </div>
+  <div class="grid-3" id="exp-grid"></div>
+</div>
+
+<div class="section" id="packages">
+  <div class="section-eyebrow">CURATED PACKAGES</div>
+  <div class="section-title">The ultimate Cabo getaway</div>
+  <div class="section-sub">Everything bundled — tours, hotel, dining, transport. Just arrive and enjoy.</div>
+  <div class="grid-3" id="pkg-grid"></div>
+</div>
+
+<div class="section" style="background:var(--navy-mid);padding:48px 28px" id="ai-section">
+  <div class="section-eyebrow">AI-POWERED BOOKING</div>
+  <div class="section-title">Meet Marina — your Cabo concierge</div>
+  <div class="section-sub">Ask anything. Marina knows every tour, hotel, restaurant, and secret spot in Los Cabos — and can book your entire trip on the spot.</div>
+  <div class="ai-chat" id="ai-chat-widget">
+    <div class="ai-header">
+      <div class="ai-avatar"><i class="ti ti-robot" aria-hidden="true"></i></div>
+      <div><div class="ai-name">Marina — Cabo Concierge AI</div><div class="ai-status"><span class="ai-online"></span>Online now · Speaks EN / ES</div></div>
+      <div style="margin-left:auto;display:flex;gap:6px">
+        <button class="wa-btn" style="padding:5px 10px;font-size:11px"><i class="ti ti-brand-whatsapp" style="font-size:12px" aria-hidden="true"></i> WhatsApp</button>
+      </div>
+    </div>
+    <div class="chat-body" id="chat-body">
+      <div class="msg bot"><div class="msg-bubble">Hola! I'm Marina, your personal Los Cabos concierge. I can help you plan tours, book a yacht, find the best restaurants, arrange your hotel, or put together a complete package. What brings you to Cabo?</div><div class="msg-time">Now</div></div>
+    </div>
+    <div class="chat-quick">
+      <button class="quick-btn" onclick="quickMsg('I want to book a yacht charter')">Yacht charter</button>
+      <button class="quick-btn" onclick="quickMsg('What tours do you recommend?')">Tour ideas</button>
+      <button class="quick-btn" onclick="quickMsg('I need a luxury resort package')">Resort package</button>
+      <button class="quick-btn" onclick="quickMsg('What are the best restaurants?')">Dining</button>
+      <button class="quick-btn" onclick="quickMsg('I need airport pickup and a driver')">Transport</button>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" type="text" id="chat-input" placeholder="Ask Marina anything about Los Cabos..." onkeydown="if(event.key==='Enter')sendChat()"/>
+      <button class="chat-send" onclick="sendChat()"><i class="ti ti-send" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="book" style="padding:48px 28px">
+  <div class="section-eyebrow">READY TO GO?</div>
+  <div class="section-title">Book your Cabo experience</div>
+  <div class="section-sub">Fast, secure, and confirmed instantly. We'll handle everything from here.</div>
+  <div class="tab-btns">
+    <button class="tab-btn active" onclick="switchTab('tours',this)">Tours & activities</button>
+    <button class="tab-btn" onclick="switchTab('packages-tab',this)">Full package</button>
+    <button class="tab-btn" onclick="switchTab('hotel',this)">Hotel only</button>
+    <button class="tab-btn" onclick="switchTab('transfer',this)">Transfer / taxi</button>
+  </div>
+  <div class="tab active" id="tab-tours">
+    <div class="booking-form">
+      <div class="form-row">
+        <div class="form-group"><div class="form-label">YOUR NAME</div><input class="form-input" type="text" placeholder="Full name"/></div>
+        <div class="form-group"><div class="form-label">EMAIL</div><input class="form-input" type="email" placeholder="email@example.com"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><div class="form-label">PHONE / WHATSAPP</div><input class="form-input" type="text" placeholder="+1 555 000 0000"/></div>
+        <div class="form-group"><div class="form-label">TOUR</div>
+          <select class="form-input" id="tour-select" onchange="updatePrice()">
+            <option value="0">Select a tour...</option>
+            <option value="399">Luxury Yacht Charter (half day) — $399/pp</option>
+            <option value="249">Sunset Yacht & Dinner — $249/pp</option>
+            <option value="189">ATV Desert & Arch Adventure — $189/pp</option>
+            <option value="129">Whale Watching AM Tour — $129/pp</option>
+            <option value="299">Deep-sea Sport Fishing — $299/pp</option>
+            <option value="89">Scuba Diving Pelican Rock — $89/pp</option>
+            <option value="75">Cultural City & Food Tour — $75/pp</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><div class="form-label">DATE</div><input class="form-input" type="date" id="tour-date"/></div>
+        <div class="form-group"><div class="form-label">GUESTS</div><select class="form-input" id="tour-guests" onchange="updatePrice()"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4 guests</option><option value="5">5 guests</option><option value="6">6+ guests</option></select></div>
+      </div>
+      <div class="total-box">
+        <div class="total-row"><span>Tour price</span><span id="pp-price">$0 / person</span></div>
+        <div class="total-row"><span>Guests</span><span id="guest-count">2</span></div>
+        <div class="total-row"><span>Taxes & fees (8%)</span><span id="tax-amount">$0</span></div>
+        <div class="total-row total"><span>Total</span><span id="total-price">$0</span></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn-gold" style="flex:1" onclick="confirmBook()"><i class="ti ti-credit-card" aria-hidden="true"></i> PAY & CONFIRM BOOKING</button>
+        <button class="wa-btn" style="flex:1;justify-content:center" onclick="quickMsg('I want to book a tour — can you help me?')"><i class="ti ti-brand-whatsapp" style="font-size:13px" aria-hidden="true"></i> BOOK VIA WHATSAPP</button>
+      </div>
+    </div>
+  </div>
+  <div class="tab" id="tab-packages-tab">
+    <div class="booking-form" style="text-align:center;padding:32px">
+      <i class="ti ti-package" style="font-size:32px;color:var(--gold)" aria-hidden="true"></i>
+      <div style="font-size:16px;color:#fff;margin:12px 0 6px;font-weight:700">Full packages include everything</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-bottom:20px;font-family:system-ui,sans-serif">Hotel + tours + dining + transport — ask Marina to build your perfect package</div>
+      <button class="btn-gold" onclick="openAI()">CHAT WITH MARINA TO BUILD YOUR PACKAGE</button>
+    </div>
+  </div>
+  <div class="tab" id="tab-hotel">
+    <div class="booking-form" style="text-align:center;padding:32px">
+      <i class="ti ti-building" style="font-size:32px;color:var(--gold)" aria-hidden="true"></i>
+      <div style="font-size:16px;color:#fff;margin:12px 0 6px;font-weight:700">Luxury resort reservations</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-bottom:20px;font-family:system-ui,sans-serif">We work with the best resorts in Los Cabos — Esperanza, One&Only, Waldorf Astoria, Nobu Hotel & more</div>
+      <button class="btn-gold" onclick="openAI()">ASK MARINA FOR HOTEL RECOMMENDATIONS</button>
+    </div>
+  </div>
+  <div class="tab" id="tab-transfer">
+    <div class="booking-form">
+      <div class="form-row">
+        <div class="form-group"><div class="form-label">NAME</div><input class="form-input" type="text" placeholder="Full name"/></div>
+        <div class="form-group"><div class="form-label">WHATSAPP</div><input class="form-input" type="text" placeholder="+1 555 000 0000"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><div class="form-label">PICKUP LOCATION</div><input class="form-input" type="text" placeholder="Airport / Hotel / Address"/></div>
+        <div class="form-group"><div class="form-label">DESTINATION</div><input class="form-input" type="text" placeholder="Hotel / Address"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><div class="form-label">DATE & TIME</div><input class="form-input" type="datetime-local"/></div>
+        <div class="form-group"><div class="form-label">VEHICLE</div><select class="form-input"><option>Luxury sedan (1–3 pax) — $45</option><option>SUV / Van (4–7 pax) — $65</option><option>Sprinter (8–14 pax) — $120</option></select></div>
+      </div>
+      <button class="btn-gold" style="width:100%">CONFIRM TRANSFER</button>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="reviews" style="background:var(--navy-mid);padding:48px 28px">
+  <div class="section-eyebrow">GUEST STORIES</div>
+  <div class="section-title">Why they love Cabo with us</div>
+  <div class="grid-3" id="reviews-grid"></div>
+</div>
+
+<div class="section" style="text-align:center;padding:48px 28px">
+  <div class="section-eyebrow">NEED HELP?</div>
+  <div class="section-title">We're always here for you</div>
+  <div class="section-sub">Available 24/7 by WhatsApp, phone, or chat. Whatever you need — just ask.</div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <button class="wa-btn" style="padding:12px 24px;font-size:13px"><i class="ti ti-brand-whatsapp" style="font-size:16px" aria-hidden="true"></i> WhatsApp us now</button>
+    <button class="btn-gold" onclick="openAI()"><i class="ti ti-robot" aria-hidden="true"></i> CHAT WITH MARINA</button>
+    <button class="btn-outline"><i class="ti ti-phone" aria-hidden="true"></i> CALL +52 624-XXX-XXXX</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">LOS CABOS TOURS</div>
+      <div class="footer-tagline">Your ultimate guide to the best of Baja California Sur. Luxury, adventure, and unforgettable memories — all in one place.</div>
+      <div style="display:flex;gap:10px">
+        <button class="wa-btn" style="font-size:11px;padding:6px 12px"><i class="ti ti-brand-whatsapp" style="font-size:12px" aria-hidden="true"></i> WhatsApp</button>
+        <button style="background:transparent;border:0.5px solid rgba(201,168,76,0.3);border-radius:4px;padding:6px 10px;cursor:pointer;color:var(--text-muted);font-size:13px"><i class="ti ti-brand-instagram" aria-hidden="true"></i></button>
+        <button style="background:transparent;border:0.5px solid rgba(201,168,76,0.3);border-radius:4px;padding:6px 10px;cursor:pointer;color:var(--text-muted);font-size:13px"><i class="ti ti-brand-facebook" aria-hidden="true"></i></button>
+        <button style="background:transparent;border:0.5px solid rgba(201,168,76,0.3);border-radius:4px;padding:6px 10px;cursor:pointer;color:var(--text-muted);font-size:13px"><i class="ti ti-brand-tiktok" aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">EXPERIENCES</div>
+      <div class="footer-links">
+        <a>Yacht charters</a><a>Water sports</a><a>ATV adventures</a><a>Whale watching</a><a>Sport fishing</a><a>Cultural tours</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">SERVICES</div>
+      <div class="footer-links">
+        <a>Resort stays</a><a>Fine dining</a><a>Airport transfers</a><a>Private drivers</a><a>Nightlife & VIP</a><a>24/7 concierge</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">PACKAGES</div>
+      <div class="footer-links">
+        <a>Romantic escape</a><a>Family adventure</a><a>Luxury & wellness</a><a>Bachelor/ette</a><a>Corporate retreats</a><a>Custom packages</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Los Cabos Tours. All rights reserved. Licensed by SECTUR Baja California Sur.</div>
+    <div style="display:flex;gap:14px">
+      <a style="font-size:11px;color:var(--text-muted);cursor:pointer;font-family:system-ui,sans-serif">Privacy policy</a>
+      <a style="font-size:11px;color:var(--text-muted);cursor:pointer;font-family:system-ui,sans-serif">Terms</a>
+      <a style="font-size:11px;color:var(--text-muted);cursor:pointer;font-family:system-ui,sans-serif">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.14.0/tabler-icons.min.js"></script>
+<script>
+var experiences=[
+  {cat:'yacht',tag:'YACHT',tagColor:'#534AB7',tagBg:'#EEEDFE',title:'Luxury yacht charter',desc:'Private yacht from the Marina — the Arch, sea lions, snorkeling, open bar & gourmet lunch included.',price:'$399',unit:'pp',stars:'★★★★★ 4.9',dur:'4 hrs',icon:'ti-sailing',bg:'#0F2A4A'},
+  {cat:'yacht',tag:'YACHT',tagColor:'#534AB7',tagBg:'#EEEDFE',title:'Sunset dinner cruise',desc:'Sail into the golden hour with a private chef, premium cocktails, and a 3-course dinner on the sea.',price:'$249',unit:'pp',stars:'★★★★★ 5.0',dur:'3 hrs',icon:'ti-moon-stars',bg:'#1A1A3A'},
+  {cat:'water',tag:'DIVING',tagColor:'#185FA5',tagBg:'#E6F1FB',title:'Scuba diving Pelican Rock',desc:'World-class dive sites including Lands End, Pelican Rock, and the famous sandfall — all skill levels.',price:'$89',unit:'pp',stars:'★★★★★ 4.8',dur:'3 hrs',icon:'ti-swimming',bg:'#0A2A3A'},
+  {cat:'atv',tag:'ATV',tagColor:'#854F0B',tagBg:'#FAEEDA',title:'ATV desert adventure',desc:'Blast through sand dunes, desert trails, and cactus fields with panoramic views of the Pacific.',price:'$189',unit:'pp',stars:'★★★★☆ 4.7',dur:'3 hrs',icon:'ti-car-4wd',bg:'#2A1A0A'},
+  {cat:'nature',tag:'WHALE',tagColor:'#085041',tagBg:'#E1F5EE',title:'Whale watching AM',desc:'Get close to humpback and gray whales in their natural habitat. Marine biologist guide included.',price:'$129',unit:'pp',stars:'★★★★★ 4.9',dur:'3.5 hrs',icon:'ti-fish',bg:'#0A2030'},
+  {cat:'fishing',tag:'FISHING',tagColor:'#712B13',tagBg:'#FAECE7',title:'Sport fishing charter',desc:'Deep-sea marlin, dorado, tuna — fully equipped boat, experienced captain, bait and tackle included.',price:'$299',unit:'pp',stars:'★★★★★ 4.9',dur:'8 hrs',icon:'ti-fish',bg:'#1A0A0A'},
+  {cat:'culture',tag:'CULTURE',tagColor:'#3C3489',tagBg:'#EEEDFE',title:'Cultural city & food tour',desc:'San José del Cabo art walk, local tacos, mezcal tasting, and hand-crafted pottery workshop.',price:'$75',unit:'pp',stars:'★★★★★ 4.8',dur:'5 hrs',icon:'ti-map-pin',bg:'#1A1030'},
+  {cat:'water',tag:'WATER',tagColor:'#185FA5',tagBg:'#E6F1FB',title:'Surf & paddleboard',desc:'Morning surf lesson at Monuments Beach + paddleboard sunset session. All equipment included.',price:'$95',unit:'pp',stars:'★★★★☆ 4.6',dur:'4 hrs',icon:'ti-waves',bg:'#0A1A2A'},
+  {cat:'atv',tag:'COMBO',tagColor:'#854F0B',tagBg:'#FAEEDA',title:'ATV + zip-line combo',desc:'Roar through the desert on ATVs then soar above the Baja landscape on a 7-line zip course.',price:'$225',unit:'pp',stars:'★★★★★ 4.9',dur:'5 hrs',icon:'ti-mountain',bg:'#1A2A0A'},
+];
+
+var packages=[
+  {name:'Cabo Romance',sub:'For couples',price:'$890',unit:'per couple / 3 nights',badge:null,features:['Beachfront hotel (3 nights)','Private sunset yacht dinner','Spa couples massage','Airport transfer (both ways)','Whale watching tour','Candlelight dinner reservation']},
+  {name:'Ultimate Adventure',sub:'For thrill seekers',price:'$1,290',unit:'per person / 5 days',badge:'MOST POPULAR',features:['Boutique hotel (5 nights)','Full-day yacht charter','ATV + zip-line combo','Deep-sea sport fishing','Scuba diving (2 dives)','Nightlife VIP access (2 nights)','24/7 private driver']},
+  {name:'Luxury Cabo',sub:'VIP & all-inclusive',price:'$3,200',unit:'per person / 7 days',badge:null,features:['5-star resort (7 nights)','Private yacht (full day)','Helicopter tour of Baja coast','Private chef dinner on beach','Golf at one of 3 top courses','Unlimited spa access','Dedicated concierge & driver']},
+];
+
+var reviews=[
+  {text:'Marina literally planned our entire honeymoon in one WhatsApp conversation. The sunset yacht was out of this world. We\'re already planning to come back.',name:'Jessica & Tom W.',trip:'Romantic getaway · Yacht charter',avatar:'JW',bg:'#EEEDFE',tc:'#3C3489'},
+  {text:'The ATV adventure was the highlight of our family trip. The kids are still talking about it. The booking was effortless and the guides were amazing.',name:'Carlos & Maria Rodriguez',trip:'Family adventure · ATV + fishing',avatar:'CR',bg:'#E1F5EE',tc:'#085041'},
+  {text:'VIP service from start to finish. They picked us up at the airport, had our resort checked in, and had our full week planned before we even unpacked.',name:'David L.',trip:'Luxury package · 7 days',avatar:'DL',bg:'#FAEEDA',tc:'#633806'},
+];
+
+var songs=[
+  {title:'Cabo Sunset Vibes',artist:'Ambient Lounge — Los Cabos Edition'},
+  {title:'Ocean Breeze Jazz',artist:'Baja Sessions Vol. 3'},
+  {title:'Baja Fiesta Mix',artist:'Tropical Beats Collective'},
+  {title:'Yacht Club Lounge',artist:'Marina del Sol Orchestra'},
+];
+
+var aiResponses={
+  'yacht':['Perfect choice! Our signature Luxury Yacht Charter departs daily from the Marina. The 4-hour morning trip includes snorkeling at Pelican Rock, visiting the famous Arch, watching the sea lion colony, plus an open bar and gourmet lunch on board. For 2 guests, that\'s $798 total. Want me to check availability for your dates?','Wonderful! How many guests and what date are you thinking? I can check availability and hold the boat for you right now.'],
+  'tour':['Of course! Here are my top picks for first-time visitors: 1) Yacht Charter (you must see the Arch from the water), 2) ATV Desert Adventure, and 3) Whale Watching if you\'re here Dec–April. Would you like to combine them into a package for better pricing?','Great question! What type of experience do you enjoy most — water, adventure, culture, or pure luxury? I\'ll match you with the perfect tours.'],
+  'resort':['Excellent taste! Los Cabos has some of the world\'s finest resorts. My top picks: Esperanza (ultra-luxury, stunning views), One&Only Palmilla (iconic, 5-star), Nobu Hotel Los Cabos (celebrity favorite), and Waldorf Astoria. What\'s your budget per night and number of guests?','I\'d love to help with a resort package! We get preferred rates at all top properties and can bundle hotel + tours + dining for significant savings. What are your travel dates?'],
+  'restaurant':['Los Cabos has incredible dining! My must-visits: Nick-San (world-class sushi-Mexican fusion), Manta at The Cape (oceanfront fine dining), El Farallon at Resort at Pedregal (seafood cliff-side!), and Acre (organic farm-to-table with firefly ambiance). Want me to make a reservation?'],
+  'transport':['Absolutely! We offer 24/7 private transfers. For airport pickups: luxury sedan (1–3 guests) $45, SUV/Van (4–7 guests) $65, Sprinter (8–14 guests) $120. All drivers are English-speaking and know every hotel and hotspot. What\'s your arrival date and flight number?'],
+  'default':['Great question! I\'m here to help you plan the ultimate Cabo experience. Whether you need a yacht, tours, a hotel, restaurant reservations, or a taxi at 3am — we handle it all. Tell me more about your trip!','Of course! Tell me your travel dates and group size and I\'ll put together the perfect itinerary for your Los Cabos vacation.','You\'re going to love Cabo! Let me ask — how many days are you visiting and what kind of experiences are most exciting for you? I\'ll craft a custom plan.'],
+};
+
+var playing=false;
+var currentSong=0;
+var visInterval=null;
+
+function toggleMusic(){
+  playing=!playing;
+  var icon=document.getElementById('play-icon');
+  if(icon) icon.className=playing?'ti ti-player-pause':'ti ti-player-play';
+  if(playing){
+    visInterval=setInterval(animateVis,300);
+  } else {
+    if(visInterval) clearInterval(visInterval);
+  }
+}
+
+function animateVis(){
+  var bars=document.querySelectorAll('#vis span');
+  bars.forEach(function(b){
+    var h=Math.round(6+Math.random()*14);
+    b.style.height=h+'px';
+  });
+}
+
+function changeSong(idx){
+  currentSong=parseInt(idx);
+  var s=songs[currentSong];
+  document.getElementById('song-title').textContent=s.title;
+  document.getElementById('song-artist').textContent=s.artist;
+}
+
+function renderExperiences(filter){
+  var grid=document.getElementById('exp-grid');
+  if(!grid) return;
+  var filtered=filter==='all'?experiences:experiences.filter(function(e){return e.cat===filter;});
+  grid.innerHTML=filtered.map(function(e){
+    return '<div class="exp-card" onclick="goSection(\'book\')">'
+      +'<div class="exp-card-img" style="background:'+e.bg+';flex-direction:column;gap:8px">'
+      +'<i class="ti '+e.icon+'" style="font-size:36px;color:rgba(201,168,76,0.7)" aria-hidden="true"></i>'
+      +'<div style="font-size:11px;color:var(--text-muted);font-family:system-ui,sans-serif"><i class="ti ti-clock" style="font-size:11px"></i> '+e.dur+'</div>'
+      +'</div>'
+      +'<div class="exp-card-body">'
+      +'<div class="exp-card-tag" style="color:'+e.tagColor+';background:'+e.tagBg+'">'+e.tag+'</div>'
+      +'<div class="exp-card-title">'+e.title+'</div>'
+      +'<div class="exp-card-desc">'+e.desc+'</div>'
+      +'<div class="exp-card-footer">'
+      +'<div class="exp-price">'+e.price+' <span>'+e.unit+'</span></div>'
+      +'<div class="exp-stars">'+e.stars+'</div>'
+      +'</div></div></div>';
+  }).join('');
+}
+
+function filterCat(cat,btn){
+  document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderExperiences(cat);
+}
+
+function renderPackages(){
+  var grid=document.getElementById('pkg-grid');
+  if(!grid) return;
+  grid.innerHTML=packages.map(function(p){
+    return '<div class="pkg-card'+(p.badge?' featured':'')+'"><div class="pkg-name">'+p.name+'</div>'
+      +(p.badge?'<div class="pkg-badge">'+p.badge+'</div>':'')
+      +'<div class="pkg-sub">'+p.sub+'</div>'
+      +'<div class="pkg-price">'+p.price+'<small> / '+p.unit+'</small></div>'
+      +'<ul class="pkg-includes">'+p.features.map(function(f){
+        return '<li><i class="ti ti-check" aria-hidden="true"></i>'+f+'</li>';
+      }).join('')+'</ul>'
+      +'<button class="btn-gold" style="width:100%" onclick="goSection(\'book\')">BOOK THIS PACKAGE</button>'
+      +'</div>';
+  }).join('');
+}
+
+function renderReviews(){
+  var grid=document.getElementById('reviews-grid');
+  if(!grid) return;
+  grid.innerHTML=reviews.map(function(r){
+    return '<div class="review-card">'
+      +'<div class="review-stars">★★★★★</div>'
+      +'<div class="review-text">"'+r.text+'"</div>'
+      +'<div class="review-author">'
+      +'<div class="review-avatar" style="background:'+r.bg+';color:'+r.tc+'">'+r.avatar+'</div>'
+      +'<div><div class="review-name">'+r.name+'</div><div class="review-trip">'+r.trip+'</div></div>'
+      +'</div></div>';
+  }).join('');
+}
+
+function goSection(id){
+  var el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth'});
+}
+
+function openAI(){
+  goSection('ai-section');
+  setTimeout(function(){
+    var input=document.getElementById('chat-input');
+    if(input) input.focus();
+  },600);
+}
+
+function switchTab(id,btn){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  var el=document.getElementById('tab-'+id);
+  if(el) el.classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+
+function updatePrice(){
+  var sel=document.getElementById('tour-select');
+  var guests=parseInt(document.getElementById('tour-guests').value)||1;
+  var price=parseInt(sel?sel.value:0)||0;
+  var subtotal=price*guests;
+  var tax=Math.round(subtotal*0.08);
+  var total=subtotal+tax;
+  var pp=document.getElementById('pp-price');
+  var gc=document.getElementById('guest-count');
+  var ta=document.getElementById('tax-amount');
+  var tp=document.getElementById('total-price');
+  if(pp) pp.textContent='$'+price+' / person';
+  if(gc) gc.textContent=guests;
+  if(ta) ta.textContent='$'+tax;
+  if(tp) tp.textContent=price>0?'$'+total.toLocaleString():'$0';
+}
+
+function confirmBook(){
+  var sel=document.getElementById('tour-select');
+  if(!sel||!sel.value||sel.value==='0'){alert('Please select a tour first!');return;}
+  var total=document.getElementById('total-price');
+  addChatMsg('bot','Booking confirmed! Your tour is reserved and a confirmation will be sent to your WhatsApp and email. Total charged: '+(total?total.textContent:'$0')+'. We\'ll be in touch 24 hours before your adventure. Enjoy Los Cabos!');
+  goSection('ai-section');
+}
+
+function addChatMsg(type,text){
+  var cb=document.getElementById('chat-body');
+  if(!cb) return;
+  var div=document.createElement('div');
+  div.className='msg '+type;
+  div.innerHTML='<div class="msg-bubble">'+text+'</div><div class="msg-time">Now</div>';
+  cb.appendChild(div);
+  cb.scrollTop=cb.scrollHeight;
+}
+
+function getAIResponse(msg){
+  var m=msg.toLowerCase();
+  if(m.includes('yacht')||m.includes('boat')||m.includes('sail')) return aiResponses.yacht[Math.floor(Math.random()*aiResponses.yacht.length)];
+  if(m.includes('tour')||m.includes('recommend')||m.includes('activities')) return aiResponses.tour[Math.floor(Math.random()*aiResponses.tour.length)];
+  if(m.includes('hotel')||m.includes('resort')||m.includes('stay')||m.includes('package')) return aiResponses.resort[Math.floor(Math.random()*aiResponses.resort.length)];
+  if(m.includes('restaurant')||m.includes('food')||m.includes('dining')||m.includes('eat')) return aiResponses.restaurant[0];
+  if(m.includes('taxi')||m.includes('transfer')||m.includes('pickup')||m.includes('airport')||m.includes('driver')||m.includes('transport')) return aiResponses.transport[0];
+  return aiResponses.default[Math.floor(Math.random()*aiResponses.default.length)];
+}
+
+function sendChat(){
+  var inp=document.getElementById('chat-input');
+  if(!inp||!inp.value.trim()) return;
+  var msg=inp.value.trim();
+  inp.value='';
+  addChatMsg('user',msg);
+  setTimeout(function(){
+    addChatMsg('bot',getAIResponse(msg));
+  },900);
+}
+
+function quickMsg(msg){
+  addChatMsg('user',msg);
+  goSection('ai-section');
+  setTimeout(function(){addChatMsg('bot',getAIResponse(msg));},900);
+}
+
+renderExperiences('all');
+renderPackages();
+renderReviews();
+updatePrice();
+</script>
