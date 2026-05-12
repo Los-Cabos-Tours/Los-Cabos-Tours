@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -478,7 +479,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
 
     <!-- PKG 1 — PUEBLO BONITO -->
     <div class="pkg-card">
-      <div class="pkg-img" id="pkg-img-1" style="background-image:url('IMG_PUEBLO_BONITO_POOL')">
+      <div class="pkg-img" id="pkg-img-1" style="background-image:url('Pueblo-Bonito-Sunset-Beach-Pool-Service.jpg')">
         <div class="pkg-img-content">
           <div class="pkg-num">VACATION PACKAGE 01</div>
           <div class="pkg-hotel-name">Pueblo Bonito<br>Sunset Beach Resort</div>
@@ -508,7 +509,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
 
     <!-- PKG 2 — VILLA DEL PALMAR -->
     <div class="pkg-card">
-      <div class="pkg-img" id="pkg-img-2" style="background-image:url('IMG_VILLA_PALMAR_REST')">
+      <div class="pkg-img" id="pkg-img-2" style="background-image:url('Villa del palmar.jpg')">
         <div class="pkg-img-content">
           <div class="pkg-num">VACATION PACKAGE 02</div>
           <div class="pkg-hotel-name">Villa del Palmar<br>Beach Resort & Spa</div>
@@ -539,7 +540,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
     <!-- PKG 3 — PLAYA GRANDE -->
     <div class="pkg-card featured">
       <div class="pkg-badge">BEST VALUE</div>
-      <div class="pkg-img" id="pkg-img-3" style="background-image:url('IMG_PLAYA_GRANDE')">
+      <div class="pkg-img" id="pkg-img-3" style="background-image:url('playa grande.jpg')">
         <div class="pkg-img-content">
           <div class="pkg-num">VACATION PACKAGE 03</div>
           <div class="pkg-hotel-name">Playa Grande Resort<br>& Grand Spa</div>
@@ -572,7 +573,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
   <div class="pkg-grid-2">
     <!-- PKG 4 — HOTEL TESORO -->
     <div class="pkg-card">
-      <div class="pkg-img" id="pkg-img-4" style="background-image:url('IMG_TESORO')">
+      <div class="pkg-img" id="pkg-img-4" style="background-image:url('hotel tesoro.webp')">
         <div class="pkg-img-content">
           <div class="pkg-num">VACATION PACKAGE 04</div>
           <div class="pkg-hotel-name">Hotel Tesoro<br>Los Cabos</div>
@@ -603,7 +604,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
     <!-- PKG 5 — GRAND SOLMAR -->
     <div class="pkg-card featured">
       <div class="pkg-badge">PREMIUM</div>
-      <div class="pkg-img" id="pkg-img-5" style="background-image:url('IMG_SOLMAR')">
+      <div class="pkg-img" id="pkg-img-5" style="background-image:url('grand solmar.webp')">
         <div class="pkg-img-content">
           <div class="pkg-num">VACATION PACKAGE 05 · FLAGSHIP</div>
           <div class="pkg-hotel-name">Grand Solmar Land's End<br>Resort & Spa</div>
