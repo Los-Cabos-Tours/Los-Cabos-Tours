@@ -962,7 +962,36 @@ function toggleAI(){
   if(tag) tag.style.display=aiOpen?'none':'block';
   document.getElementById('ai-btn-ico').className=aiOpen?'ti ti-x':'ti ti-robot';
 }
-function openAI(){if(!aiOpen)toggleAI();}
+function openAI(service){
+
+  if(!aiOpen){
+    toggleAI();
+  }
+
+  if(service){
+
+    var msgs=document.getElementById('ai-msgs');
+
+    if(msgs){
+
+      msgs.innerHTML += `
+        <div class="am u">
+          <div class="am-b">
+            I need help with ${service}
+          </div>
+        </div>
+
+        <div class="am b">
+          <div class="am-b">
+            Great choice. Marina AI can help you book ${service}, answer questions, check availability, pricing, and help complete your reservation.
+          </div>
+        </div>
+      `;
+
+      msgs.scrollTop=msgs.scrollHeight;
+    }
+  }
+}
 function closeAI(){if(aiOpen)toggleAI();}
 
 function addMsg(type,text){
