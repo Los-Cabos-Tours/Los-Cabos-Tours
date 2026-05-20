@@ -988,11 +988,14 @@ function openAI(service){
         </div>
       `;
 
-      msgs.scrollTop=msgs.scrollHeight;
+      msgs.scrollTop = msgs.scrollHeight;
     }
   }
 }
-function closeAI(){if(aiOpen)toggleAI();}
+
+function closeAI(){
+  if(aiOpen) toggleAI();
+}
 
 function addMsg(type,text){
   var msgs=document.getElementById('ai-msgs');
