@@ -1039,8 +1039,13 @@ function toggleSec(id,btn){
 }
 
 // ===== INIT =====
-injectImages();
-renderExps('all');
+if(typeof injectImages === 'function'){
+  injectImages();
+}
+
+if(typeof renderExps === 'function'){
+  renderExps('all');
+}
 </script>
 </body>
 </html>
