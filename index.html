@@ -37,7 +37,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
 .btn-wa:hover{background:#1da851}
 .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px}
 .hamburger span{width:22px;height:2px;background:var(--gold);border-radius:2px;display:block}
-
+o
 /* ===== HERO VIDEO ===== */
 .hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;overflow:hidden;margin-top:58px}
 .hero-video-wrap{position:absolute;inset:0;overflow:hidden}
@@ -340,7 +340,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
   </div>
   <div class="nav-right">
     <button class="btn btn-wa" onclick="openWhatsApp()"><i class="ti ti-brand-whatsapp"></i><span class="hide-sm">WhatsApp</span></button>
-    <button class="btn btn-gold" onclick="scrollSec('packages')">BOOK NOW</button>
+    <button class="btn btn-gold" onclick="openPackageBooking('Los Cabos Vacation Package', 0)">BOOK NOW</button>
     <div class="hamburger" onclick="toggleMobileNav()" id="hamburger"><span></span><span></span><span></span></div>
   </div>
 </nav>
@@ -352,7 +352,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
   <a style="color:var(--muted);font-size:13px;text-decoration:none;cursor:pointer" onclick="scrollSec('hotels')">Resort Stays</a>
   <a style="color:var(--muted);font-size:13px;text-decoration:none;cursor:pointer" onclick="scrollSec('services')">All Services</a>
   <a style="color:var(--muted);font-size:13px;text-decoration:none;cursor:pointer" onclick="scrollSec('contact')">Contact Us</a>
-  <button class="btn btn-gold" onclick="scrollSec('packages')" style="width:100%;justify-content:center">BOOK NOW</button>
+  <button class="btn btn-gold" onclick="openPackageBooking('Los Cabos Vacation Package', 0)" style="width:100%;justify-content:center">BOOK NOW</button>
 </div>
 
 <!-- ===== HERO ===== -->
@@ -554,14 +554,17 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
 <div class="section" id="catalog">
   <div class="sec-label">COMPLETE PRICE LIST</div>
   <div class="sec-t">All Tours &amp; Activities</div>
-  <div class="sec-s">Every tour, activity and experience from our trusted Cabo partners — click BOOK on any tour to chat with Marina and reserve instantly.</div>
+  <div class="sec-s">Every tour, activity and experience from our trusted Cabo partners — click BOOK NOW on any tour to open the booking flow and send your reservation to WhatsApp.</div>
   <div class="gold-line"></div>
   <div class="catalog-pills" id="catalog-pills">
     <div class="cat-pill active" onclick="filterCatalog('all',this)">All Partners</div>
     <div class="cat-pill" onclick="filterCatalog('cactus',this)">Cactus ATVs</div>
     <div class="cat-pill" onclick="filterCatalog('cabo-adv',this)">Cabo Adventures</div>
     <div class="cat-pill" onclick="filterCatalog('wild-canyon',this)">Wild Canyon</div>
-    <div class="cat-pill" onclick="filterCatalog('catboats',this)">Cabo Escape &amp; Co.</div>
+    <div class="cat-pill" onclick="filterCatalog('cabo-escape',this)">Cabo Escape</div>
+    <div class="cat-pill" onclick="filterCatalog('cabo-ray',this)">Cabo Ray</div>
+    <div class="cat-pill" onclick="filterCatalog('eco-cat',this)">Eco Cat</div>
+    <div class="cat-pill" onclick="filterCatalog('costa-azul',this)">Costa Azul</div>
     <div class="cat-pill" onclick="filterCatalog('fishing',this)">Fishing Charters</div>
     <div class="cat-pill" onclick="filterCatalog('luvies',this)">Luvies Tours</div>
     <div class="cat-pill" onclick="filterCatalog('transport',this)">Transportation</div>
@@ -603,7 +606,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
           <strong>CHOOSE 3 ACTIVITIES:</strong>
           Camel Ride · ATVs · Sunset Boat DJ Party · Natural Reef Snorkeling · Whale-Watching · Zipline Ride · Swimming with Dolphins + More
         </div>
-        <button class="btn btn-gold" style="width:100%;justify-content:center" onclick="openAI()">BOOK THIS PACKAGE</button>
+        <button class="btn btn-gold" style="width:100%;justify-content:center" data-pkg="Pueblo Bonito Sunset Beach Resort — Vacation Package 01" data-price="5500" onclick="openPkgFromEl(this)">BOOK THIS PACKAGE</button>
       </div>
     </div>
 
@@ -633,7 +636,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
           <strong>CHOOSE 3 ACTIVITIES:</strong>
           Camel Ride · ATVs · Sunset Boat DJ Party · Natural Reef Snorkeling · Whale-Watching · Zipline Ride · Swimming with Dolphins + More
         </div>
-        <button class="btn btn-gold" style="width:100%;justify-content:center" onclick="openAI()">BOOK THIS PACKAGE</button>
+        <button class="btn btn-gold" style="width:100%;justify-content:center" data-pkg="Villa del Palmar Beach Resort & Spa — Vacation Package 02" data-price="5500" onclick="openPkgFromEl(this)">BOOK THIS PACKAGE</button>
       </div>
     </div>
 
@@ -664,7 +667,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
           <strong>CHOOSE 3 ACTIVITIES:</strong>
           Camel Ride · ATVs · Sunset Boat DJ Party · Natural Reef Snorkeling · Whale-Watching · Zipline Ride · Swimming with Dolphins + More
         </div>
-        <button class="btn btn-gold" style="width:100%;justify-content:center" onclick="openAI()">BOOK THIS PACKAGE</button>
+        <button class="btn btn-gold" style="width:100%;justify-content:center" data-pkg="Playa Grande Resort & Grand Spa — Vacation Package 03" data-price="5500" onclick="openPkgFromEl(this)">BOOK THIS PACKAGE</button>
       </div>
     </div>
 
@@ -697,7 +700,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
           <strong>CHOOSE 3 ACTIVITIES:</strong>
           Camel Ride · ATVs · Sunset Boat DJ Party · Natural Reef Snorkeling · Whale-Watching · Zipline Ride · Swimming with Dolphins + More
         </div>
-        <button class="btn btn-gold" style="width:100%;justify-content:center" onclick="openAI()">BOOK THIS PACKAGE</button>
+        <button class="btn btn-gold" style="width:100%;justify-content:center" data-pkg="Hotel Tesoro Los Cabos — Vacation Package 04" data-price="5000" onclick="openPkgFromEl(this)">BOOK THIS PACKAGE</button>
       </div>
     </div>
 
@@ -728,7 +731,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
           <strong>CHOOSE 3 ACTIVITIES:</strong>
           Camel Ride · ATVs · Sunset Boat DJ Party · Natural Reef Snorkeling · Whale-Watching · Zipline Ride · Swimming with Dolphins + More
         </div>
-        <button class="btn btn-gold" style="width:100%;justify-content:center" onclick="openAI()">BOOK THIS PACKAGE</button>
+        <button class="btn btn-gold" style="width:100%;justify-content:center" data-pkg="Grand Solmar Land’s End Resort & Spa — Vacation Package 05" data-price="6000" onclick="openPkgFromEl(this)">BOOK THIS PACKAGE</button>
       </div>
     </div>
   </div>
@@ -792,7 +795,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
   </div>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
     <button class="btn btn-wa" style="padding:12px 28px;font-size:13px" onclick="openWhatsApp()"><i class="ti ti-brand-whatsapp"></i> WhatsApp us now</button>
-    <button class="btn btn-gold" onclick="openAI()" style="padding:12px 28px;font-size:13px"><i class="ti ti-robot"></i> CHAT WITH MARINA AI</button>
+    <button class="btn btn-gold" onclick="openPackageBooking('Los Cabos Experience', 0)" style="padding:12px 28px;font-size:13px"><i class="ti ti-calendar-check"></i> BOOK NOW</button>
     <button class="btn btn-outline" style="padding:12px 28px;font-size:13px"><i class="ti ti-world"></i> .com</button>
   </div>
 </div>
@@ -1301,21 +1304,36 @@ var CATALOG = [
     ]
   },
   {
-    id:"catboats",group:"catboats",name:"Cabo Escape / Cabo Ray / Eco Cat / Costa Azul",bg:"rgba(8,80,65,.22)",
+    id:"cabo-escape",group:"cabo-escape",name:"Cabo Escape",bg:"rgba(8,80,65,.22)",
     tours:[
-      {n:"Costa Azul Ziplines",                    p:null,f:"Ask for pricing",cat:"extras"},
       {n:"Cabo Escape — Private Tour",             p:null,f:"Ask for pricing",cat:"extras"},
       {n:"Cabo Escape — Snorkel Tour",             p:null,f:"Ask for pricing",cat:"water"},
       {n:"Cabo Escape — Sunset Tour",              p:null,f:"Ask for pricing",cat:"yacht"},
-      {n:"Cabo Escape — Whale Watching (Dec-Apr)", p:null,f:"Seasonal",       cat:"nature"},
+      {n:"Cabo Escape — Whale Watching (Dec-Apr)", p:null,f:"Seasonal",       cat:"nature"}
+    ]
+  },
+  {
+    id:"cabo-ray",group:"cabo-ray",name:"Cabo Ray",bg:"rgba(6,60,95,.22)",
+    tours:[
       {n:"Cabo Ray — Mexican Dinner",              p:null,f:"Ask for pricing",cat:"culture"},
       {n:"Cabo Ray — Snorkel Tour",                p:null,f:"Ask for pricing",cat:"water"},
       {n:"Cabo Ray — Sunset Tour",                 p:null,f:"Ask for pricing",cat:"yacht"},
-      {n:"Cabo Ray — Whale Watching (Dec-Apr)",    p:null,f:"Seasonal",       cat:"nature"},
+      {n:"Cabo Ray — Whale Watching (Dec-Apr)",    p:null,f:"Seasonal",       cat:"nature"}
+    ]
+  },
+  {
+    id:"eco-cat",group:"eco-cat",name:"Eco Cat",bg:"rgba(20,85,40,.22)",
+    tours:[
       {n:"Eco Cat — Fun Snorkel",                  p:null,f:"Ask for pricing",cat:"water"},
       {n:"Eco Cat — Snorkel Tour",                 p:null,f:"Ask for pricing",cat:"water"},
       {n:"Eco Cat — Sunset Tour",                  p:null,f:"Ask for pricing",cat:"yacht"},
       {n:"Eco Cat — Whale Watching (Dec-Apr)",     p:null,f:"Seasonal",       cat:"nature"}
+    ]
+  },
+  {
+    id:"costa-azul",group:"costa-azul",name:"Costa Azul",bg:"rgba(5,50,95,.22)",
+    tours:[
+      {n:"Costa Azul Ziplines",                        p:null,f:"Ask for pricing",cat:"extras"}
     ]
   },
   {
@@ -1373,6 +1391,7 @@ function buildCatalogHTML(companies) {
     var rows = co.tours.map(function(t) {
       var sn = t.n.replace(/&/g,"&amp;").replace(/"/g,"&quot;");
       var numP = parsePrice(t.p);
+      var snFee = (t.f||"").replace(/"/g,"&quot;");
       var priceCell = t.p
         ? "<div class=\"catalog-price\">"+t.p+"<span class=\"catalog-pp\"> / pp</span></div>"
         : "<div class=\"catalog-ask\">Ask Marina</div>";
@@ -1382,7 +1401,7 @@ function buildCatalogHTML(companies) {
       return "<div class=\"catalog-row\">"
         +"<div><div class=\"catalog-name\">"+t.n+"</div>"+feeCell+"</div>"
         +priceCell
-        +"<button class=\"catalog-book\" data-tour=\""+sn+"\" onclick=\"openAI(this.dataset.tour)\"><i class=\"ti ti-robot\"></i> ASK MARINA</button>"
+        +"<button class=\"catalog-book\" data-tour=\""+sn+"\" data-price=\""+numP+"\" data-fee=\""+snFee+"\" onclick=\"openBookingFromEl(this)\"><i class=\"ti ti-calendar-check\"></i> BOOK NOW</button>"
         +"<button class=\"catalog-wa-btn\" data-tour=\""+sn+"\" data-price=\""+numP+"\" onclick=\"expDirectWA(this)\"><i class=\"ti ti-brand-whatsapp\"></i> WHATSAPP</button>"
         +"</div>";
     }).join("");
@@ -1509,6 +1528,7 @@ function openBooking(name, price, feeStr) {
   _bkTime = "7:00 AM";
   _bkInsurance = parseInsuranceFee(feeStr || "");
   _bkFeeNote = parseFeeNote(feeStr || "");
+  _bkPackageTotal = 0;
 
   var titleEl = document.getElementById("bk-title");
   if (titleEl) titleEl.textContent = name;
@@ -1581,6 +1601,16 @@ function updateBkSummary() {
   var cl = document.getElementById("bk-child-line");
   var tl = document.getElementById("bk-total");
   if (!al || !tl) return;
+  if (_bkPackageTotal > 0) {
+    al.innerHTML = "<span>Package rate (up to 4 guests)</span><span>$" + _bkPackageTotal.toLocaleString() + " USD</span>";
+    if (cl) cl.style.display = "none";
+    var _il = document.getElementById("bk-insurance-line");
+    if (_il) _il.style.display = "none";
+    var _fn = document.getElementById("bk-fee-note");
+    if (_fn) _fn.style.display = "none";
+    tl.textContent = "$" + _bkPackageTotal.toLocaleString() + " USD";
+    return;
+  }
   if (!_bkPrice) {
     al.innerHTML = "<span>Pricing on request</span><span>—</span>";
     if (cl) cl.style.display = "none";
@@ -1624,6 +1654,22 @@ function confirmBooking() {
     var d = new Date(di.value + "T12:00:00");
     dateStr = d.toLocaleDateString("en-US", {weekday:"short", month:"long", day:"numeric", year:"numeric"});
   }
+  if (_bkPackageTotal > 0) {
+    var di0 = document.getElementById("bk-date");
+    var ds0 = "Date TBD";
+    if (di0 && di0.value) {
+      var d0 = new Date(di0.value + "T12:00:00");
+      ds0 = d0.toLocaleDateString("en-US", {weekday:"short", month:"long", day:"numeric", year:"numeric"});
+    }
+    var pkgMsg = "Hello! I would like to book the following vacation package with EBL Los Cabos.\n\n"
+      + "Package: " + _bkTour + "\n"
+      + "Package Price: $" + _bkPackageTotal.toLocaleString() + " USD (up to 4 guests)\n"
+      + "Preferred Check-in Date: " + ds0 + "\n"
+      + "\nPlease confirm availability and next steps. Thank you!";
+    openWhatsApp(pkgMsg);
+    return;
+  }
+
   var aTotal = _bkAdults * _bkPrice;
   var cp = Math.round(_bkPrice * 0.8);
   var cTotal = _bkChildren * cp;
@@ -1656,6 +1702,56 @@ function expDirectWA(el) {
     + (numP > 0 ? " ($" + numP.toFixed(0) + " USD pp)" : "")
     + ". Please confirm availability. Thank you!";
   openWhatsApp(msg);
+}
+
+
+// ===== PACKAGE BOOKING =====
+var _bkPackageTotal = 0;
+
+function openPkgFromEl(el) {
+  var name = el.getAttribute("data-pkg");
+  var price = parseFloat(el.getAttribute("data-price")) || 0;
+  openPackageBooking(name, price);
+}
+
+function openPackageBooking(name, totalPrice) {
+  _bkPackageTotal = totalPrice;
+  _bkTour = name;
+  _bkPrice = 0;
+  _bkAdults = 1;
+  _bkChildren = 0;
+  _bkTime = "9:00 AM";
+  _bkInsurance = 0;
+  _bkFeeNote = "";
+
+  var titleEl = document.getElementById("bk-title");
+  if (titleEl) titleEl.textContent = name;
+
+  var ap = document.getElementById("bk-adult-price");
+  var cp = document.getElementById("bk-child-price");
+  if (ap) ap.textContent = totalPrice > 0 ? ("$" + totalPrice.toLocaleString() + " USD — total package (up to 4 guests)") : "Contact us for pricing";
+  if (cp) cp.textContent = "Included in package price";
+
+  var adEl = document.getElementById("bk-adults-num");
+  var chEl = document.getElementById("bk-children-num");
+  if (adEl) adEl.textContent = "1";
+  if (chEl) chEl.textContent = "0";
+
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var ds = tomorrow.toISOString().split("T")[0];
+  var di = document.getElementById("bk-date");
+  if (di) { di.min = ds; di.value = ds; }
+
+  document.querySelectorAll(".bk-time-btn").forEach(function(b) { b.classList.remove("active"); });
+  var fb = document.querySelector(".bk-time-btn");
+  if (fb) { fb.classList.add("active"); _bkTime = fb.textContent.trim(); }
+
+  updateBkSummary();
+
+  var ov = document.getElementById("booking-overlay");
+  if (ov) ov.style.display = "flex";
+  document.body.style.overflow = "hidden";
 }
 
 </script>
