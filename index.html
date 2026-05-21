@@ -1043,6 +1043,21 @@ function openWhatsApp(msg) {
   var text = msg || "Hello! I'm interested in booking a tour or package in Los Cabos. Can you help me?";
   window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(text), "_blank");
 }
+
+// ===== VIDEO GALLERY — ONE AT A TIME =====
+(function() {
+  var gridVideos = document.querySelectorAll(".video-grid video");
+  gridVideos.forEach(function(vid) {
+    vid.addEventListener("play", function() {
+      gridVideos.forEach(function(other) {
+        if (other !== vid) {
+          other.pause();
+        }
+      });
+    });
+  });
+})();
+
 // ===== INIT =====
 if(typeof injectImages === "function"){
   injectImages();
