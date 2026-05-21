@@ -243,14 +243,14 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
 .catalog-company-hdr{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:8px 8px 0 0}
 .catalog-company-name{font-size:12px;font-weight:700;letter-spacing:2px;color:#fff;text-transform:uppercase}
 .catalog-table{background:var(--navy2);border:.5px solid rgba(201,168,76,.18);border-radius:0 0 8px 8px;overflow:hidden}
-.catalog-row{display:grid;grid-template-columns:1fr auto auto;align-items:center;padding:9px 16px;border-bottom:.5px solid rgba(255,255,255,.05);gap:16px}
+.catalog-row{display:grid;grid-template-columns:1fr auto auto auto;align-items:center;padding:9px 14px;border-bottom:.5px solid rgba(255,255,255,.05);gap:10px}
 .catalog-row:last-child{border-bottom:none}
 .catalog-row:hover{background:rgba(201,168,76,.05)}
 .catalog-name{font-size:12px;color:#e8dcc8;line-height:1.4}
 .catalog-fee{font-size:10px;color:var(--muted);margin-top:2px}
 .catalog-price{font-size:13px;font-weight:700;color:var(--gold);white-space:nowrap;text-align:right;min-width:70px}
 .catalog-ask{font-size:11px;color:var(--muted);font-style:italic;white-space:nowrap;min-width:70px;text-align:right}
-.catalog-book{background:var(--gold);color:var(--navy);border:none;border-radius:3px;padding:5px 11px;font-size:9px;font-weight:700;cursor:pointer;letter-spacing:1.2px;white-space:nowrap;flex-shrink:0}
+.catalog-book{background:var(--gold);color:var(--navy);border:none;border-radius:4px;padding:6px 8px;font-size:8px;font-weight:700;cursor:pointer;letter-spacing:1px;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;gap:4px}
 .catalog-book:hover{opacity:.8}
 .catalog-pp{font-size:9px;font-weight:400;color:rgba(201,168,76,.7);letter-spacing:.5px}
 @media(max-width:640px){
@@ -269,13 +269,54 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
 .exp-co-label{font-weight:700;color:#fff;text-transform:uppercase;font-size:9px}
 .exp-fee-note{font-size:10px;color:var(--muted);margin-bottom:8px;line-height:1.4}
 .catalog-row{display:grid;grid-template-columns:1fr auto auto auto;align-items:center;padding:9px 16px;border-bottom:.5px solid rgba(255,255,255,.05);gap:10px}
-.catalog-wa-btn{background:#25D366;color:#fff;border:none;border-radius:3px;padding:5px 8px;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.catalog-wa-btn{background:#25D366;color:#fff;border:none;border-radius:4px;padding:6px 8px;font-size:8px;font-weight:700;cursor:pointer;letter-spacing:1px;display:flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0}
 .catalog-wa-btn:hover{opacity:.82}
 @media(max-width:640px){
   .catalog-row{grid-template-columns:1fr auto}
   .catalog-book{display:none}
   .catalog-wa-btn{display:none}
 }
+
+/* ── Booking Modal ────────────────────────────────────────────────── */
+.booking-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;align-items:center;justify-content:center;padding:16px}
+.booking-modal{background:#0b1e35;border:1px solid rgba(201,168,76,.28);border-radius:14px;width:100%;max-width:460px;max-height:92vh;overflow-y:auto;box-shadow:0 30px 90px rgba(0,0,0,.7)}
+.bk-header{display:flex;align-items:flex-start;justify-content:space-between;padding:22px 22px 0;gap:12px}
+.bk-title{font-family:var(--serif);font-size:17px;color:var(--gold);line-height:1.35;flex:1}
+.bk-badge{display:inline-block;font-size:8px;font-weight:700;letter-spacing:1.5px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);border-radius:3px;padding:2px 7px;margin-bottom:6px;text-transform:uppercase}
+.bk-close{background:none;border:none;color:rgba(255,255,255,.4);font-size:22px;cursor:pointer;line-height:1;padding:0;flex-shrink:0;transition:color .2s}
+.bk-close:hover{color:#fff}
+.bk-body{padding:18px 22px 22px}
+.bk-section{margin-bottom:20px}
+.bk-section-label{font-size:9px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.06)}
+.bk-qty-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.bk-qty-info{flex:1}
+.bk-qty-label{font-size:13px;color:#fff;font-weight:600}
+.bk-age{font-size:11px;color:rgba(255,255,255,.4);font-weight:400;margin-left:4px}
+.bk-unit-price{font-size:11px;color:var(--gold);margin-top:3px}
+.bk-qty-ctrl{display:flex;align-items:center;gap:16px}
+.bk-minus,.bk-plus{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold);width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
+.bk-minus:hover,.bk-plus:hover{background:rgba(201,168,76,.25)}
+.bk-qty-num{min-width:26px;text-align:center;font-size:17px;font-weight:700;color:#fff}
+.bk-date-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:11px 14px;color:#fff;font-size:14px;cursor:pointer;box-sizing:border-box;outline:none;transition:border-color .2s}
+.bk-date-input:focus{border-color:rgba(201,168,76,.5)}
+.bk-date-input::-webkit-calendar-picker-indicator{filter:invert(.7);cursor:pointer}
+.bk-time-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.bk-time-btn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;color:rgba(255,255,255,.5);padding:10px 2px;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:.5px}
+.bk-time-btn:hover{border-color:rgba(201,168,76,.4);color:var(--gold)}
+.bk-time-btn.active{background:rgba(201,168,76,.14);border-color:var(--gold);color:var(--gold)}
+.bk-summary{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:14px 16px;margin-bottom:16px}
+.bk-sum-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:rgba(255,255,255,.55);padding:4px 0}
+.bk-sum-divider{border:none;border-top:1px solid rgba(255,255,255,.1);margin:8px 0}
+.bk-total-row{font-weight:700;font-size:15px;color:#fff}
+.bk-note{font-size:10px;color:rgba(255,255,255,.35);text-align:center;margin-top:10px;letter-spacing:.4px}
+.bk-actions{display:flex;flex-direction:column;gap:10px}
+.bk-book-btn{background:var(--gold);color:var(--navy);border:none;border-radius:7px;padding:15px;font-size:12px;font-weight:800;letter-spacing:1.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s;width:100%;text-transform:uppercase}
+.bk-book-btn:hover{opacity:.86}
+.bk-marina-btn{background:transparent;border:1px solid rgba(201,168,76,.35);border-radius:7px;padding:12px;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--gold);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;width:100%;text-transform:uppercase}
+.bk-marina-btn:hover{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.6)}
+@media(max-width:480px){.bk-time-grid{grid-template-columns:repeat(2,1fr)}}
+.bk-ins-row{color:rgba(255,255,255,.5)!important;font-style:italic}
+.bk-fee-note{font-size:10px;color:rgba(255,255,255,.3);margin-top:4px;letter-spacing:.3px}
 </style>
 </head>
 <body>
@@ -520,7 +561,10 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
     <div class="cat-pill" onclick="filterCatalog('cactus',this)">Cactus ATVs</div>
     <div class="cat-pill" onclick="filterCatalog('cabo-adv',this)">Cabo Adventures</div>
     <div class="cat-pill" onclick="filterCatalog('wild-canyon',this)">Wild Canyon</div>
-    <div class="cat-pill" onclick="filterCatalog('more',this)">More Partners</div>
+    <div class="cat-pill" onclick="filterCatalog('catboats',this)">Cabo Escape &amp; Co.</div>
+    <div class="cat-pill" onclick="filterCatalog('fishing',this)">Fishing Charters</div>
+    <div class="cat-pill" onclick="filterCatalog('luvies',this)">Luvies Tours</div>
+    <div class="cat-pill" onclick="filterCatalog('transport',this)">Transportation</div>
   </div>
   <div id="catalog-grid"></div>
 </div>
@@ -897,8 +941,8 @@ function injectImages(){
 
 function buildHotels(){
   var hotels=[
-    {name:"Pueblo Bonito Sunset Beach",desc:"Cabo's most scenic oceanfront resort. Cliffside suites with Pacific views.",tag:"OCEANFRONT",img:IMGS.pueblo_bonito},
-    {name:"Villa del Palmar Beach Resort & Spa",desc:"Relaxation and luxury on the Sea of Cortez. World-class spa and fine dining.",tag:"SPA & WELLNESS",img:IMGS.villa_palmar},
+    {name:"Pueblo Bonito Sunset Beach",desc:"Cabo's most scenic oceanfront resort. Cliffside suites with Pacific views.",tag:"OCEANFRONT",img:IMGS.pb_main},
+    {name:"Villa del Palmar Beach Resort & Spa",desc:"Relaxation and luxury on the Sea of Cortez. World-class spa and fine dining.",tag:"SPA & WELLNESS",img:IMGS.vp_main},
     {name:"Playa Grande Resort & Grand Spa",desc:"One of the best in Mexico — iconic dome architecture, privileged Lands End views.",tag:"ICONIC LOCATION",img:IMGS.pg_pool},
     {name:"Hotel Tesoro Los Cabos",desc:"Most central, family-friendly marina hotel. Steps from Cabo's nightlife and restaurants.",tag:"MARINA VIEW",img:IMGS.tes_main},
     {name:"Grand Solmar Land's End Resort & Spa",desc:"Dramatic Land's End location. Refined world-class service and stunning cliff-side pools.",tag:"PREMIUM · FLAGSHIP",img:IMGS.gs_aerial},
@@ -940,12 +984,15 @@ function renderExps(filter){
   CATALOG.forEach(function(co){
     var tours=filter==="all"?co.tours:co.tours.filter(function(t){return t.cat===filter;});
     tours.forEach(function(t){
-      var sn=t.n.replace(/'/g,"&#39;");
-      var sm=("Hi! I want to book: "+t.n+(t.p?" ("+t.p+" pp)":"")+". Please confirm availability.").replace(/'/g,"&#39;");
+      var sn=t.n.replace(/&/g,"&amp;").replace(/"/g,"&quot;");
+      var numP=parsePrice(t.p);
+      var snFee=(t.f||"").replace(/"/g,"&quot;");
       var priceHtml=t.p
         ?"<div class=\"exp-price\">"+t.p+" <small>/ pp</small></div>"
         :"<div class=\"exp-price\" style=\"font-size:11px;color:var(--muted)\">Ask Marina</div>";
-      var feeHtml=t.f?"<div class=\"exp-fee-note\">"+t.f+"</div>":"";
+      var rawFee=t.f||"";
+      var feeLabel=(!rawFee||/^(\+|Ask|Seasonal|Capacity|Incl)/.test(rawFee))?rawFee:("+ "+rawFee);
+      var feeHtml=feeLabel?"<div class=\"exp-fee-note\">"+feeLabel+"</div>":"";
       cards.push(
         "<div class=\"exp-card\">"
         +"<div class=\"exp-card-co\" style=\"background:"+co.bg+"\">"
@@ -957,8 +1004,8 @@ function renderExps(filter){
         +"<div class=\"exp-foot\">"+priceHtml+"</div>"
         +"</div>"
         +"<div class=\"exp-actions\">"
-        +"<button class=\"exp-btn-ai\" onclick=\"openAI('"+sn+"')\"><i class=\"ti ti-robot\"></i> ASK MARINA</button>"
-        +"<button class=\"exp-btn-wa\" onclick=\"openWhatsApp('"+sm+"')\"><i class=\"ti ti-brand-whatsapp\"></i> WHATSAPP</button>"
+        +"<button class=\"exp-btn-ai\" data-tour=\""+sn+"\" data-price=\""+numP+"\" data-fee=\""+snFee+"\" onclick=\"openBookingFromEl(this)\"><i class=\"ti ti-calendar-check\"></i> BOOK NOW</button>"
+        +"<button class=\"exp-btn-wa\" data-tour=\""+sn+"\" data-price=\""+numP+"\" onclick=\"expDirectWA(this)\"><i class=\"ti ti-brand-whatsapp\"></i> WHATSAPP</button>"
         +"</div>"
         +"</div>"
       );
@@ -1254,7 +1301,7 @@ var CATALOG = [
     ]
   },
   {
-    id:"catboats",group:"more",name:"Cabo Escape / Cabo Ray / Eco Cat / Costa Azul",bg:"rgba(8,80,65,.22)",
+    id:"catboats",group:"catboats",name:"Cabo Escape / Cabo Ray / Eco Cat / Costa Azul",bg:"rgba(8,80,65,.22)",
     tours:[
       {n:"Costa Azul Ziplines",                    p:null,f:"Ask for pricing",cat:"extras"},
       {n:"Cabo Escape — Private Tour",             p:null,f:"Ask for pricing",cat:"extras"},
@@ -1272,7 +1319,7 @@ var CATALOG = [
     ]
   },
   {
-    id:"fishing",group:"more",name:"Fishing Charters",bg:"rgba(113,43,19,.22)",
+    id:"fishing",group:"fishing",name:"Fishing Charters",bg:"rgba(113,43,19,.22)",
     tours:[
       {n:"Super Panga 23 Ft. (3 Pax)",                  p:null,f:"Ask for pricing",cat:"fishing"},
       {n:"28 Ft. Boat — 4 Pax (5 Hr. / 8 Hr.)",         p:null,f:"Ask for pricing",cat:"fishing"},
@@ -1292,7 +1339,7 @@ var CATALOG = [
     ]
   },
   {
-    id:"luvies",group:"more",name:"Luvies Tours",bg:"rgba(83,74,183,.22)",
+    id:"luvies",group:"luvies",name:"Luvies Tours",bg:"rgba(83,74,183,.22)",
     tours:[
       {n:"Balandra — La Paz",                          p:null,f:"Ask for pricing",cat:"nature"},
       {n:"La Paz Via Larga",                           p:null,f:"Ask for pricing",cat:"extras"},
@@ -1304,7 +1351,7 @@ var CATALOG = [
     ]
   },
   {
-    id:"transport",group:"more",name:"Transportation, Rentals & Water Sports",bg:"rgba(20,30,60,.35)",
+    id:"transport",group:"transport",name:"Transportation, Rentals & Water Sports",bg:"rgba(20,30,60,.35)",
     tours:[
       {n:"Car Rental (Hertz / National / Fox)", p:null,f:"Ask for pricing",cat:"extras"},
       {n:"Private Transfer — Car",             p:null,f:"Ask for pricing",cat:"extras"},
@@ -1324,17 +1371,19 @@ function buildCatalogHTML(companies) {
   if (!companies.length) return "<p style=\"color:var(--muted);text-align:center;padding:40px\">No tours found.</p>";
   return companies.map(function(co) {
     var rows = co.tours.map(function(t) {
-      var sn = t.n.replace(/&/g,"&amp;").replace(/'/g,"&#39;");
-      var sm = ("Hi! I want to book: "+t.n+(t.p?" ("+t.p+" pp)":"")+". Please confirm availability.").replace(/'/g,"&#39;");
+      var sn = t.n.replace(/&/g,"&amp;").replace(/"/g,"&quot;");
+      var numP = parsePrice(t.p);
       var priceCell = t.p
         ? "<div class=\"catalog-price\">"+t.p+"<span class=\"catalog-pp\"> / pp</span></div>"
         : "<div class=\"catalog-ask\">Ask Marina</div>";
-      var feeCell = t.f ? "<div class=\"catalog-fee\">"+t.f+"</div>" : "";
+      var rawFee = t.f || "";
+      var feeLabel = (!rawFee || /^(\+|Ask|Seasonal|Capacity|Incl)/.test(rawFee)) ? rawFee : ("+ " + rawFee);
+      var feeCell = feeLabel ? "<div class=\"catalog-fee\">"+feeLabel+"</div>" : "";
       return "<div class=\"catalog-row\">"
         +"<div><div class=\"catalog-name\">"+t.n+"</div>"+feeCell+"</div>"
         +priceCell
-        +"<button class=\"catalog-book\" onclick=\"openAI('"+sn+"')\">BOOK</button>"
-        +"<button class=\"catalog-wa-btn\" onclick=\"openWhatsApp('"+sm+"')\"><i class=\"ti ti-brand-whatsapp\"></i></button>"
+        +"<button class=\"catalog-book\" data-tour=\""+sn+"\" onclick=\"openAI(this.dataset.tour)\"><i class=\"ti ti-robot\"></i> ASK MARINA</button>"
+        +"<button class=\"catalog-wa-btn\" data-tour=\""+sn+"\" data-price=\""+numP+"\" onclick=\"expDirectWA(this)\"><i class=\"ti ti-brand-whatsapp\"></i> WHATSAPP</button>"
         +"</div>";
     }).join("");
     return "<div class=\"catalog-company\">"
@@ -1417,6 +1466,273 @@ function goToExp(cat) {
     run();
   }
 })();
+
+// ===== BOOKING MODAL =====
+var _bkTour = "";
+var _bkPrice = 0;
+var _bkAdults = 1;
+var _bkChildren = 0;
+var _bkTime = "7:00 AM";
+var _bkInsurance = 0;
+var _bkFeeNote = "";
+
+function parsePrice(str) {
+  if (!str) return 0;
+  var m = String(str).match(/[\d,]+\.?\d*/);
+  if (!m) return 0;
+  return parseFloat(m[0].replace(/,/g, ""));
+}
+
+function parseInsuranceFee(s) {
+  if (!s) return 0;
+  var m = s.match(/Insurance\s*\$?([\d.]+)/i);
+  return m ? parseFloat(m[1]) : 0;
+}
+
+function parseFeeNote(s) {
+  if (!s) return "";
+  return s.replace(/Insurance\s*\$?[\d.]+\s*(\.)?/i, "").replace(/^\s*[·\-]\s*/, "").replace(/\s*[·\-]\s*$/, "").trim();
+}
+
+function openBookingFromEl(el) {
+  var name = el.getAttribute("data-tour");
+  var price = parseFloat(el.getAttribute("data-price")) || 0;
+  var fee = el.getAttribute("data-fee") || "";
+  openBooking(name, price, fee);
+}
+
+function openBooking(name, price, feeStr) {
+  _bkTour = name;
+  _bkPrice = price || 0;
+  _bkAdults = 1;
+  _bkChildren = 0;
+  _bkTime = "7:00 AM";
+  _bkInsurance = parseInsuranceFee(feeStr || "");
+  _bkFeeNote = parseFeeNote(feeStr || "");
+
+  var titleEl = document.getElementById("bk-title");
+  if (titleEl) titleEl.textContent = name;
+
+  var ap = document.getElementById("bk-adult-price");
+  var cp = document.getElementById("bk-child-price");
+  if (ap && cp) {
+    if (_bkPrice) {
+      ap.textContent = "$" + _bkPrice.toFixed(0) + " USD / person";
+      cp.textContent = "$" + Math.round(_bkPrice * 0.8) + " USD / person";
+    } else {
+      ap.textContent = "Contact us for pricing";
+      cp.textContent = "Contact us for pricing";
+    }
+  }
+
+  var adEl = document.getElementById("bk-adults-num");
+  var chEl = document.getElementById("bk-children-num");
+  if (adEl) adEl.textContent = "1";
+  if (chEl) chEl.textContent = "0";
+
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var ds = tomorrow.toISOString().split("T")[0];
+  var di = document.getElementById("bk-date");
+  if (di) { di.min = ds; di.value = ds; }
+
+  document.querySelectorAll(".bk-time-btn").forEach(function(b) { b.classList.remove("active"); });
+  var fb = document.querySelector(".bk-time-btn");
+  if (fb) { fb.classList.add("active"); _bkTime = fb.textContent.trim(); }
+
+  updateBkSummary();
+
+  var ov = document.getElementById("booking-overlay");
+  if (ov) ov.style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+function closeBooking() {
+  var ov = document.getElementById("booking-overlay");
+  if (ov) ov.style.display = "none";
+  document.body.style.overflow = "";
+}
+
+function bkOverlayClick(e) {
+  if (e.target === document.getElementById("booking-overlay")) closeBooking();
+}
+
+function adjustQty(type, delta) {
+  if (type === "adults") {
+    _bkAdults = Math.max(1, _bkAdults + delta);
+    var el = document.getElementById("bk-adults-num");
+    if (el) el.textContent = _bkAdults;
+  } else {
+    _bkChildren = Math.max(0, _bkChildren + delta);
+    var el = document.getElementById("bk-children-num");
+    if (el) el.textContent = _bkChildren;
+  }
+  updateBkSummary();
+}
+
+function selectBkTime(btn) {
+  document.querySelectorAll(".bk-time-btn").forEach(function(b) { b.classList.remove("active"); });
+  btn.classList.add("active");
+  _bkTime = btn.textContent.trim();
+}
+
+function updateBkSummary() {
+  var al = document.getElementById("bk-adult-line");
+  var cl = document.getElementById("bk-child-line");
+  var tl = document.getElementById("bk-total");
+  if (!al || !tl) return;
+  if (!_bkPrice) {
+    al.innerHTML = "<span>Pricing on request</span><span>—</span>";
+    if (cl) cl.style.display = "none";
+    tl.textContent = "Contact us";
+    return;
+  }
+  var aTotal = _bkAdults * _bkPrice;
+  var cp = Math.round(_bkPrice * 0.8);
+  var cTotal = _bkChildren * cp;
+  var grand = aTotal + cTotal + _bkInsurance;
+  al.innerHTML = "<span>" + _bkAdults + " Adult" + (_bkAdults !== 1 ? "s" : "") + " × $" + _bkPrice.toFixed(0) + "</span><span>$" + aTotal.toFixed(2) + "</span>";
+  if (cl) {
+    if (_bkChildren > 0) {
+      cl.innerHTML = "<span>" + _bkChildren + " Child" + (_bkChildren !== 1 ? "ren" : "") + " × $" + cp + "</span><span>$" + cTotal.toFixed(2) + "</span>";
+      cl.style.display = "flex";
+    } else {
+      cl.style.display = "none";
+    }
+  }
+  var il = document.getElementById("bk-insurance-line");
+  if (il) {
+    if (_bkInsurance > 0) {
+      il.innerHTML = "<span>Insurance (one-time)</span><span>$" + _bkInsurance.toFixed(2) + "</span>";
+      il.style.display = "flex";
+    } else {
+      il.style.display = "none";
+    }
+  }
+  var fnEl = document.getElementById("bk-fee-note");
+  if (fnEl) {
+    if (_bkFeeNote) { fnEl.textContent = "* Additional fees: " + _bkFeeNote; fnEl.style.display = "block"; }
+    else { fnEl.style.display = "none"; }
+  }
+  tl.textContent = "$" + grand.toFixed(2) + " USD";
+}
+
+function confirmBooking() {
+  var di = document.getElementById("bk-date");
+  var dateStr = "Date TBD";
+  if (di && di.value) {
+    var d = new Date(di.value + "T12:00:00");
+    dateStr = d.toLocaleDateString("en-US", {weekday:"short", month:"long", day:"numeric", year:"numeric"});
+  }
+  var aTotal = _bkAdults * _bkPrice;
+  var cp = Math.round(_bkPrice * 0.8);
+  var cTotal = _bkChildren * cp;
+  var grand = aTotal + cTotal + _bkInsurance;
+
+  var msg = "Hello! I would like to book a tour with EBL Los Cabos.\n\n"
+    + "Tour: " + _bkTour + "\n"
+    + "Date: " + dateStr + "\n"
+    + "Time: " + _bkTime + "\n"
+    + "Adults (10+): " + _bkAdults + (_bkPrice ? " x $" + _bkPrice.toFixed(0) + " USD each" : "") + "\n"
+    + (_bkChildren > 0 ? "Children (4-9): " + _bkChildren + " x $" + cp + " USD each\n" : "")
+    + (_bkInsurance > 0 ? "Insurance (one-time): $" + _bkInsurance.toFixed(2) + "\n" : "")
+    + (_bkPrice ? "Estimated Total: $" + grand.toFixed(2) + " USD\n" : "")
+    + "\nPlease confirm availability. Thank you!";
+
+  openWhatsApp(msg);
+}
+
+function askMarinaBooking() {
+  closeBooking();
+  openAI(_bkTour);
+}
+
+
+
+function expDirectWA(el) {
+  var name = el.getAttribute("data-tour");
+  var numP = parseFloat(el.getAttribute("data-price")) || 0;
+  var msg = "Hello! I would like to book: " + name
+    + (numP > 0 ? " ($" + numP.toFixed(0) + " USD pp)" : "")
+    + ". Please confirm availability. Thank you!";
+  openWhatsApp(msg);
+}
+
 </script>
+
+<!-- ═══════════════════ BOOKING MODAL ══════════════════════════ -->
+<div id="booking-overlay" class="booking-overlay" onclick="bkOverlayClick(event)">
+  <div class="booking-modal">
+    <div class="bk-header">
+      <div>
+        <div class="bk-badge">EBL Los Cabos</div>
+        <div id="bk-title" class="bk-title"></div>
+      </div>
+      <button class="bk-close" onclick="closeBooking()">&#10005;</button>
+    </div>
+    <div class="bk-body">
+      <div class="bk-section">
+        <div class="bk-section-label">Select number of guests</div>
+        <div class="bk-qty-row">
+          <div class="bk-qty-info">
+            <div class="bk-qty-label">Adults<span class="bk-age">(10+)</span></div>
+            <div id="bk-adult-price" class="bk-unit-price"></div>
+          </div>
+          <div class="bk-qty-ctrl">
+            <button class="bk-minus" onclick="adjustQty('adults',-1)">&#8722;</button>
+            <span id="bk-adults-num" class="bk-qty-num">1</span>
+            <button class="bk-plus" onclick="adjustQty('adults',1)">+</button>
+          </div>
+        </div>
+        <div class="bk-qty-row">
+          <div class="bk-qty-info">
+            <div class="bk-qty-label">Children<span class="bk-age">(4&ndash;9)</span></div>
+            <div id="bk-child-price" class="bk-unit-price"></div>
+          </div>
+          <div class="bk-qty-ctrl">
+            <button class="bk-minus" onclick="adjustQty('children',-1)">&#8722;</button>
+            <span id="bk-children-num" class="bk-qty-num">0</span>
+            <button class="bk-plus" onclick="adjustQty('children',1)">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="bk-section">
+        <div class="bk-section-label">Select tour date</div>
+        <input type="date" id="bk-date" class="bk-date-input" onchange="updateBkSummary()">
+      </div>
+      <div class="bk-section">
+        <div class="bk-section-label">Select time slot</div>
+        <div class="bk-time-grid">
+          <button class="bk-time-btn active" onclick="selectBkTime(this)">7:00 AM</button>
+          <button class="bk-time-btn" onclick="selectBkTime(this)">9:00 AM</button>
+          <button class="bk-time-btn" onclick="selectBkTime(this)">11:00 AM</button>
+          <button class="bk-time-btn" onclick="selectBkTime(this)">1:00 PM</button>
+        </div>
+      </div>
+      <div class="bk-summary">
+        <div class="bk-sum-row" id="bk-adult-line"><span>&nbsp;</span><span>&nbsp;</span></div>
+        <div class="bk-sum-row" id="bk-child-line" style="display:none"><span>&nbsp;</span><span>&nbsp;</span></div>
+        <div class="bk-sum-row bk-ins-row" id="bk-insurance-line" style="display:none"><span>&nbsp;</span><span>&nbsp;</span></div>
+        <div class="bk-fee-note" id="bk-fee-note" style="display:none"></div>
+        <hr class="bk-sum-divider">
+        <div class="bk-sum-row bk-total-row">
+          <span>TOTAL</span>
+          <span id="bk-total">&#8212;</span>
+        </div>
+        <div class="bk-note">Book with confidence &mdash; secure your spot, pay at pickup or online</div>
+      </div>
+      <div class="bk-actions">
+        <button class="bk-book-btn" onclick="confirmBooking()">
+          <i class="ti ti-brand-whatsapp" style="font-size:18px"></i>&nbsp;Book on WhatsApp
+        </button>
+        <button class="bk-marina-btn" onclick="askMarinaBooking()">
+          <i class="ti ti-robot" style="font-size:15px"></i>&nbsp;Ask Marina First
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </body>
 </html>
