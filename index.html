@@ -826,145 +826,143 @@ var IMGS = {"pb_pool": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAAAAAAD/4QAxR
 // ===== INJECT IMAGES INTO PACKAGE CARDS =====
 function injectImages(){
   var maps = {
-    'pkg-img-1': IMGS.pb_pool,
-    'pkg-img-2': IMGS.vp_rest,
-    'pkg-img-3': IMGS.pg_main,
-    'pkg-img-4': IMGS.tes_night,
-    'pkg-img-5': IMGS.gs_main,
+    "pkg-img-1": IMGS.pb_pool,
+    "pkg-img-2": IMGS.vp_rest,
+    "pkg-img-3": IMGS.pg_main,
+    "pkg-img-4": IMGS.tes_night,
+    "pkg-img-5": IMGS.gs_main,
   };
   Object.keys(maps).forEach(function(id){
     var el=document.getElementById(id);
-    if(el) el.style.backgroundImage='url('+maps[id]+')';
+    if(el) el.style.backgroundImage="url("+maps[id]+")";
   });
   buildHotels();
 }
 
 function buildHotels(){
   var hotels=[
-    {name:'Pueblo Bonito Sunset Beach',desc:"Cabo's most scenic oceanfront resort. Cliffside suites with Pacific views.",tag:'OCEANFRONT',img:IMGS.pueblo_bonito},
-    {name:'Villa del Palmar Beach Resort & Spa',desc:'Relaxation and luxury on the Sea of Cortez. World-class spa and fine dining.',tag:'SPA & WELLNESS',img:IMGS.villa_palmar},
-    {name:'Playa Grande Resort & Grand Spa',desc:'One of the best in Mexico — iconic dome architecture, privileged Lands End views.',tag:'ICONIC LOCATION',img:IMGS.pg_pool},
-    {name:'Hotel Tesoro Los Cabos',desc:'Most central, family-friendly marina hotel. Steps from Cabo's nightlife and restaurants.',tag:'MARINA VIEW',img:IMGS.tes_main},
-    {name:'Grand Solmar Land's End Resort & Spa',desc:'Dramatic Land's End location. Refined world-class service and stunning cliff-side pools.',tag:'PREMIUM · FLAGSHIP',img:IMGS.gs_aerial},
-    {name:'Villa del Palmar Dining',desc:'Terrace dining pavilion with traditional Mexican flavors and ocean breezes.',tag:'FINE DINING',img:IMGS.vp_rest},
+    {name:"Pueblo Bonito Sunset Beach",desc:"Cabo's most scenic oceanfront resort. Cliffside suites with Pacific views.",tag:"OCEANFRONT",img:IMGS.pueblo_bonito},
+    {name:"Villa del Palmar Beach Resort & Spa",desc:"Relaxation and luxury on the Sea of Cortez. World-class spa and fine dining.",tag:"SPA & WELLNESS",img:IMGS.villa_palmar},
+    {name:"Playa Grande Resort & Grand Spa",desc:"One of the best in Mexico — iconic dome architecture, privileged Lands End views.",tag:"ICONIC LOCATION",img:IMGS.pg_pool},
+    {name:"Hotel Tesoro Los Cabos",desc:"Most central, family-friendly marina hotel. Steps from Cabo's nightlife and restaurants.",tag:"MARINA VIEW",img:IMGS.tes_main},
+    {name:"Grand Solmar Land's End Resort & Spa",desc:"Dramatic Land's End location. Refined world-class service and stunning cliff-side pools.",tag:"PREMIUM · FLAGSHIP",img:IMGS.gs_aerial},
+    {name:"Villa del Palmar Dining",desc:"Terrace dining pavilion with traditional Mexican flavors and ocean breezes.",tag:"FINE DINING",img:IMGS.vp_rest},
   ];
-  var grid=document.getElementById('hotel-grid');
+  var grid=document.getElementById("hotel-grid");
   if(!grid) return;
   grid.innerHTML=hotels.map(function(h){
-    return '<div class="hotel-card">'
-      +'<div class="hotel-img" style="background-image:url('+h.img+');background-size:cover;background-position:center">'
-      +'<div class="hotel-info">'
-      +'<div class="hotel-name">'+h.name+'</div>'
-      +'<div class="hotel-desc">'+h.desc+'</div>'
-      +'<div class="hotel-tag">'+h.tag+'</div>'
-      +'</div></div></div>';
-  }).join('');
+    return "<div class=\"hotel-card\">"
+      +"<div class=\"hotel-img\" style=\"background-image:url("+h.img+");background-size:cover;background-position:center\">"
+      +"<div class=\"hotel-info\">"
+      +"<div class=\"hotel-name\">"+h.name+"</div>"
+      +"<div class=\"hotel-desc\">"+h.desc+"</div>"
+      +"<div class=\"hotel-tag\">"+h.tag+"</div>"
+      +"</div></div></div>";
+  }).join("");
 }
 
 // ===== EXPERIENCES =====
 var EXPS=[
-  {cat:'yacht',name:'Luxury Yacht Charter',desc:'Cabo Arch, sea lions, snorkeling, open bar & gourmet lunch on the Sea of Cortez.',price:'$399',pp:true,stars:'★★★★★',tag:'YACHT',tc:'#534AB7',bg:'rgba(83,74,183,.2)',ico:'ti-sailing'},
-  {cat:'yacht',name:'Sunset Dinner Cruise',desc:'Private chef, premium cocktails, 3-course dinner as the sun dips below the Pacific.',price:'$249',pp:true,stars:'★★★★★',tag:'YACHT',tc:'#534AB7',bg:'rgba(83,74,183,.2)',ico:'ti-moon-stars'},
-  {cat:'water',name:'Scuba Diving — Pelican Rock',desc:'World-class dive sites at Lands End. All skill levels welcome. Gear included.',price:'$89',pp:true,stars:'★★★★★',tag:'DIVING',tc:'#185FA5',bg:'rgba(24,95,165,.2)',ico:'ti-swimming'},
-  {cat:'water',name:'Surf & Paddleboard',desc:'Morning surf lesson at Monuments Beach + sunset paddleboard session.',price:'$95',pp:true,stars:'★★★★☆',tag:'SURF',tc:'#185FA5',bg:'rgba(24,95,165,.2)',ico:'ti-waves'},
-  {cat:'atv',name:'ATV Desert Adventure',desc:'Blast through sand dunes, desert trails and cactus fields with panoramic Pacific views.',price:'$189',pp:true,stars:'★★★★★',tag:'ATV',tc:'#854F0B',bg:'rgba(133,79,11,.2)',ico:'ti-car-4wd'},
-  {cat:'atv',name:'ATV + Zipline Combo',desc:'Desert ATVs then soar above the Baja landscape on a 7-line zip course.',price:'$225',pp:true,stars:'★★★★★',tag:'COMBO',tc:'#854F0B',bg:'rgba(133,79,11,.2)',ico:'ti-mountain'},
-  {cat:'nature',name:'Whale Watching AM Tour',desc:'Humpback & gray whales in their natural habitat. Marine biologist guide included.',price:'$129',pp:true,stars:'★★★★★',tag:'WHALE',tc:'#085041',bg:'rgba(8,80,65,.2)',ico:'ti-fish'},
-  {cat:'fishing',name:'Deep-Sea Sport Fishing',desc:'Marlin, dorado, tuna — fully equipped boat, captain, bait and tackle included.',price:'$299',pp:true,stars:'★★★★★',tag:'FISHING',tc:'#712B13',bg:'rgba(113,43,19,.2)',ico:'ti-fish'},
-  {cat:'culture',name:'City & Food Tour',desc:'San José art walk, authentic tacos, mezcal tasting, hand-crafted pottery workshop.',price:'$75',pp:true,stars:'★★★★★',tag:'CULTURE',tc:'#3C3489',bg:'rgba(60,52,137,.2)',ico:'ti-map-pin'},
-  {cat:'culture',name:'Premium Tequila Tasting',desc:'Guided tasting of 8 premium tequilas with food pairing at a top distillery.',price:'$65',pp:true,stars:'★★★★★',tag:'EXPERIENCE',tc:'#3C3489',bg:'rgba(60,52,137,.2)',ico:'ti-bottle'},
-  {cat:'extras',name:'Swimming with Dolphins',desc:'Interact with dolphins at Cabo's premier dolphin center. All ages welcome.',price:'$120',pp:true,stars:'★★★★★',tag:'FAMILY',tc:'#0F6E56',bg:'rgba(15,110,86,.2)',ico:'ti-swimming'},
-  {cat:'extras',name:'Camel Ride Desert Tour',desc:'A unique Baja adventure — ride camels through the desert with mountain views.',price:'$95',pp:true,stars:'★★★★☆',tag:'UNIQUE',tc:'#633806',bg:'rgba(99,56,6,.2)',ico:'ti-horse'},
+  {cat:"yacht",name:"Luxury Yacht Charter",desc:"Cabo Arch, sea lions, snorkeling, open bar & gourmet lunch on the Sea of Cortez.",price:"$399",pp:true,stars:"★★★★★",tag:"YACHT",tc:"#534AB7",bg:"rgba(83,74,183,.2)",ico:"ti-sailing"},
+  {cat:"yacht",name:"Sunset Dinner Cruise",desc:"Private chef, premium cocktails, 3-course dinner as the sun dips below the Pacific.",price:"$249",pp:true,stars:"★★★★★",tag:"YACHT",tc:"#534AB7",bg:"rgba(83,74,183,.2)",ico:"ti-moon-stars"},
+  {cat:"water",name:"Scuba Diving — Pelican Rock",desc:"World-class dive sites at Lands End. All skill levels welcome. Gear included.",price:"$89",pp:true,stars:"★★★★★",tag:"DIVING",tc:"#185FA5",bg:"rgba(24,95,165,.2)",ico:"ti-swimming"},
+  {cat:"water",name:"Surf & Paddleboard",desc:"Morning surf lesson at Monuments Beach + sunset paddleboard session.",price:"$95",pp:true,stars:"★★★★☆",tag:"SURF",tc:"#185FA5",bg:"rgba(24,95,165,.2)",ico:"ti-waves"},
+  {cat:"atv",name:"ATV Desert Adventure",desc:"Blast through sand dunes, desert trails and cactus fields with panoramic Pacific views.",price:"$189",pp:true,stars:"★★★★★",tag:"ATV",tc:"#854F0B",bg:"rgba(133,79,11,.2)",ico:"ti-car-4wd"},
+  {cat:"atv",name:"ATV + Zipline Combo",desc:"Desert ATVs then soar above the Baja landscape on a 7-line zip course.",price:"$225",pp:true,stars:"★★★★★",tag:"COMBO",tc:"#854F0B",bg:"rgba(133,79,11,.2)",ico:"ti-mountain"},
+  {cat:"nature",name:"Whale Watching AM Tour",desc:"Humpback & gray whales in their natural habitat. Marine biologist guide included.",price:"$129",pp:true,stars:"★★★★★",tag:"WHALE",tc:"#085041",bg:"rgba(8,80,65,.2)",ico:"ti-fish"},
+  {cat:"fishing",name:"Deep-Sea Sport Fishing",desc:"Marlin, dorado, tuna — fully equipped boat, captain, bait and tackle included.",price:"$299",pp:true,stars:"★★★★★",tag:"FISHING",tc:"#712B13",bg:"rgba(113,43,19,.2)",ico:"ti-fish"},
+  {cat:"culture",name:"City & Food Tour",desc:"San José art walk, authentic tacos, mezcal tasting, hand-crafted pottery workshop.",price:"$75",pp:true,stars:"★★★★★",tag:"CULTURE",tc:"#3C3489",bg:"rgba(60,52,137,.2)",ico:"ti-map-pin"},
+  {cat:"culture",name:"Premium Tequila Tasting",desc:"Guided tasting of 8 premium tequilas with food pairing at a top distillery.",price:"$65",pp:true,stars:"★★★★★",tag:"EXPERIENCE",tc:"#3C3489",bg:"rgba(60,52,137,.2)",ico:"ti-bottle"},
+  {cat:"extras",name:"Swimming with Dolphins",desc:"Interact with dolphins at Cabo's premier dolphin center. All ages welcome.",price:"$120",pp:true,stars:"★★★★★",tag:"FAMILY",tc:"#0F6E56",bg:"rgba(15,110,86,.2)",ico:"ti-swimming"},
+  {cat:"extras",name:"Camel Ride Desert Tour",desc:"A unique Baja adventure — ride camels through the desert with mountain views.",price:"$95",pp:true,stars:"★★★★☆",tag:"UNIQUE",tc:"#633806",bg:"rgba(99,56,6,.2)",ico:"ti-horse"},
 ];
 
 function renderExps(filter){
-  var grid=document.getElementById('exp-grid');
+  var grid=document.getElementById("exp-grid");
   if(!grid) return;
-  var list=filter==='all'?EXPS:EXPS.filter(function(e){return e.cat===filter;});
+  var list=filter==="all"?EXPS:EXPS.filter(function(e){return e.cat===filter;});
   grid.innerHTML=list.map(function(e){
-    return '<div class="exp-card">'
-      +'<div class="exp-img" style="background:'+e.bg+';display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px">'
-      +'<i class="ti '+e.ico+'" style="font-size:36px;color:rgba(201,168,76,.65);position:relative;z-index:1"></i>'
-      +'<div class="exp-tag" style="background:rgba(255,255,255,.07);color:'+e.tc+'">'+e.tag+'</div>'
-      +'</div>'
-      +'<div class="exp-body">'
-      +'<div class="exp-name">'+e.name+'</div>'
-      +'<div class="exp-desc">'+e.desc+'</div>'
-      +'<div class="exp-foot">'
-      +'<div class="exp-price">'+e.price+' <small>'+(e.pp?'pp':'')+'</small></div>'
-      +'<div class="exp-stars">'+e.stars+'</div>'
-      +'</div></div></div>';
-  }).join('');
+    return "<div class=\"exp-card\">"
+      +"<div class=\"exp-img\" style=\"background:"+e.bg+";display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px\">"
+      +"<i class=\"ti "+e.ico+"\" style=\"font-size:36px;color:rgba(201,168,76,.65);position:relative;z-index:1\"></i>"
+      +"<div class=\"exp-tag\" style=\"background:rgba(255,255,255,.07);color:"+e.tc+"\">"+e.tag+"</div>"
+      +"</div>"
+      +"<div class=\"exp-body\">"
+      +"<div class=\"exp-name\">"+e.name+"</div>"
+      +"<div class=\"exp-desc\">"+e.desc+"</div>"
+      +"<div class=\"exp-foot\">"
+      +"<div class=\"exp-price\">"+e.price+" <small>"+(e.pp?"pp":"")+"</small></div>"
+      +"<div class=\"exp-stars\">"+e.stars+"</div>"
+      +"</div></div></div>";
+  }).join("");
 }
 
 function filterExp(f,el){
-  document.querySelectorAll('.cat-pill').forEach(function(c){c.classList.remove('active');});
-  el.classList.add('active');
+  document.querySelectorAll(".cat-pill").forEach(function(c){c.classList.remove("active");});
+  el.classList.add("active");
   renderExps(f);
 }
 
 // ===== NAVIGATION =====
 function scrollSec(id){
   var el=document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:'smooth'});
-  var mn=document.getElementById('mobile-nav');
-  if(mn) mn.style.display='none';
+  if(el) el.scrollIntoView({behavior:"smooth"});
+  var mn=document.getElementById("mobile-nav");
+  if(mn) mn.style.display="none";
 }
 
 function toggleMobileNav(){
-  var mn=document.getElementById('mobile-nav');
-  if(mn) mn.style.display=mn.style.display==='flex'?'none':'flex';
+  var mn=document.getElementById("mobile-nav");
+  if(mn) mn.style.display=mn.style.display==="flex"?"none":"flex";
 }
 
 // ===== VIDEO =====
 var vidPlaying=true;
 var vidIndex=0;
-var vids=['ebl_promo_video_1.mp4','ebl_promo_video_2.mp4','ebl_promo_video_3.mp4'];
+var vids=["ebl_promo_video_1.mp4","ebl_promo_video_2.mp4","ebl_promo_video_3.mp4"];
 function toggleVideo(){
-  var v=document.getElementById('hero-video');
-  var ico=document.getElementById('vid-ico');
-  if(vidPlaying){v.pause();ico.className='ti ti-player-play';}
-  else{v.play();ico.className='ti ti-player-pause';}
+  var v=document.getElementById("hero-video");
+  var ico=document.getElementById("vid-ico");
+  if(vidPlaying){v.pause();ico.className="ti ti-player-play";}
+  else{v.play();ico.className="ti ti-player-pause";}
   vidPlaying=!vidPlaying;
 }
 function changeHeroVideo(){
   vidIndex=(vidIndex+1)%vids.length;
-  var v=document.getElementById('hero-video');
+  var v=document.getElementById("hero-video");
   v.src=vids[vidIndex];
   v.play();
   vidPlaying=true;
-  document.getElementById('vid-ico').className='ti ti-player-pause';
+  document.getElementById("vid-ico").className="ti ti-player-pause";
 }
 
 // ===== MARINA AI =====
 var aiOpen=false;
 var AI_RESPONSES={
-  pkg:['Our vacation packages range from $5,000–$6,000 USD for up to 4 guests. Each includes 7 nights in a suite, airport transfers, a Mexican dinner, tequila tasting, Arch boat tour, and 3 activities of your choice. Which resort interests you?','We have 5 packages: Pueblo Bonito ($5,500), Villa del Palmar ($5,500), Playa Grande ($5,500), Hotel Tesoro ($5,000) and our flagship Grand Solmar at $6,000. All include transportation, tours, and dining. Want details on any?'],
-  yacht:['Our Luxury Yacht Charter is $399/pp — Cabo Arch, sea lions, snorkeling, open bar and gourmet lunch included. Departs daily from Marina Cabo San Lucas. How many guests and what date?','The Sunset Dinner Cruise ($249/pp) is unforgettable — private chef, premium cocktails, 3-course dinner as the sun sets over the Pacific. Would you like to reserve?'],
-  transfer:['Private transfers available 24/7. Airport to hotel: Sedan (1–3 pax) $45 · SUV/Van (4–7 pax) $65 · Sprinter (8–14 pax) $120. All English-speaking drivers. What's your arrival date and flight number?'],
-  activities:['We offer over 20 curated activities: yacht charters, scuba diving, ATV desert adventure, whale watching, sport fishing, camel rides, swimming with dolphins, ziplines, cooking classes, tequila tours, and much more. What sounds exciting to you?'],
-  default:['¡Bienvenido! I'd love to help you plan the perfect Cabo trip. Tell me — how many guests, what dates, and what kind of experience excites you most?','Of course! Whether it's adventure, luxury, food, or pure relaxation — we have it all in Los Cabos. What's most important for your trip?','You're going to love Cabo! What would you like to do first — book a tour, a package, or do you need airport pickup?'],
+  pkg:["Our vacation packages range from $5,000–6,000 USD for up to 4 guests. Each includes 7 nights in a suite, airport transfers, a Mexican dinner, tequila tasting, Arch boat tour, and 3 activities of your choice. Which resort interests you?","We have 5 packages: Pueblo Bonito ($5,500), Villa del Palmar ($5,500), Playa Grande ($5,500), Hotel Tesoro ($5,000) and our flagship Grand Solmar at $6,000. All include transportation, tours, and dining. Want details on any?"],
+  yacht:["Our Luxury Yacht Charter is $399/pp — Cabo Arch, sea lions, snorkeling, open bar and gourmet lunch included. Departs daily from Marina Cabo San Lucas. How many guests and what date?","The Sunset Dinner Cruise ($249/pp) is unforgettable — private chef, premium cocktails, 3-course dinner as the sun sets over the Pacific. Would you like to reserve?"],
+  transfer:["Private transfers available 24/7. Airport to hotel: Sedan (1–3 pax) $45 · SUV/Van (4–7 pax) $65 · Sprinter (8–14 pax) $120. All English-speaking drivers. What's your arrival date and flight number?"],
+  activities:["We offer over 20 curated activities: yacht charters, scuba diving, ATV desert adventure, whale watching, sport fishing, camel rides, swimming with dolphins, ziplines, cooking classes, tequila tours, and much more. What sounds exciting to you?"],
+  default:["¡Bienvenido! I'd love to help you plan the perfect Cabo trip. Tell me — how many guests, what dates, and what kind of experience excites you most?","Of course! Whether it's adventure, luxury, food, or pure relaxation — we have it all in Los Cabos. What's most important for your trip?","You're going to love Cabo! What would you like to do first — book a tour, a package, or do you need airport pickup?"],
 };
 
 function getAIResp(m){
   m=m.toLowerCase();
-  if(m.includes('package')||m.includes('all-inclusive')) return AI_RESPONSES.pkg[Math.floor(Math.random()*2)];
-  if(m.includes('yacht')||m.includes('boat')||m.includes('sail')) return AI_RESPONSES.yacht[Math.floor(Math.random()*2)];
-  if(m.includes('taxi')||m.includes('transfer')||m.includes('airport')||m.includes('pickup')) return AI_RESPONSES.transfer[0];
-  if(m.includes('activit')||m.includes('tour')||m.includes('atv')||m.includes('dive')) return AI_RESPONSES.activities[0];
+  if(m.includes("package")||m.includes("all-inclusive")) return AI_RESPONSES.pkg[Math.floor(Math.random()*2)];
+  if(m.includes("yacht")||m.includes("boat")||m.includes("sail")) return AI_RESPONSES.yacht[Math.floor(Math.random()*2)];
+  if(m.includes("taxi")||m.includes("transfer")||m.includes("airport")||m.includes("pickup")) return AI_RESPONSES.transfer[0];
+  if(m.includes("activit")||m.includes("tour")||m.includes("atv")||m.includes("dive")) return AI_RESPONSES.activities[0];
   return AI_RESPONSES.default[Math.floor(Math.random()*3)];
 }
 
 function toggleAI(){
   aiOpen=!aiOpen;
-  document.getElementById('ai-win').classList.toggle('open',aiOpen);
-  var tag=document.getElementById('ai-tag');
-  if(tag) tag.style.display=aiOpen?'none':'block';
-  document.getElementById('ai-btn-ico').className=aiOpen?'ti ti-x':'ti ti-robot';
+  document.getElementById("ai-win").classList.toggle("open",aiOpen);
+  var tag=document.getElementById("ai-tag");
+  if(tag) tag.style.display=aiOpen?"none":"block";
+  document.getElementById("ai-btn-ico").className=aiOpen?"ti ti-x":"ti ti-robot";
 }
 function openAI(service){
-
-  alert(service);
 
   if(!aiOpen){
     toggleAI();
@@ -972,7 +970,7 @@ function openAI(service){
 
   if(service){
 
-    var msgs=document.getElementById('ai-msgs');
+    var msgs=document.getElementById("ai-msgs");
 
     if(msgs){
 
@@ -1000,53 +998,53 @@ function closeAI(){
 }
 
 function addMsg(type,text){
-  var msgs=document.getElementById('ai-msgs');
+  var msgs=document.getElementById("ai-msgs");
   if(!msgs) return;
-  var d=document.createElement('div');
-  d.className='am '+type;
-  d.innerHTML='<div class="am-b">'+text+'</div>';
+  var d=document.createElement("div");
+  d.className="am "+type;
+  d.innerHTML="<div class=\"am-b\">"+text+"</div>";
   msgs.appendChild(d);
   msgs.scrollTop=msgs.scrollHeight;
 }
 
 function aiSend(){
-  var inp=document.getElementById('ai-inp');
+  var inp=document.getElementById("ai-inp");
   if(!inp||!inp.value.trim()) return;
-  var msg=inp.value.trim(); inp.value='';
-  addMsg('u',msg);
-  setTimeout(function(){addMsg('b',getAIResp(msg));},800);
+  var msg=inp.value.trim(); inp.value="";
+  addMsg("u",msg);
+  setTimeout(function(){addMsg("b",getAIResp(msg));},800);
 }
 
 function aiQ(msg){
   openAI();
-  addMsg('u',msg);
-  setTimeout(function(){addMsg('b',getAIResp(msg));},800);
+  addMsg("u",msg);
+  setTimeout(function(){addMsg("b",getAIResp(msg));},800);
 }
 
 // ===== CUSTOMIZER =====
 function toggleCust(){
-  document.getElementById('cust-panel').classList.toggle('open');
+  document.getElementById("cust-panel").classList.toggle("open");
 }
 function toggleFeat(id,btn){
-  btn.classList.toggle('on');btn.classList.toggle('off');
+  btn.classList.toggle("on");btn.classList.toggle("off");
   var el=document.getElementById(id);
-  if(el) el.style.display=btn.classList.contains('on')?'':'none';
+  if(el) el.style.display=btn.classList.contains("on")?"":"none";
 }
 function toggleSec(id,btn){
-  btn.classList.toggle('on');btn.classList.toggle('off');
+  btn.classList.toggle("on");btn.classList.toggle("off");
   var el=document.getElementById(id);
-  if(el) el.style.display=btn.classList.contains('on')?'':'none';
+  if(el) el.style.display=btn.classList.contains("on")?"":"none";
 }
 
 // ===== INIT =====
-if(typeof injectImages === 'function'){
+if(typeof injectImages === "function"){
   injectImages();
 }
 
-if(typeof renderExps === 'function'){
-  renderExps('all');
+if(typeof renderExps === "function"){
+  renderExps("all");
 }
-console.log('SCRIPT LOADED');
+console.log("SCRIPT LOADED");
 </script>
 </body>
 </html>
