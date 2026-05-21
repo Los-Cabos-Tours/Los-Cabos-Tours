@@ -713,23 +713,23 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
     <div>
       <div class="footer-heading">EXPERIENCES</div>
       <div class="footer-links">
-        <a>Yacht charters</a><a>Water sports</a><a>ATV adventures</a>
-        <a>Whale watching</a><a>Sport fishing</a><a>Cultural tours</a><a>Camel rides</a>
+        <a onclick="goToExp('yacht')" style="cursor:pointer">Yacht charters</a><a onclick="goToExp('water')" style="cursor:pointer">Water sports</a><a onclick="goToExp('atv')" style="cursor:pointer">ATV adventures</a>
+        <a onclick="goToExp('nature')" style="cursor:pointer">Whale watching</a><a onclick="goToExp('fishing')" style="cursor:pointer">Sport fishing</a><a onclick="goToExp('culture')" style="cursor:pointer">Cultural tours</a><a onclick="goToExp('extras')" style="cursor:pointer">Camel rides</a>
       </div>
     </div>
     <div>
       <div class="footer-heading">SERVICES</div>
       <div class="footer-links">
-        <a>Resort stays</a><a>Fine dining reservations</a><a>Airport transfers</a>
-        <a>Private chef</a><a>In-villa spa</a><a>Photography</a><a>Security</a>
+        <a onclick="scrollSec('hotels')" style="cursor:pointer">Resort stays</a><a onclick="openAI('Restaurant Reservations')" style="cursor:pointer">Fine dining reservations</a><a onclick="openAI('Private Transfers')" style="cursor:pointer">Airport transfers</a>
+        <a onclick="openAI('Private Chef & Butler')" style="cursor:pointer">Private chef</a><a onclick="openAI('In-Villa Spa')" style="cursor:pointer">In-villa spa</a><a onclick="openAI('Photography')" style="cursor:pointer">Photography</a><a onclick="openAI('Private Security')" style="cursor:pointer">Security</a>
       </div>
     </div>
     <div>
       <div class="footer-heading">PACKAGES</div>
       <div class="footer-links">
-        <a>Pueblo Bonito — $5,500</a><a>Villa del Palmar — $5,500</a>
-        <a>Playa Grande — $5,500</a><a>Hotel Tesoro — $5,000</a>
-        <a>Grand Solmar — $6,000</a><a>Custom packages</a>
+        <a onclick="scrollSec('packages')" style="cursor:pointer">Pueblo Bonito — $5,500</a><a onclick="scrollSec('packages')" style="cursor:pointer">Villa del Palmar — $5,500</a>
+        <a onclick="scrollSec('packages')" style="cursor:pointer">Playa Grande — $5,500</a><a onclick="scrollSec('packages')" style="cursor:pointer">Hotel Tesoro — $5,000</a>
+        <a onclick="scrollSec('packages')" style="cursor:pointer">Grand Solmar — $6,000</a><a onclick="openAI('Custom Package')" style="cursor:pointer">Custom packages</a>
       </div>
     </div>
   </div>
@@ -1042,6 +1042,17 @@ function openWhatsApp(msg) {
   var phone = "526245181970";
   var text = msg || "Hello! I'm interested in booking a tour or package in Los Cabos. Can you help me?";
   window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(text), "_blank");
+}
+
+
+// ===== FOOTER LINK HELPERS =====
+function goToExp(cat) {
+  scrollSec("tours");
+  document.querySelectorAll(".cat-pill").forEach(function(p) {
+    var oc = p.getAttribute("onclick") || "";
+    p.classList.toggle("active", oc.indexOf("'" + cat + "'") !== -1);
+  });
+  renderExps(cat);
 }
 
 // ===== VIDEO GALLERY — ONE AT A TIME =====
