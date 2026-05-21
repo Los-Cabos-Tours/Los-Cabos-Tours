@@ -258,7 +258,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
     <a onclick="scrollSec('contact')">Contact</a>
   </div>
   <div class="nav-right">
-    <button class="btn btn-wa" onclick="openAI()"><i class="ti ti-brand-whatsapp"></i><span class="hide-sm">WhatsApp</span></button>
+    <button class="btn btn-wa" onclick="openWhatsApp()"><i class="ti ti-brand-whatsapp"></i><span class="hide-sm">WhatsApp</span></button>
     <button class="btn btn-gold" onclick="scrollSec('packages')">BOOK NOW</button>
     <div class="hamburger" onclick="toggleMobileNav()" id="hamburger"><span></span><span></span><span></span></div>
   </div>
@@ -691,7 +691,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
     </div>
   </div>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <button class="btn btn-wa" style="padding:12px 28px;font-size:13px"><i class="ti ti-brand-whatsapp"></i> WhatsApp us now</button>
+    <button class="btn btn-wa" style="padding:12px 28px;font-size:13px" onclick="openWhatsApp()"><i class="ti ti-brand-whatsapp"></i> WhatsApp us now</button>
     <button class="btn btn-gold" onclick="openAI()" style="padding:12px 28px;font-size:13px"><i class="ti ti-robot"></i> CHAT WITH MARINA AI</button>
     <button class="btn btn-outline" style="padding:12px 28px;font-size:13px"><i class="ti ti-world"></i> .com</button>
   </div>
@@ -704,7 +704,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
       <div class="footer-brand">LOS CABOS TOURS</div>
       <p class="footer-tagline">Your ultimate guide to the best of Baja California Sur. Luxury, adventure, and unforgettable memories — all in one place. "Explore Cabo, Your Way, All Day."</p>
       <div style="display:flex;gap:8px">
-        <button class="btn btn-wa" style="padding:6px 12px;font-size:11px"><i class="ti ti-brand-whatsapp"></i> WhatsApp</button>
+        <button class="btn btn-wa" style="padding:6px 12px;font-size:11px" onclick="openWhatsApp()"><i class="ti ti-brand-whatsapp"></i> WhatsApp</button>
         <button style="background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:4px;padding:6px 10px;cursor:pointer;color:var(--muted);font-size:14px"><i class="ti ti-brand-instagram"></i></button>
         <button style="background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:4px;padding:6px 10px;cursor:pointer;color:var(--muted);font-size:14px"><i class="ti ti-brand-facebook"></i></button>
         <button style="background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:4px;padding:6px 10px;cursor:pointer;color:var(--muted);font-size:14px"><i class="ti ti-brand-tiktok"></i></button>
@@ -778,7 +778,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
 </div>
 
 <!-- WA FLOAT -->
-<button class="wa-float"><i class="ti ti-brand-whatsapp"></i></button>
+<button class="wa-float" id="wa-float-btn" onclick="openWhatsApp()"><i class="ti ti-brand-whatsapp"></i></button>
 
 <!-- CUSTOMIZER -->
 <button class="cust-toggle" onclick="toggleCust()">CUSTOMIZE</button>
@@ -1036,6 +1036,13 @@ function toggleSec(id,btn){
   if(el) el.style.display=btn.classList.contains("on")?"":"none";
 }
 
+
+// ===== WHATSAPP =====
+function openWhatsApp(msg) {
+  var phone = "526245181970";
+  var text = msg || "Hello! I'm interested in booking a tour or package in Los Cabos. Can you help me?";
+  window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(text), "_blank");
+}
 // ===== INIT =====
 if(typeof injectImages === "function"){
   injectImages();
