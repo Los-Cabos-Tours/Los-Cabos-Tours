@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -37,9 +37,9 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
 .btn-wa:hover{background:#1da851}
 .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px}
 .hamburger span{width:22px;height:2px;background:var(--gold);border-radius:2px;display:block}
-o
+
 /* ===== HERO VIDEO ===== */
-.hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;overflow:hidden;margin-top:58px}
+.hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;overflow:hidden;margin-top:62px;padding-top:80px;padding-bottom:80px}
 .hero-video-wrap{position:absolute;inset:0;overflow:hidden}
 .hero-video-wrap video{width:100%;height:100%;object-fit:cover;opacity:.55}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,22,40,.92) 40%,rgba(10,22,40,.3))}
@@ -55,8 +55,6 @@ o
 .hero-video-controls{position:absolute;bottom:24px;right:24px;z-index:3;display:flex;gap:8px}
 .vid-ctrl{width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);color:var(--gold);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .2s}
 .vid-ctrl:hover{background:rgba(201,168,76,.4)}
-.scroll-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:10px;letter-spacing:2px;animation:bounce 2s infinite;cursor:pointer;z-index:3}
-@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
 
 /* ===== TRUST BAR ===== */
 .trust{background:rgba(201,168,76,.07);border-top:.5px solid rgba(201,168,76,.15);border-bottom:.5px solid rgba(201,168,76,.15);padding:18px 24px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;text-align:center}
@@ -77,6 +75,7 @@ o
 .sf-label{font-size:10px;letter-spacing:2px;color:var(--gold)}
 .sf-input{background:transparent;border:none;border-bottom:.5px solid rgba(201,168,76,.35);padding:7px 0;font-size:13px;color:var(--txt);font-family:'Lato',sans-serif;outline:none}
 .sf-input::placeholder{color:var(--muted)}
+.sf-input option{background:#fff!important;color:#111!important}
 .sf-divider{width:.5px;height:44px;background:rgba(201,168,76,.18);align-self:flex-end}
 
 /* ===== SERVICES GRID ===== */
@@ -351,6 +350,7 @@ o
   <a style="color:var(--muted);font-size:13px;text-decoration:none;cursor:pointer" onclick="scrollSec('packages')">Vacation Packages</a>
   <a style="color:var(--muted);font-size:13px;text-decoration:none;cursor:pointer" onclick="scrollSec('hotels')">Resort Stays</a>
   <a style="color:var(--muted);font-size:13px;text-decoration:none;cursor:pointer" onclick="scrollSec('services')">All Services</a>
+  <a style="color:var(--muted);font-size:13px;text-decoration:none;cursor:pointer" onclick="scrollSec('videos')">Gallery</a>
   <a style="color:var(--muted);font-size:13px;text-decoration:none;cursor:pointer" onclick="scrollSec('contact')">Contact Us</a>
   <button class="btn btn-gold" onclick="openPackageBooking('Los Cabos Vacation Package', 0)" style="width:100%;justify-content:center">BOOK NOW</button>
 </div>
@@ -359,14 +359,14 @@ o
 <section class="hero" id="hero">
   <div class="hero-video-wrap">
     <video id="hero-video" autoplay muted loop playsinline>
-      <source src="ebl_promo_video_1.mp4" type="video/mp4"/>
-      <source src="ebl_promo_video_2.mp4" type="video/mp4"/>
+      <source src="ebl_promo_video_1.mp4?v=original" type="video/mp4"/>
+      <source src="ebl_promo_video_2.mp4?v=original" type="video/mp4"/>
     </video>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">WELCOME TO PARADISE</div>
-    <h1 class="hero-title">Explore Cabo,<br><span> Your Way, All Day.</span></h1>
+    <h1 class="hero-title">Explore Cabo,<br><span> Your Way,<br>All Day.</span></h1>
     <p class="hero-subtitle" id="hero-sub-text">Luxury tours, yacht charters, resort stays, fine dining, taxi & concierge — we handle everything so you focus on making memories in Baja California Sur.</p>
     <div class="hero-actions">
       <button class="btn btn-gold" onclick="scrollSec('packages')"><i class="ti ti-calendar"></i> VIEW PACKAGES</button>
@@ -383,10 +383,7 @@ o
     <button class="vid-ctrl" onclick="toggleVideo()" id="vid-play-btn"><i class="ti ti-player-pause" id="vid-ico"></i></button>
     <button class="vid-ctrl" onclick="changeHeroVideo()"><i class="ti ti-arrows-shuffle"></i></button>
   </div>
-  <div class="scroll-hint" onclick="scrollSec('trust')">
-    <span>SCROLL</span>
-    <i class="ti ti-chevron-down" style="font-size:16px"></i>
-  </div>
+
 </section>
 
 <!-- ===== TRUST ===== -->
@@ -403,7 +400,7 @@ o
   <div class="search-bar">
     <div class="sf">
       <div class="sf-label">EXPERIENCE</div>
-      <select class="sf-input" style="cursor:pointer">
+      <select class="sf-input" id="search-experience" style="cursor:pointer">
         <option>All experiences</option>
         <option>Vacation package</option>
         <option>Yacht charter</option>
@@ -419,12 +416,12 @@ o
     <div class="sf-divider"></div>
     <div class="sf">
       <div class="sf-label">ARRIVAL DATE</div>
-      <input type="date" class="sf-input" placeholder="Select date"/>
+      <input type="date" class="sf-input" id="search-date" placeholder="Select date"/>
     </div>
     <div class="sf-divider"></div>
     <div class="sf">
       <div class="sf-label">GUESTS</div>
-      <select class="sf-input">
+      <select class="sf-input" id="search-guests">
         <option>1 guest</option><option>2 guests</option><option selected>3–4 guests</option>
         <option>5–8 guests</option><option>9+ guests</option>
       </select>
@@ -432,12 +429,12 @@ o
     <div class="sf-divider"></div>
     <div class="sf">
       <div class="sf-label">BUDGET</div>
-      <select class="sf-input">
+      <select class="sf-input" id="search-budget">
         <option>Any budget</option><option>Under $200</option>
         <option>$200–$1,000</option><option>$1,000–$5,000</option><option>$5,000+</option>
       </select>
     </div>
-    <button class="btn btn-gold" style="padding:10px 24px;flex-shrink:0"><i class="ti ti-search"></i> SEARCH</button>
+    <button class="btn btn-gold" id="search-btn" onclick="performSearch()" style="padding:10px 24px;flex-shrink:0"><i class="ti ti-search"></i> SEARCH</button>
   </div>
 </div>
 
@@ -755,19 +752,19 @@ o
   <div class="video-grid">
     <div class="video-item">
       <video controls preload="metadata" style="height:220px;width:100%;object-fit:cover">
-        <source src="ebl_promo_video_1.mp4" type="video/mp4"/>
+        <source src="ebl_promo_video_1.mp4?v=original" type="video/mp4"/>
       </video>
       <div class="video-label"><i class="ti ti-player-play" style="color:var(--gold)"></i> Los Cabos Experience Vol. 1</div>
     </div>
     <div class="video-item">
       <video controls preload="metadata" style="height:220px;width:100%;object-fit:cover">
-        <source src="ebl_promo_video_2.mp4" type="video/mp4"/>
+        <source src="ebl_promo_video_2.mp4?v=original" type="video/mp4"/>
       </video>
       <div class="video-label"><i class="ti ti-player-play" style="color:var(--gold)"></i> Adventures & Experiences Vol. 2</div>
     </div>
     <div class="video-item">
       <video controls preload="metadata" style="height:220px;width:100%;object-fit:cover">
-        <source src="ebl_promo_video_3.mp4" type="video/mp4"/>
+        <source src="ebl_promo_video_3.mp4?v=original" type="video/mp4"/>
       </video>
       <div class="video-label"><i class="ti ti-player-play" style="color:var(--gold)"></i> Cabo YOUR Way Vol. 3</div>
     </div>
@@ -796,7 +793,7 @@ o
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
     <button class="btn btn-wa" style="padding:12px 28px;font-size:13px" onclick="openWhatsApp()"><i class="ti ti-brand-whatsapp"></i> WhatsApp us now</button>
     <button class="btn btn-gold" onclick="openPackageBooking('Los Cabos Experience', 0)" style="padding:12px 28px;font-size:13px"><i class="ti ti-calendar-check"></i> BOOK NOW</button>
-    <button class="btn btn-outline" style="padding:12px 28px;font-size:13px"><i class="ti ti-world"></i> .com</button>
+    <button class="btn btn-outline" onclick="window.open('https://loscabostours.com','_blank')" style="padding:12px 28px;font-size:13px"><i class="ti ti-world"></i> .com</button>
   </div>
 </div>
 
@@ -808,9 +805,9 @@ o
       <p class="footer-tagline">Your ultimate guide to the best of Baja California Sur. Luxury, adventure, and unforgettable memories — all in one place. "Explore Cabo, Your Way, All Day."</p>
       <div style="display:flex;gap:8px">
         <button class="btn btn-wa" style="padding:6px 12px;font-size:11px" onclick="openWhatsApp()"><i class="ti ti-brand-whatsapp"></i> WhatsApp</button>
-        <button style="background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:4px;padding:6px 10px;cursor:pointer;color:var(--muted);font-size:14px"><i class="ti ti-brand-instagram"></i></button>
-        <button style="background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:4px;padding:6px 10px;cursor:pointer;color:var(--muted);font-size:14px"><i class="ti ti-brand-facebook"></i></button>
-        <button style="background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:4px;padding:6px 10px;cursor:pointer;color:var(--muted);font-size:14px"><i class="ti ti-brand-tiktok"></i></button>
+        <button onclick="openAI('Instagram')" style="background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:4px;padding:6px 10px;cursor:pointer;color:var(--muted);font-size:14px"><i class="ti ti-brand-instagram"></i></button>
+        <button onclick="openAI('Facebook')" style="background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:4px;padding:6px 10px;cursor:pointer;color:var(--muted);font-size:14px"><i class="ti ti-brand-facebook"></i></button>
+        <button onclick="openAI('TikTok')" style="background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:4px;padding:6px 10px;cursor:pointer;color:var(--muted);font-size:14px"><i class="ti ti-brand-tiktok"></i></button>
       </div>
     </div>
     <div>
@@ -839,9 +836,9 @@ o
   <div class="footer-bottom">
     <div>© 2026 Los Cabos Tours. Licensed by SECTUR Baja California Sur. .com</div>
     <div style="display:flex;gap:14px">
-      <a style="color:var(--muted);cursor:pointer;text-decoration:none">Privacy</a>
-      <a style="color:var(--muted);cursor:pointer;text-decoration:none">Terms</a>
-      <a style="color:var(--muted);cursor:pointer;text-decoration:none">Contact</a>
+      <a onclick="openAI('Privacy policy')" style="color:var(--muted);cursor:pointer;text-decoration:none">Privacy</a>
+      <a onclick="openAI('Terms and conditions')" style="color:var(--muted);cursor:pointer;text-decoration:none">Terms</a>
+      <a onclick="scrollSec('contact')" style="color:var(--muted);cursor:pointer;text-decoration:none">Contact</a>
     </div>
   </div>
 </footer>
@@ -1040,7 +1037,7 @@ function toggleMobileNav(){
 // ===== VIDEO =====
 var vidPlaying=true;
 var vidIndex=0;
-var vids=["ebl_promo_video_1.mp4","ebl_promo_video_2.mp4","ebl_promo_video_3.mp4"];
+var vids=["ebl_promo_video_1.mp4?v=original","ebl_promo_video_2.mp4?v=original","ebl_promo_video_3.mp4?v=original"];
 function toggleVideo(){
   var v=document.getElementById("hero-video");
   var ico=document.getElementById("vid-ico");
@@ -1162,7 +1159,8 @@ function toggleSec(id,btn){
 function openWhatsApp(msg) {
   var phone = "526245181970";
   var text = msg || "Hello! I'm interested in booking a tour or package in Los Cabos. Can you help me?";
-  window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(text), "_blank");
+  var url = "https://api.whatsapp.com/send?phone=" + phone + "&text=" + encodeURIComponent(text);
+  window.location.href = url;
 }
 
 
@@ -1425,6 +1423,41 @@ function filterCatalog(id, el) {
 
 
 
+// ===== SEARCH BAR =====
+function performSearch(){
+  var expEl=document.getElementById("search-experience");
+  var dateEl=document.getElementById("search-date");
+  var guestsEl=document.getElementById("search-guests");
+  var budgetEl=document.getElementById("search-budget");
+  var exp=expEl?expEl.value:"All experiences";
+  var date=dateEl&&dateEl.value?dateEl.value:"not selected";
+  var guests=guestsEl?guestsEl.value:"3-4 guests";
+  var budget=budgetEl?budgetEl.value:"Any budget";
+  var map={
+    "All experiences":{section:"tours",cat:"all"},
+    "Vacation package":{section:"packages"},
+    "Yacht charter":{section:"tours",cat:"yacht"},
+    "Water sports":{section:"tours",cat:"water"},
+    "ATV adventure":{section:"tours",cat:"atv"},
+    "Whale watching":{section:"tours",cat:"nature"},
+    "Sport fishing":{section:"tours",cat:"fishing"},
+    "Fine dining":{section:"services",ai:"Fine dining"},
+    "Resort stay":{section:"hotels"},
+    "Airport transfer":{section:"services",ai:"Airport transfer"}
+  };
+  var target=map[exp]||map["All experiences"];
+  if(target.cat&&typeof renderExps==="function"){
+    renderExps(target.cat);
+    document.querySelectorAll("#exp-cats .cat-pill").forEach(function(p){
+      var oc=p.getAttribute("onclick")||"";
+      p.classList.toggle("active",oc.indexOf("'"+target.cat+"'")!==-1);
+    });
+  }
+  scrollSec(target.section||"tours");
+  if(target.ai&&typeof openAI==="function"){
+    setTimeout(function(){openAI(target.ai+" for "+guests+", arrival "+date+", budget "+budget);},350);
+  }
+}
 // ===== FOOTER LINK HELPERS =====
 function goToExp(cat) {
   scrollSec("tours");
@@ -1832,3 +1865,11 @@ function openPackageBooking(name, totalPrice) {
 
 </body>
 </html> 
+
+
+
+
+
+
+
+
