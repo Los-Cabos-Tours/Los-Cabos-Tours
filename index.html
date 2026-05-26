@@ -987,12 +987,14 @@ function renderExps(filter){
       var sn=t.n.replace(/&/g,"&amp;").replace(/"/g,"&quot;");
       var numP=parsePrice(t.p);
       var snFee=(t.f||"").replace(/"/g,"&quot;");
+      var perUnit=t.pv?"/ vehicle":"/ pp";
       var priceHtml=t.p
-        ?"<div class=\"exp-price\">"+t.p+" <small>/ pp</small></div>"
+        ?"<div class=\"exp-price\">"+t.p+" <small>"+perUnit+"</small></div>"
         :"<div class=\"exp-price\" style=\"font-size:11px;color:var(--muted)\">Ask Marina</div>";
       var rawFee=t.f||"";
       var feeLabel=(!rawFee||/^(\+|Ask|Seasonal|Capacity|Incl)/.test(rawFee))?rawFee:("+ "+rawFee);
       var feeHtml=feeLabel?"<div class=\"exp-fee-note\">"+feeLabel+"</div>":"";
+      var pvAttr=t.pv?" data-pervehicle=\"1\"":"";
       cards.push(
         "<div class=\"exp-card\">"
         +"<div class=\"exp-card-co\" style=\"background:"+co.bg+"\">"
@@ -1004,8 +1006,8 @@ function renderExps(filter){
         +"<div class=\"exp-foot\">"+priceHtml+"</div>"
         +"</div>"
         +"<div class=\"exp-actions\">"
-        +"<button class=\"exp-btn-ai\" data-tour=\""+sn+"\" data-price=\""+numP+"\" data-fee=\""+snFee+"\" onclick=\"openBookingFromEl(this)\"><i class=\"ti ti-calendar-check\"></i> BOOK NOW</button>"
-        +"<button class=\"exp-btn-wa\" data-tour=\""+sn+"\" data-price=\""+numP+"\" onclick=\"expDirectWA(this)\"><i class=\"ti ti-brand-whatsapp\"></i> WHATSAPP</button>"
+        +"<button class=\"exp-btn-ai\" data-tour=\""+sn+"\" data-price=\""+numP+"\" data-fee=\""+snFee+"\""+pvAttr+" onclick=\"openBookingFromEl(this)\"><i class=\"ti ti-calendar-check\"></i> BOOK NOW</button>"
+        +"<button class=\"exp-btn-wa\" data-tour=\""+sn+"\" data-price=\""+numP+"\""+pvAttr+" onclick=\"expDirectWA(this)\"><i class=\"ti ti-brand-whatsapp\"></i> WHATSAPP</button>"
         +"</div>"
         +"</div>"
       );
@@ -1170,48 +1172,48 @@ var CATALOG = [
   {
     id:"cactus",group:"cactus",name:"Cactus ATVs",bg:"rgba(133,79,11,.22)",
     tours:[
-      {n:"ATVs Double",                      p:"$135",f:"+ Park Fee",       cat:"atv"},
-      {n:"ATVs Single",                      p:"$75", f:"+ Park Fee",       cat:"atv"},
+      {n:"ATVs Double",                      p:"$135",f:"+ Park Fee",       cat:"atv",pv:true},
+      {n:"ATVs Single",                      p:"$75", f:"+ Park Fee",       cat:"atv",pv:true},
       {n:"Camel Ride",                       p:"$70", f:"+ Park Fee",       cat:"extras"},
       {n:"Combo Tours",                      p:"$95", f:"+ Park Fee",       cat:"extras"},
       {n:"Horse Back Ride — Beach & Desert", p:"$70", f:"+ Park Fee",       cat:"extras"},
       {n:"Kids Club",                        p:null,  f:"Ask for pricing",  cat:"extras"},
-      {n:"Maverick RS/RC",                   p:null,  f:"Ask for pricing",  cat:"atv"},
-      {n:"Mountain Bike Tour",               p:null,  f:"Ask for pricing",  cat:"atv"},
-      {n:"Razors Quadruple",                 p:"$300",f:"+ Park Fee",       cat:"atv"},
-      {n:"Razors Doubles",                   p:"$220",f:"+ Park Fee",       cat:"atv"},
-      {n:"Razors Single",                    p:"$150",f:"+ Park Fee",       cat:"atv"},
-      {n:"Razors Triples",                   p:"$275",f:"+ Park Fee",       cat:"atv"},
-      {n:"Side by Side Kids",                p:null,  f:"Ask for pricing",  cat:"atv"}
+      {n:"Maverick RS/RC",                   p:null,  f:"Ask for pricing",  cat:"atv",pv:true},
+      {n:"Mountain Bike Tour",               p:null,  f:"Ask for pricing",  cat:"atv",pv:true},
+      {n:"Razors Quadruple",                 p:"$300",f:"+ Park Fee",       cat:"atv",pv:true},
+      {n:"Razors Doubles",                   p:"$220",f:"+ Park Fee",       cat:"atv",pv:true},
+      {n:"Razors Single",                    p:"$150",f:"+ Park Fee",       cat:"atv",pv:true},
+      {n:"Razors Triples",                   p:"$275",f:"+ Park Fee",       cat:"atv",pv:true},
+      {n:"Side by Side Kids",                p:null,  f:"Ask for pricing",  cat:"atv",pv:true}
     ]
   },
   {
     id:"cabo-adv",group:"cabo-adv",name:"Cabo Adventures",bg:"rgba(24,95,165,.22)",
     tours:[
       {n:"Art Y Vino",                               p:"$100",  f:"",                   cat:"culture"},
-      {n:"ATVs Double",                              p:null,    f:"Ask for pricing",    cat:"atv"},
-      {n:"ATVs Single",                              p:null,    f:"Ask for pricing",    cat:"atv"},
+      {n:"ATVs Double",                              p:null,    f:"Ask for pricing",    cat:"atv",pv:true},
+      {n:"ATVs Single",                              p:null,    f:"Ask for pricing",    cat:"atv",pv:true},
       {n:"Balandra & Hidden Beaches",                p:"$190",  f:"",                   cat:"nature"},
       {n:"Beach Club",                               p:"$125",  f:"",                   cat:"extras"},
       {n:"Beginner Scuba 1 Tank",                    p:"$110",  f:"",                   cat:"water"},
-      {n:"Can-Am Maverick X3 Single",                p:"$250",  f:"",                   cat:"atv"},
-      {n:"Can-Am Maverick X3 Double",                p:"$350",  f:"",                   cat:"atv"},
-      {n:"Can-Am Maverick X3 Triple",                p:"$370",  f:"",                   cat:"atv"},
-      {n:"Can-Am Maverick X3 Quadruple",             p:"$420",  f:"",                   cat:"atv"},
+      {n:"Can-Am Maverick X3 Single",                p:"$250",  f:"",                   cat:"atv",pv:true},
+      {n:"Can-Am Maverick X3 Double",                p:"$350",  f:"",                   cat:"atv",pv:true},
+      {n:"Can-Am Maverick X3 Triple",                p:"$370",  f:"",                   cat:"atv",pv:true},
+      {n:"Can-Am Maverick X3 Quadruple",             p:"$420",  f:"",                   cat:"atv",pv:true},
       {n:"Certified Advanced Open Water",            p:"$399",  f:"",                   cat:"water"},
       {n:"Certified PADI Open Water",                p:"$519",  f:"",                   cat:"water"},
       {n:"Certified Scuba 2 Tank",                   p:"$110",  f:"",                   cat:"water"},
       {n:"Certified Scuba 2 Tank — Cabo Pulmo",      p:"$255",  f:"",                   cat:"water"},
       {n:"Combo Arch & Camel",                       p:"$119",  f:"",                   cat:"extras"},
-      {n:"Combo ATV & Camel",                        p:"$129",  f:"",                   cat:"extras"},
-      {n:"Combo E-Bike & Camel",                     p:"$110",  f:"",                   cat:"extras"},
-      {n:"Combo Off-Road & Camel Single",            p:"$219",  f:"",                   cat:"extras"},
-      {n:"Combo Off-Road & Camel Double",            p:"$290",  f:"",                   cat:"extras"},
-      {n:"Combo Off-Road & Camel Triple",            p:"$340",  f:"",                   cat:"extras"},
-      {n:"Combo Off-Road & Camel Family",            p:"$390",  f:"",                   cat:"extras"},
-      {n:"E-Bike",                                   p:"$95",   f:"",                   cat:"atv"},
+      {n:"Combo ATV & Camel",                        p:"$129",  f:"",                   cat:"extras",pv:true},
+      {n:"Combo E-Bike & Camel",                     p:"$110",  f:"",                   cat:"extras",pv:true},
+      {n:"Combo Off-Road & Camel Single",            p:"$219",  f:"",                   cat:"extras",pv:true},
+      {n:"Combo Off-Road & Camel Double",            p:"$290",  f:"",                   cat:"extras",pv:true},
+      {n:"Combo Off-Road & Camel Triple",            p:"$340",  f:"",                   cat:"extras",pv:true},
+      {n:"Combo Off-Road & Camel Family",            p:"$390",  f:"",                   cat:"extras",pv:true},
+      {n:"E-Bike",                                   p:"$95",   f:"",                   cat:"atv",pv:true},
       {n:"Family Encounter",                         p:"$110",  f:"",                   cat:"water"},
-      {n:"Jet Skis",                                 p:"$155",  f:"",                   cat:"water"},
+      {n:"Jet Skis",                                 p:"$155",  f:"",                   cat:"water",pv:true},
       {n:"Luxury Day Sailing",                       p:"$129",  f:"",                   cat:"yacht"},
       {n:"Luxury Sunset Sailing",                    p:"$95",   f:"",                   cat:"yacht"},
       {n:"Magical Toro Santo — City Tour",           p:"$100",  f:"",                   cat:"culture"},
@@ -1221,10 +1223,10 @@ var CATALOG = [
       {n:"Premium Swim",                             p:"$190",  f:"",                   cat:"water"},
       {n:"Private Yacht 3 Hr. (Due Amici)",          p:null,    f:"Ask for pricing",    cat:"yacht"},
       {n:"Private Yacht 3 Hr. (Sinaia)",             p:"$1,350",f:"",                   cat:"yacht"},
-      {n:"Razors Quadruple",                         p:null,    f:"Ask for pricing",    cat:"atv"},
-      {n:"Razors Doubles",                           p:null,    f:"Ask for pricing",    cat:"atv"},
-      {n:"Razors Single",                            p:null,    f:"Ask for pricing",    cat:"atv"},
-      {n:"Razors Triples",                           p:null,    f:"Ask for pricing",    cat:"atv"},
+      {n:"Razors Quadruple",                         p:null,    f:"Ask for pricing",    cat:"atv",pv:true},
+      {n:"Razors Doubles",                           p:null,    f:"Ask for pricing",    cat:"atv",pv:true},
+      {n:"Razors Single",                            p:null,    f:"Ask for pricing",    cat:"atv",pv:true},
+      {n:"Razors Triples",                           p:null,    f:"Ask for pricing",    cat:"atv",pv:true},
       {n:"Referral Dive",                            p:"$450",  f:"",                   cat:"water"},
       {n:"Signature Swim",                           p:"$179",  f:"",                   cat:"water"},
       {n:"Snorkel Adventure — Cabo Pulmo",           p:"$250",  f:"",                   cat:"water"},
@@ -1257,16 +1259,16 @@ var CATALOG = [
       {n:"Dual Experience",                                       p:null,    f:"Ask for pricing",                             cat:"extras"},
       {n:"Fun Day (Adult)",                                       p:"$85",   f:"Food $60",                                    cat:"extras"},
       {n:"Fun Day (Kids 6-12)",                                   p:null,    f:"Ask for pricing",                             cat:"extras"},
-      {n:"Jet Ski Rental (0.5 hr.)",                              p:"$110",  f:"Transport $10 · Insurance $35",               cat:"water"},
-      {n:"Jet Ski Rental (1 hr.)",                                p:"$160",  f:"Transport $10 · Insurance $35",               cat:"water"},
+      {n:"Jet Ski Rental (0.5 hr.)",                              p:"$110",  f:"Transport $10 · Insurance $35",               cat:"water",pv:true},
+      {n:"Jet Ski Rental (1 hr.)",                                p:"$160",  f:"Transport $10 · Insurance $35",               cat:"water",pv:true},
       {n:"Kingdom Experience (Adult)",                            p:"$95",   f:"Park $25 · Transport $10",                    cat:"extras"},
       {n:"Kingdom Experience Kids (4-12)",                        p:"$72",   f:"Park $25 · Transport $5",                     cat:"extras"},
       {n:"Monster Ziplines",                                      p:"$95",   f:"Park $25 · Transport $10",                    cat:"extras"},
       {n:"Monster Ziplines Kids (8-12)",                          p:"$72",   f:"Park $25 · Transport $5",                     cat:"extras"},
       {n:"Moon Zipping Fire (Adult)",                             p:"$135",  f:"Park $25 · Transport $10 · Insurance $49",    cat:"extras"},
       {n:"Moon Zipping Fire Kids (8-12)",                         p:"$25",   f:"Park $25 · Transport $5",                     cat:"extras"},
-      {n:"Off Road Runners (Double)",                             p:"$125",  f:"Park $50 · Transport $20 · Insurance $35",    cat:"atv"},
-      {n:"Off Road Runners (Single)",                             p:"$95",   f:"Park $25 · Transport $10 · Insurance $35",    cat:"atv"},
+      {n:"Off Road Runners (Double)",                             p:"$125",  f:"Park $50 · Transport $20 · Insurance $35",    cat:"atv",pv:true},
+      {n:"Off Road Runners (Single)",                             p:"$95",   f:"Park $25 · Transport $10 · Insurance $35",    cat:"atv",pv:true},
       {n:"Park Pass (Adult)",                                     p:"$200",  f:"",                                            cat:"extras"},
       {n:"Park Pass Adult/Kids (4-12)",                           p:"$131",  f:"",                                            cat:"extras"},
       {n:"Signature East Cape",                                   p:"$900",  f:"",                                            cat:"extras"},
@@ -1275,30 +1277,30 @@ var CATALOG = [
       {n:"TGF Horse Back Kids (4-12)",                            p:"$72",   f:"Park $25 · Transport $5",                     cat:"extras"},
       {n:"Triple Thrill — ATV, UTV, Camel, Zipline, Horses, Bungie, Swing",p:"$130",f:"Park $25 · Insurance $49 · Transport $10",cat:"extras"},
       {n:"Dual Experience — ATV, UTV, Camel, Zipline, Horses",   p:"$100",  f:"Park $25 · Insurance $49 · Transport $10",    cat:"extras"},
-      {n:"Ultimate UTV Quadruple",                                p:null,    f:"Ask for pricing",                             cat:"atv"},
-      {n:"Ultimate UTV Double",                                   p:null,    f:"Ask for pricing",                             cat:"atv"},
-      {n:"Ultimate UTV Single",                                   p:null,    f:"Ask for pricing",                             cat:"atv"},
-      {n:"Ultimate UTV Triple",                                   p:null,    f:"Ask for pricing",                             cat:"atv"},
+      {n:"Ultimate UTV Quadruple",                                p:null,    f:"Ask for pricing",                             cat:"atv",pv:true},
+      {n:"Ultimate UTV Double",                                   p:null,    f:"Ask for pricing",                             cat:"atv",pv:true},
+      {n:"Ultimate UTV Single",                                   p:null,    f:"Ask for pricing",                             cat:"atv",pv:true},
+      {n:"Ultimate UTV Triple",                                   p:null,    f:"Ask for pricing",                             cat:"atv",pv:true},
       {n:"Unlimited Pass Adult/Kids (4-12)",                      p:null,    f:"Ask for pricing",                             cat:"extras"},
-      {n:"UTV Razor 1000 (Quadruple)",                            p:"$260",  f:"",                                            cat:"atv"},
-      {n:"UTV Razor 1000 (Double)",                               p:"$205",  f:"Park $50 · Transport $20 · Insurance $49",    cat:"atv"},
-      {n:"UTV Razor 1000 (Single)",                               p:"$150",  f:"Park $25 · Transport $10 · Insurance $49",    cat:"atv"},
-      {n:"UTV Razor 1000 (Triple)",                               p:"$250",  f:"Park $75 · Transport $30 · Insurance $60",    cat:"atv"},
+      {n:"UTV Razor 1000 (Quadruple)",                            p:"$260",  f:"",                                            cat:"atv",pv:true},
+      {n:"UTV Razor 1000 (Double)",                               p:"$205",  f:"Park $50 · Transport $20 · Insurance $49",    cat:"atv",pv:true},
+      {n:"UTV Razor 1000 (Single)",                               p:"$150",  f:"Park $25 · Transport $10 · Insurance $49",    cat:"atv",pv:true},
+      {n:"UTV Razor 1000 (Triple)",                               p:"$250",  f:"Park $75 · Transport $30 · Insurance $60",    cat:"atv",pv:true},
       {n:"Whale Watching Shared (Adult)",                         p:"$120",  f:"+ Transport $10",                             cat:"nature"},
       {n:"Whale Watching Shared (Kids 4-12)",                     p:"$90",   f:"+ Transport $5",                              cat:"nature"},
-      {n:"Combo Jet Ski & Snorkel at Chileno",                    p:"$240",  f:"Insurance $35",                               cat:"water"},
+      {n:"Combo Jet Ski & Snorkel at Chileno",                    p:"$240",  f:"Insurance $35",                               cat:"water",pv:true},
       {n:"Efoil Class 30 Min.",                                   p:"$130",  f:"",                                            cat:"water"},
       {n:"Efoil Class 1 Hr.",                                     p:"$170",  f:"",                                            cat:"water"},
       {n:"Efoil Class 2 Hr.",                                     p:"$255",  f:"",                                            cat:"water"},
-      {n:"Hobby Cat Guided Tour 1 Hr. (1-3 pax)",                 p:"$170",  f:"",                                            cat:"yacht"},
+      {n:"Hobby Cat Guided Tour 1 Hr. (1-3 pax)",                 p:"$170",  f:"",                                            cat:"yacht",pv:true},
       {n:"Surf Experience Guided Tour 1 Hr. (Acapulquito)",       p:"$140",  f:"",                                            cat:"water"},
-      {n:"UTV Signature 3 Hr.",                                   p:"$750",  f:"",                                            cat:"atv"},
-      {n:"UTV Signature 1 Hr.",                                   p:"$390",  f:"",                                            cat:"atv"},
-      {n:"ATV Signature Single 3 Hr.",                            p:"$295",  f:"",                                            cat:"atv"},
-      {n:"ATV Signature Double 3 Hr.",                            p:"$400",  f:"",                                            cat:"atv"},
-      {n:"ATV Express Single 1 Hr.",                              p:"$155",  f:"",                                            cat:"atv"},
-      {n:"ATV Express Double 1 Hr.",                              p:"$235",  f:"",                                            cat:"atv"},
-      {n:"Electric Bike Guided Tour 2 Hr.",                       p:"$125",  f:"",                                            cat:"atv"}
+      {n:"UTV Signature 3 Hr.",                                   p:"$750",  f:"",                                            cat:"atv",pv:true},
+      {n:"UTV Signature 1 Hr.",                                   p:"$390",  f:"",                                            cat:"atv",pv:true},
+      {n:"ATV Signature Single 3 Hr.",                            p:"$295",  f:"",                                            cat:"atv",pv:true},
+      {n:"ATV Signature Double 3 Hr.",                            p:"$400",  f:"",                                            cat:"atv",pv:true},
+      {n:"ATV Express Single 1 Hr.",                              p:"$155",  f:"",                                            cat:"atv",pv:true},
+      {n:"ATV Express Double 1 Hr.",                              p:"$235",  f:"",                                            cat:"atv",pv:true},
+      {n:"Electric Bike Guided Tour 2 Hr.",                       p:"$125",  f:"",                                            cat:"atv",pv:true}
     ]
   },
   {
@@ -1369,14 +1371,14 @@ var CATALOG = [
   {
     id:"transport",group:"transport",name:"Transportation, Rentals & Water Sports",bg:"rgba(20,30,60,.35)",
     tours:[
-      {n:"Car Rental (Hertz / National / Fox)", p:null,f:"Ask for pricing",cat:"extras"},
-      {n:"Private Transfer — Car",             p:null,f:"Ask for pricing",cat:"extras"},
-      {n:"Private Transfer — SUV",             p:null,f:"Ask for pricing",cat:"extras"},
-      {n:"Private Transfer — Van",             p:null,f:"Ask for pricing",cat:"extras"},
-      {n:"Private Transfer — Bus",             p:null,f:"Ask for pricing",cat:"extras"},
-      {n:"Paddle Board",                        p:null,f:"Ask for pricing",cat:"water"},
-      {n:"Kayaks",                              p:null,f:"Ask for pricing",cat:"water"},
-      {n:"Jet Skis Arias",                      p:null,f:"Ask for pricing",cat:"water"},
+      {n:"Car Rental (Hertz / National / Fox)", p:null,f:"Ask for pricing",cat:"extras",pv:true},
+      {n:"Private Transfer — Car",             p:null,f:"Ask for pricing",cat:"extras",pv:true},
+      {n:"Private Transfer — SUV",             p:null,f:"Ask for pricing",cat:"extras",pv:true},
+      {n:"Private Transfer — Van",             p:null,f:"Ask for pricing",cat:"extras",pv:true},
+      {n:"Private Transfer — Bus",             p:null,f:"Ask for pricing",cat:"extras",pv:true},
+      {n:"Paddle Board",                        p:null,f:"Ask for pricing",cat:"water",pv:true},
+      {n:"Kayaks",                              p:null,f:"Ask for pricing",cat:"water",pv:true},
+      {n:"Jet Skis Arias",                      p:null,f:"Ask for pricing",cat:"water",pv:true},
       {n:"Parra Sailing Arias",                 p:null,f:"Ask for pricing",cat:"yacht"},
       {n:"Glass Bottom Boat Arias",             p:null,f:"Ask for pricing",cat:"water"}
     ]
@@ -1390,17 +1392,19 @@ function buildCatalogHTML(companies) {
       var sn = t.n.replace(/&/g,"&amp;").replace(/"/g,"&quot;");
       var numP = parsePrice(t.p);
       var snFee = (t.f||"").replace(/"/g,"&quot;");
+      var perUnit = t.pv ? " / vehicle" : " / pp";
       var priceCell = t.p
-        ? "<div class=\"catalog-price\">"+t.p+"<span class=\"catalog-pp\"> / pp</span></div>"
+        ? "<div class=\"catalog-price\">"+t.p+"<span class=\"catalog-pp\">"+perUnit+"</span></div>"
         : "<div class=\"catalog-ask\">Ask Marina</div>";
       var rawFee = t.f || "";
       var feeLabel = (!rawFee || /^(\+|Ask|Seasonal|Capacity|Incl)/.test(rawFee)) ? rawFee : ("+ " + rawFee);
       var feeCell = feeLabel ? "<div class=\"catalog-fee\">"+feeLabel+"</div>" : "";
+      var pvAttr = t.pv ? " data-pervehicle=\"1\"" : "";
       return "<div class=\"catalog-row\">"
         +"<div><div class=\"catalog-name\">"+t.n+"</div>"+feeCell+"</div>"
         +priceCell
-        +"<button class=\"catalog-book\" data-tour=\""+sn+"\" data-price=\""+numP+"\" data-fee=\""+snFee+"\" onclick=\"openBookingFromEl(this)\"><i class=\"ti ti-calendar-check\"></i> BOOK NOW</button>"
-        +"<button class=\"catalog-wa-btn\" data-tour=\""+sn+"\" data-price=\""+numP+"\" onclick=\"expDirectWA(this)\"><i class=\"ti ti-brand-whatsapp\"></i> WHATSAPP</button>"
+        +"<button class=\"catalog-book\" data-tour=\""+sn+"\" data-price=\""+numP+"\" data-fee=\""+snFee+"\""+pvAttr+" onclick=\"openBookingFromEl(this)\"><i class=\"ti ti-calendar-check\"></i> BOOK NOW</button>"
+        +"<button class=\"catalog-wa-btn\" data-tour=\""+sn+"\" data-price=\""+numP+"\""+pvAttr+" onclick=\"expDirectWA(this)\"><i class=\"ti ti-brand-whatsapp\"></i> WHATSAPP</button>"
         +"</div>";
     }).join("");
     return "<div class=\"catalog-company\">"
@@ -1527,6 +1531,7 @@ var _bkChildren = 0;
 var _bkTime = "7:00 AM";
 var _bkInsurance = 0;
 var _bkFeeNote = "";
+var _bkPerVehicle = false;
 
 function parsePrice(str) {
   if (!str) return 0;
@@ -1550,10 +1555,11 @@ function openBookingFromEl(el) {
   var name = el.getAttribute("data-tour");
   var price = parseFloat(el.getAttribute("data-price")) || 0;
   var fee = el.getAttribute("data-fee") || "";
-  openBooking(name, price, fee);
+  var perVehicle = el.getAttribute("data-pervehicle") === "1";
+  openBooking(name, price, fee, perVehicle);
 }
 
-function openBooking(name, price, feeStr) {
+function openBooking(name, price, feeStr, perVehicle) {
   _bkTour = name;
   _bkPrice = price || 0;
   _bkAdults = 1;
@@ -1562,9 +1568,22 @@ function openBooking(name, price, feeStr) {
   _bkInsurance = parseInsuranceFee(feeStr || "");
   _bkFeeNote = parseFeeNote(feeStr || "");
   _bkPackageTotal = 0;
+  _bkPerVehicle = !!perVehicle;
 
   var titleEl = document.getElementById("bk-title");
   if (titleEl) titleEl.textContent = name;
+
+  var guestsSec = document.getElementById("bk-guests-section");
+  var vehicleSec = document.getElementById("bk-vehicle-section");
+  if (guestsSec) guestsSec.style.display = _bkPerVehicle ? "none" : "";
+  if (vehicleSec) vehicleSec.style.display = _bkPerVehicle ? "" : "none";
+
+  var vp = document.getElementById("bk-vehicle-price");
+  if (vp) {
+    vp.textContent = _bkPrice
+      ? ("$" + _bkPrice.toFixed(0) + " USD / vehicle")
+      : "Contact us for pricing";
+  }
 
   var ap = document.getElementById("bk-adult-price");
   var cp = document.getElementById("bk-child-price");
@@ -1644,6 +1663,39 @@ function updateBkSummary() {
     tl.textContent = "$" + _bkPackageTotal.toLocaleString() + " USD";
     return;
   }
+  if (_bkPerVehicle) {
+    if (cl) cl.style.display = "none";
+    if (!_bkPrice) {
+      al.innerHTML = "<span>Vehicle rental — pricing on request</span><span>—</span>";
+      var ilv0 = document.getElementById("bk-insurance-line");
+      if (ilv0) ilv0.style.display = "none";
+      var fnv0 = document.getElementById("bk-fee-note");
+      if (fnv0) {
+        if (_bkFeeNote) { fnv0.textContent = "* Additional fees: " + _bkFeeNote; fnv0.style.display = "block"; }
+        else { fnv0.style.display = "none"; }
+      }
+      tl.textContent = "Contact us";
+      return;
+    }
+    var vGrand = _bkPrice + _bkInsurance;
+    al.innerHTML = "<span>1 vehicle × $" + _bkPrice.toFixed(0) + "</span><span>$" + _bkPrice.toFixed(2) + "</span>";
+    var ilv = document.getElementById("bk-insurance-line");
+    if (ilv) {
+      if (_bkInsurance > 0) {
+        ilv.innerHTML = "<span>Insurance (one-time)</span><span>$" + _bkInsurance.toFixed(2) + "</span>";
+        ilv.style.display = "flex";
+      } else {
+        ilv.style.display = "none";
+      }
+    }
+    var fnv = document.getElementById("bk-fee-note");
+    if (fnv) {
+      if (_bkFeeNote) { fnv.textContent = "* Additional fees: " + _bkFeeNote; fnv.style.display = "block"; }
+      else { fnv.style.display = "none"; }
+    }
+    tl.textContent = "$" + vGrand.toFixed(2) + " USD";
+    return;
+  }
   if (!_bkPrice) {
     al.innerHTML = "<span>Pricing on request</span><span>—</span>";
     if (cl) cl.style.display = "none";
@@ -1703,6 +1755,21 @@ function confirmBooking() {
     return;
   }
 
+  if (_bkPerVehicle) {
+    var vGrand = (_bkPrice || 0) + _bkInsurance;
+    var vMsg = "Hello! I would like to book a vehicle rental with EBL Los Cabos.\n\n"
+      + "Rental: " + _bkTour + "\n"
+      + "Date: " + dateStr + "\n"
+      + "Time: " + _bkTime + "\n"
+      + (_bkPrice ? "Price: $" + _bkPrice.toFixed(0) + " USD per vehicle\n" : "Pricing: on request\n")
+      + (_bkInsurance > 0 ? "Insurance (one-time): $" + _bkInsurance.toFixed(2) + "\n" : "")
+      + (_bkFeeNote ? "Additional fees: " + _bkFeeNote + "\n" : "")
+      + (_bkPrice ? "Estimated Total: $" + vGrand.toFixed(2) + " USD\n" : "")
+      + "\nPlease confirm availability. Thank you!";
+    openWhatsApp(vMsg);
+    return;
+  }
+
   var aTotal = _bkAdults * _bkPrice;
   var cp = Math.round(_bkPrice * 0.8);
   var cTotal = _bkChildren * cp;
@@ -1731,8 +1798,10 @@ function askMarinaBooking() {
 function expDirectWA(el) {
   var name = el.getAttribute("data-tour");
   var numP = parseFloat(el.getAttribute("data-price")) || 0;
+  var perVehicle = el.getAttribute("data-pervehicle") === "1";
+  var unit = perVehicle ? "per vehicle" : "pp";
   var msg = "Hello! I would like to book: " + name
-    + (numP > 0 ? " ($" + numP.toFixed(0) + " USD pp)" : "")
+    + (numP > 0 ? " ($" + numP.toFixed(0) + " USD " + unit + ")" : "")
     + ". Please confirm availability. Thank you!";
   openWhatsApp(msg);
 }
@@ -1756,6 +1825,12 @@ function openPackageBooking(name, totalPrice) {
   _bkTime = "9:00 AM";
   _bkInsurance = 0;
   _bkFeeNote = "";
+  _bkPerVehicle = false;
+
+  var guestsSec0 = document.getElementById("bk-guests-section");
+  var vehicleSec0 = document.getElementById("bk-vehicle-section");
+  if (guestsSec0) guestsSec0.style.display = "";
+  if (vehicleSec0) vehicleSec0.style.display = "none";
 
   var titleEl = document.getElementById("bk-title");
   if (titleEl) titleEl.textContent = name;
@@ -1800,7 +1875,7 @@ function openPackageBooking(name, totalPrice) {
       <button class="bk-close" onclick="closeBooking()">&#10005;</button>
     </div>
     <div class="bk-body">
-      <div class="bk-section">
+      <div class="bk-section" id="bk-guests-section">
         <div class="bk-section-label">Select number of guests</div>
         <div class="bk-qty-row">
           <div class="bk-qty-info">
@@ -1822,6 +1897,15 @@ function openPackageBooking(name, totalPrice) {
             <button class="bk-minus" onclick="adjustQty('children',-1)">&#8722;</button>
             <span id="bk-children-num" class="bk-qty-num">0</span>
             <button class="bk-plus" onclick="adjustQty('children',1)">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="bk-section" id="bk-vehicle-section" style="display:none">
+        <div class="bk-section-label">Vehicle rental</div>
+        <div class="bk-qty-row">
+          <div class="bk-qty-info">
+            <div class="bk-qty-label">Per vehicle</div>
+            <div id="bk-vehicle-price" class="bk-unit-price"></div>
           </div>
         </div>
       </div>
