@@ -197,7 +197,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
 @media(max-width:768px){
   .nav-links{display:none}
   .hamburger{display:flex}
-  .hero{height:auto;min-height:520px;padding-top:20px;padding-bottom:60px}
+  .hero{height:auto;min-height:520px;padding-top:80px;padding-bottom:60px}
   .trust{grid-template-columns:repeat(2,1fr)}
   .services-grid{grid-template-columns:repeat(2,1fr)}
   .exp-grid{grid-template-columns:1fr 1fr}
@@ -210,11 +210,27 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
   .search-bar{flex-direction:column}
   .sf-divider{display:none}
   .hero-title{font-size:28px}
+  /* Compact nav: hide the WhatsApp label, tighten padding, smaller brand */
+  .hide-sm{display:none !important}
+  .nav{padding:8px 12px}
+  .nav-logo{gap:6px}
+  .nav-logo-ico{width:28px;height:28px;font-size:13px}
+  .nav-brand{font-size:13px;letter-spacing:1.2px}
+  .nav-sub{display:none}
+  .nav-right{gap:6px}
+  .nav-right .btn{padding:8px 10px;font-size:11px;white-space:nowrap}
+  /* Hide the right-edge CUSTOMIZE tab on phones so it doesn't sit on top of the hero */
+  .cust-toggle{display:none}
 }
 @media(max-width:480px){
   .services-grid{grid-template-columns:1fr 1fr}
   .exp-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
+  /* Very narrow phones: brand label compacted */
+  .nav-brand{font-size:11px;letter-spacing:1px;max-width:90px;line-height:1.05}
+  .nav-right .btn{padding:7px 9px;font-size:10px}
+  .hero{padding-top:72px}
+  .hero-eyebrow{font-size:10px;letter-spacing:3px;margin-bottom:8px}
 }
 
 /* ===== CUSTOMIZER PANEL ===== */
