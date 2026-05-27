@@ -173,7 +173,9 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
 .ai-send{padding:10px 14px;background:var(--gold);border:none;color:var(--navy);cursor:pointer;font-size:14px}
 
 /* ===== WA FLOAT ===== */
-.wa-float{position:fixed;bottom:88px;right:16px;z-index:998;width:44px;height:44px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;box-shadow:0 4px 14px rgba(37,211,102,.4)}
+.wa-float-wrap{position:fixed;bottom:88px;right:16px;z-index:998;display:flex;align-items:center;gap:8px}
+.wa-tag{background:var(--navy2);border:.5px solid rgba(37,211,102,.4);border-radius:20px;padding:5px 14px;font-size:11px;color:#25D366;white-space:nowrap;font-weight:700;letter-spacing:.5px}
+.wa-float{width:44px;height:44px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;box-shadow:0 4px 14px rgba(37,211,102,.4)}
 
 /* ===== CONTACT / FOOTER ===== */
 .contact-section{background:var(--navy2);padding:64px 6%;text-align:center}
@@ -210,15 +212,15 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
   .search-bar{flex-direction:column}
   .sf-divider{display:none}
   .hero-title{font-size:28px}
-  /* Compact nav: hide the WhatsApp label, tighten padding, smaller brand */
-  .hide-sm{display:none !important}
+  /* Compact nav: tighten padding, smaller brand, keep button labels visible */
   .nav{padding:8px 12px}
   .nav-logo{gap:6px}
   .nav-logo-ico{width:28px;height:28px;font-size:13px}
   .nav-brand{font-size:13px;letter-spacing:1.2px}
   .nav-sub{display:none}
   .nav-right{gap:6px}
-  .nav-right .btn{padding:8px 10px;font-size:11px;white-space:nowrap}
+  .nav-right .btn{padding:7px 10px;font-size:10px;letter-spacing:.5px;white-space:nowrap}
+  .nav-right .btn i{font-size:13px}
   /* Hide the right-edge CUSTOMIZE tab on phones so it doesn't sit on top of the hero */
   .cust-toggle{display:none}
 }
@@ -226,9 +228,11 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
   .services-grid{grid-template-columns:1fr 1fr}
   .exp-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
-  /* Very narrow phones: brand label compacted */
+  /* Very narrow phones: brand label compacted, WhatsApp drops to icon-only */
   .nav-brand{font-size:11px;letter-spacing:1px;max-width:90px;line-height:1.05}
-  .nav-right .btn{padding:7px 9px;font-size:10px}
+  .nav-right{gap:4px}
+  .nav-right .btn{padding:7px 8px;font-size:9px}
+  .nav-right .btn-wa span{display:none}
   .hero{padding-top:72px}
   .hero-eyebrow{font-size:10px;letter-spacing:3px;margin-bottom:8px}
 }
@@ -354,9 +358,9 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
     <a onclick="scrollSec('contact')">Contact</a>
   </div>
   <div class="nav-right">
-    <button class="btn btn-wa" onclick="openWhatsApp()"><i class="ti ti-brand-whatsapp"></i><span class="hide-sm">WhatsApp</span></button>
-    <button class="btn btn-gold" onclick="openPackageBooking('Los Cabos Vacation Package', 0)">BOOK NOW</button>
-    <div class="hamburger" onclick="toggleMobileNav()" id="hamburger"><span></span><span></span><span></span></div>
+    <button class="btn btn-wa" onclick="openWhatsApp()" aria-label="Chat on WhatsApp"><i class="ti ti-brand-whatsapp"></i><span>WhatsApp</span></button>
+    <button class="btn btn-gold" onclick="openPackageBooking('Los Cabos Vacation Package', 0)" aria-label="Book Now">BOOK NOW</button>
+    <div class="hamburger" onclick="toggleMobileNav()" id="hamburger" role="button" aria-label="Open Menu" title="Menu"><span></span><span></span><span></span></div>
   </div>
 </nav>
 
@@ -894,7 +898,10 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
 </div>
 
 <!-- WA FLOAT -->
-<button class="wa-float" id="wa-float-btn" onclick="openWhatsApp()"><i class="ti ti-brand-whatsapp"></i></button>
+<div class="wa-float-wrap">
+  <div class="wa-tag">WhatsApp</div>
+  <button class="wa-float" id="wa-float-btn" onclick="openWhatsApp()" aria-label="Chat on WhatsApp"><i class="ti ti-brand-whatsapp"></i></button>
+</div>
 
 <!-- CUSTOMIZER -->
 <button class="cust-toggle" onclick="toggleCust()">CUSTOMIZE</button>
