@@ -1164,17 +1164,14 @@ function toggleSec(id,btn){
 }
 
 
-// ===== WHATSAPP + SILENT CRM LEAD CAPTURE =====
+// ===== WHATSAPP + CRM LEAD CAPTURE (one lead per browser, every inquiry logged) =====
 var CRM_SYNC_URL = "https://script.google.com/macros/s/AKfycbwnKUCCXJrgkzLU1z665lDnnU1B6voYeuvdU9INNmWfXgeHPsJAapGUNR9yEafoLlJY/exec";
 var CRM_NAMESPACE = "default";
 var WA_PHONE = "526245181970";
 
 function openWhatsApp(msg) {
   var text = msg || "Hello! I'm interested in booking a tour or package in Los Cabos. Can you help me?";
-  if (!sessionStorage.getItem("lct_lead_logged")) {
-    sessionStorage.setItem("lct_lead_logged", "1");
-    _sendLeadToCRM(text);
-  }
+  _logInquiryToCRM(text);
   window.location.href = "https://api.whatsapp.com/send?phone=" + WA_PHONE + "&text=" + encodeURIComponent(text);
 }
 
@@ -1208,44 +1205,103 @@ function _jsonpGet(url, cb) {
   document.head.appendChild(script);
 }
 
-function _sendLeadToCRM(inquiryMsg) {
+function _newLogId() {
+  return "L-" + Date.now() + "-" + Math.random().toString(36).substr(2, 5);
+}
+
+function _logInquiryToCRM(inquiryMsg) {
   var url = CRM_SYNC_URL + "?user=" + encodeURIComponent(CRM_NAMESPACE);
+  var savedId = localStorage.getItem("lct_lead_id") || "";
   _jsonpGet(url, function(state) {
     var now = Date.now();
+    var nowIso = new Date(now).toISOString();
+    var when = new Date(now).toLocaleString("en-US", { timeZone: "America/Mazatlan" });
+
     var guests = [];
     if (state && state.aetherion_guests) {
       try { guests = JSON.parse(state.aetherion_guests); } catch(e) {}
     }
-    var maxId = guests.reduce(function(m, g) {
-      var n = parseInt(String(g.id || "").replace("G-", ""), 10);
-      return isNaN(n) ? m : Math.max(m, n);
-    }, 1000);
-    var when = new Date(now).toLocaleString("en-US", { timeZone: "America/Mazatlan" });
-    var newGuest = {
-      id: "G-" + (maxId + 1),
-      name: "Website Lead — " + when,
-      email: "",
-      phone: "Check WhatsApp",
-      hotel: "",
-      room: "",
-      checkIn: "",
-      checkOut: "",
-      guestsCount: 1,
-      status: "Lead",
-      notes: "Website inquiry submitted " + when + ". Name and phone available in WhatsApp chat. Message sent: \"" + (inquiryMsg || "").replace(/"/g, "'") + "\"",
-      source: "Website",
-      updatedAt: now
-    };
-    guests.push(newGuest);
+    var logs = [];
+    if (state && state.aetherion_activitylog) {
+      try { logs = JSON.parse(state.aetherion_activitylog); } catch(e) {}
+    }
+
+    var existing = savedId ? guests.find(function(g) { return g && g.id === savedId; }) : null;
+    var guestId, guestName, isNewLead;
+    if (existing) {
+      guestId = existing.id;
+      guestName = existing.name;
+      existing.updatedAt = now;
+      var prevCount = parseInt(existing.inquiryCount || 0, 10) || 0;
+      existing.inquiryCount = prevCount + 1;
+      existing.lastInquiryAt = nowIso;
+      existing.notes = (existing.notes ? existing.notes + "\n" : "") + "[" + when + "] Website inquiry: " + inquiryMsg;
+      isNewLead = false;
+    } else {
+      var maxId = guests.reduce(function(m, g) {
+        var n = parseInt(String((g && g.id) || "").replace("G-", ""), 10);
+        return isNaN(n) ? m : Math.max(m, n);
+      }, 1000);
+      guestId = "G-" + (maxId + 1);
+      guestName = "Website Lead — " + when;
+      var newGuest = {
+        id: guestId,
+        name: guestName,
+        email: "",
+        phone: "Check WhatsApp",
+        hotel: "",
+        room: "",
+        checkIn: "",
+        checkOut: "",
+        guestsCount: 1,
+        status: "Lead",
+        notes: "[" + when + "] First website inquiry: " + inquiryMsg,
+        source: "Website",
+        inquiryCount: 1,
+        firstInquiryAt: nowIso,
+        lastInquiryAt: nowIso,
+        updatedAt: now
+      };
+      guests.push(newGuest);
+      localStorage.setItem("lct_lead_id", guestId);
+      isNewLead = true;
+    }
+
+    if (isNewLead) {
+      logs.push({
+        id: _newLogId(),
+        guestId: guestId,
+        guestName: guestName,
+        type: "lead",
+        description: "New website lead created from inquiry",
+        meta: { source: "Website" },
+        performedBy: "Website",
+        performedById: null,
+        timestamp: nowIso
+      });
+    }
+    logs.push({
+      id: _newLogId(),
+      guestId: guestId,
+      guestName: guestName,
+      type: "whatsapp",
+      description: "Website inquiry sent to WhatsApp: " + inquiryMsg,
+      meta: { source: "Website", message: inquiryMsg },
+      performedBy: "Website",
+      performedById: null,
+      timestamp: nowIso
+    });
+    if (logs.length > 1000) logs.splice(0, logs.length - 1000);
 
     var payload = {};
     if (state) {
       ["aetherion_users","aetherion_bookings","aetherion_tasks","aetherion_operators",
-       "aetherion_resorts","aetherion_settings","aetherion_activitylog","aetherion_tombstones"].forEach(function(k) {
+       "aetherion_resorts","aetherion_settings","aetherion_tombstones"].forEach(function(k) {
         if (state[k] != null) payload[k] = state[k];
       });
     }
     payload.aetherion_guests = JSON.stringify(guests);
+    payload.aetherion_activitylog = JSON.stringify(logs);
     payload.aetherion_last_updated = String(now);
 
     try {
