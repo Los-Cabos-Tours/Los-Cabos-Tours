@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
 <title>Los Cabos Tours — Explore Cabo, Your Way, All Day.</title>
 <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.14.0/tabler-icons.min.css" rel="stylesheet"/>
 <style>
@@ -391,7 +394,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
     <p class="hero-subtitle" id="hero-sub-text">Luxury tours, yacht charters, resort stays, fine dining, taxi & concierge — we handle everything so you focus on making memories in Baja California Sur.</p>
     <div class="hero-actions">
       <button class="btn btn-gold" onclick="scrollSec('packages')"><i class="ti ti-calendar"></i> VIEW PACKAGES</button>
-      <button class="btn btn-outline" onclick="openAI()"><i class="ti ti-robot"></i> TALK TO MARINA AI</button>
+      <button class="btn btn-outline" onclick="openWhatsApp()"><i class="ti ti-brand-whatsapp"></i> CHAT ON WHATSAPP</button>
     </div>
     <div class="hero-badges">
       <div class="hero-badge"><i class="ti ti-star-filled"></i> 4.9 rated</div>
@@ -890,7 +893,7 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
     </div>
   </div>
   <div style="position:relative;display:flex;align-items:center;gap:8px">
-    <div class="ai-tag" id="ai-tag">Chat with Marina</div>
+    <div class="ai-tag" id="ai-tag">Chat on WhatsApp</div>
     <button class="ai-btn" onclick="toggleAI()" id="ai-btn">
       <div class="ai-pulse"></div>
       <i class="ti ti-robot" id="ai-btn-ico"></i>
@@ -1014,7 +1017,7 @@ function renderExps(filter){
       var perUnit=t.pv?"/ vehicle":"/ pp";
       var priceHtml=t.p
         ?"<div class=\"exp-price\">"+t.p+" <small>"+perUnit+"</small></div>"
-        :"<div class=\"exp-price\" style=\"font-size:11px;color:var(--muted)\">Ask Marina</div>";
+        :"<div class=\"exp-price\" style=\"font-size:11px;color:var(--muted)\">Ask on WhatsApp</div>";
       var rawFee=t.f||"";
       var feeLabel=(!rawFee||/^(\+|Ask|Seasonal|Capacity|Incl)/.test(rawFee))?rawFee:("+ "+rawFee);
       var feeHtml=feeLabel?"<div class=\"exp-fee-note\">"+feeLabel+"</div>":"";
@@ -1100,41 +1103,13 @@ function getAIResp(m){
 }
 
 function toggleAI(){
-  aiOpen=!aiOpen;
-  document.getElementById("ai-win").classList.toggle("open",aiOpen);
-  var tag=document.getElementById("ai-tag");
-  if(tag) tag.style.display=aiOpen?"none":"block";
-  document.getElementById("ai-btn-ico").className=aiOpen?"ti ti-x":"ti ti-robot";
+  openWhatsApp("Hello! I would like to inquire about availability and pricing for your tours and services in Los Cabos. Can you help me?");
 }
 function openAI(service){
-
-  if(!aiOpen){
-    toggleAI();
-  }
-
-  if(service){
-
-    var msgs=document.getElementById("ai-msgs");
-
-    if(msgs){
-
-      msgs.innerHTML += `
-        <div class="am u">
-          <div class="am-b">
-            I need help with ${service}
-          </div>
-        </div>
-
-        <div class="am b">
-          <div class="am-b">
-            Great choice. Marina AI can help you book ${service}, answer questions, check availability, pricing, and help complete your reservation.
-          </div>
-        </div>
-      `;
-
-      msgs.scrollTop = msgs.scrollHeight;
-    }
-  }
+  var msg = service
+    ? "Hello! I am interested in " + service + ". Could you please share availability and pricing? Thank you!"
+    : "Hello! I would like to inquire about availability and pricing for your tours and services in Los Cabos. Can you help me?";
+  openWhatsApp(msg);
 }
 
 function closeAI(){
@@ -1420,7 +1395,7 @@ function buildCatalogHTML(companies) {
       var perUnit = t.pv ? " / vehicle" : " / pp";
       var priceCell = t.p
         ? "<div class=\"catalog-price\">"+t.p+"<span class=\"catalog-pp\">"+perUnit+"</span></div>"
-        : "<div class=\"catalog-ask\">Ask Marina</div>";
+        : "<div class=\"catalog-ask\">Ask on WhatsApp</div>";
       var rawFee = t.f || "";
       var feeLabel = (!rawFee || /^(\+|Ask|Seasonal|Capacity|Incl)/.test(rawFee)) ? rawFee : ("+ " + rawFee);
       var feeCell = feeLabel ? "<div class=\"catalog-fee\">"+feeLabel+"</div>" : "";
@@ -1964,7 +1939,7 @@ function openPackageBooking(name, totalPrice) {
           <i class="ti ti-brand-whatsapp" style="font-size:18px"></i>&nbsp;Book on WhatsApp
         </button>
         <button class="bk-marina-btn" onclick="askMarinaBooking()">
-          <i class="ti ti-robot" style="font-size:15px"></i>&nbsp;Ask Marina First
+          <i class="ti ti-brand-whatsapp" style="font-size:15px"></i>&nbsp;Ask on WhatsApp
         </button>
       </div>
     </div>
