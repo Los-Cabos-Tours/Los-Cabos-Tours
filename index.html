@@ -250,25 +250,6 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
 }
 
 /* ===== CUSTOMIZER PANEL ===== */
-/* ===== LEAD CAPTURE MODAL ===== */
-.lead-modal-ov{position:fixed;inset:0;background:rgba(7,15,28,.85);backdrop-filter:blur(4px);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px}
-.lead-modal-ov.open{display:flex}
-.lead-modal{background:linear-gradient(180deg,#0e1b32,#0a1628);border:1px solid rgba(201,168,76,.35);border-radius:12px;max-width:420px;width:100%;padding:28px 24px;box-shadow:0 20px 60px rgba(0,0,0,.6);position:relative}
-.lead-modal-ico{width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 6px 20px rgba(37,211,102,.35)}
-.lead-modal-ico i{font-size:28px;color:#fff}
-.lead-modal-title{font-family:'Cinzel',serif;font-size:20px;color:var(--gold);text-align:center;margin-bottom:6px;letter-spacing:.5px}
-.lead-modal-sub{font-size:12px;color:var(--muted);text-align:center;margin-bottom:20px;line-height:1.5}
-.lead-field{margin-bottom:14px}
-.lead-label{display:block;font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:6px;text-transform:uppercase}
-.lead-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.25);border-radius:6px;padding:11px 14px;color:#fff;font-size:14px;font-family:'Lato',sans-serif;outline:none;transition:border-color .2s}
-.lead-input:focus{border-color:var(--gold)}
-.lead-input::placeholder{color:rgba(255,255,255,.3)}
-.lead-modal-err{color:#ef4444;font-size:12px;text-align:center;margin-bottom:10px;min-height:18px}
-.lead-submit{width:100%;background:#25D366;color:#fff;border:none;border-radius:6px;padding:13px;font-size:13px;font-weight:700;letter-spacing:1.5px;cursor:pointer;font-family:'Lato',sans-serif;transition:opacity .2s;display:flex;align-items:center;justify-content:center;gap:8px;text-transform:uppercase}
-.lead-submit:hover{opacity:.92}
-.lead-submit:disabled{opacity:.6;cursor:wait}
-.lead-submit i{font-size:18px}
-.lead-fine{font-size:10px;color:rgba(255,255,255,.4);text-align:center;margin-top:12px;line-height:1.5}
 .cust-toggle{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:200;background:var(--gold);color:var(--navy);border:none;cursor:pointer;padding:10px 6px;border-radius:8px 0 0 8px;font-size:10px;font-weight:700;letter-spacing:1px;writing-mode:vertical-rl;font-family:'Lato',sans-serif}
 .cust-panel{position:fixed;top:0;right:-320px;width:320px;height:100vh;background:var(--navy2);border-left:.5px solid rgba(201,168,76,.25);z-index:201;overflow-y:auto;transition:right .3s;padding:20px}
 .cust-panel.open{right:0}
@@ -928,32 +909,6 @@ h1,h2,h3,.serif{font-family:'Cinzel',Georgia,serif}
   </div>
 </div>
 
-<!-- LEAD CAPTURE MODAL -->
-<div class="lead-modal-ov" id="lead-modal-ov" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
-  <div class="lead-modal">
-    <div class="lead-modal-ico"><i class="ti ti-brand-whatsapp"></i></div>
-    <div class="lead-modal-title" id="lead-modal-title">One quick step</div>
-    <div class="lead-modal-sub">Tell us who we're chatting with so our concierge can prepare your itinerary before we connect on WhatsApp.</div>
-    <form onsubmit="event.preventDefault();_submitLead();return false">
-      <div class="lead-field">
-        <label class="lead-label" for="lead-name">Full Name</label>
-        <input class="lead-input" type="text" id="lead-name" autocomplete="name" placeholder="John Smith" required/>
-      </div>
-      <div class="lead-field">
-        <label class="lead-label" for="lead-phone">Phone / WhatsApp</label>
-        <input class="lead-input" type="tel" id="lead-phone" autocomplete="tel" placeholder="+1 555 123 4567" required/>
-      </div>
-      <div class="lead-field">
-        <label class="lead-label" for="lead-email">Email <span style="color:rgba(255,255,255,.35);letter-spacing:.5px;text-transform:none">(optional)</span></label>
-        <input class="lead-input" type="email" id="lead-email" autocomplete="email" placeholder="john@email.com"/>
-      </div>
-      <div class="lead-modal-err" id="lead-modal-err"></div>
-      <button class="lead-submit" type="submit" id="lead-submit-btn"><i class="ti ti-brand-whatsapp"></i> Continue to WhatsApp</button>
-      <div class="lead-fine">By continuing, you agree to be contacted by Los Cabos Tours about your inquiry.</div>
-    </form>
-  </div>
-</div>
-
 <!-- WA FLOAT -->
 <div class="wa-float-wrap">
   <div class="wa-tag">WhatsApp</div>
@@ -1209,58 +1164,18 @@ function toggleSec(id,btn){
 }
 
 
-// ===== WHATSAPP + CRM LEAD CAPTURE =====
+// ===== WHATSAPP + SILENT CRM LEAD CAPTURE =====
 var CRM_SYNC_URL = "https://script.google.com/macros/s/AKfycbwnKUCCXJrgkzLU1z665lDnnU1B6voYeuvdU9INNmWfXgeHPsJAapGUNR9yEafoLlJY/exec";
 var CRM_NAMESPACE = "default";
 var WA_PHONE = "526245181970";
 
-function _waUrl(msg) {
-  var text = msg || "Hello! I'm interested in booking a tour or package in Los Cabos. Can you help me?";
-  return "https://api.whatsapp.com/send?phone=" + WA_PHONE + "&text=" + encodeURIComponent(text);
-}
-
 function openWhatsApp(msg) {
-  var captured = sessionStorage.getItem("lct_lead_captured");
-  if (captured) {
-    window.location.href = _waUrl(msg);
-    return;
+  var text = msg || "Hello! I'm interested in booking a tour or package in Los Cabos. Can you help me?";
+  if (!sessionStorage.getItem("lct_lead_logged")) {
+    sessionStorage.setItem("lct_lead_logged", "1");
+    _sendLeadToCRM(text);
   }
-  _showLeadModal(msg);
-}
-
-function _showLeadModal(msg) {
-  var ov = document.getElementById("lead-modal-ov");
-  if (!ov) return;
-  ov.setAttribute("data-pending-msg", msg || "");
-  document.getElementById("lead-modal-err").textContent = "";
-  document.getElementById("lead-name").value = "";
-  document.getElementById("lead-phone").value = "";
-  document.getElementById("lead-email").value = "";
-  ov.classList.add("open");
-  document.body.style.overflow = "hidden";
-  setTimeout(function() { document.getElementById("lead-name").focus(); }, 100);
-}
-
-function _submitLead() {
-  var name = document.getElementById("lead-name").value.trim();
-  var phone = document.getElementById("lead-phone").value.trim();
-  var email = document.getElementById("lead-email").value.trim();
-  var err = document.getElementById("lead-modal-err");
-  if (!name || name.length < 2) { err.textContent = "Please enter your full name."; return; }
-  if (!phone || phone.replace(/\D/g, "").length < 7) { err.textContent = "Please enter a valid phone number."; return; }
-
-  var ov = document.getElementById("lead-modal-ov");
-  var pendingMsg = ov.getAttribute("data-pending-msg") || "";
-  var btn = document.getElementById("lead-submit-btn");
-  btn.disabled = true;
-  btn.innerHTML = "<i class=\"ti ti-loader-2\"></i> Connecting…";
-
-  sessionStorage.setItem("lct_lead_captured", "1");
-  _sendLeadToCRM({ name: name, phone: phone, email: email, source: pendingMsg || "Website inquiry" });
-
-  setTimeout(function() {
-    window.location.href = _waUrl(pendingMsg);
-  }, 600);
+  window.location.href = "https://api.whatsapp.com/send?phone=" + WA_PHONE + "&text=" + encodeURIComponent(text);
 }
 
 function _jsonpGet(url, cb) {
@@ -1273,7 +1188,7 @@ function _jsonpGet(url, cb) {
     delete window[name];
     if (script.parentNode) script.parentNode.removeChild(script);
     cb(null);
-  }, 5000);
+  }, 4000);
   window[name] = function(data) {
     if (done) return;
     done = true;
@@ -1293,7 +1208,7 @@ function _jsonpGet(url, cb) {
   document.head.appendChild(script);
 }
 
-function _sendLeadToCRM(lead) {
+function _sendLeadToCRM(inquiryMsg) {
   var url = CRM_SYNC_URL + "?user=" + encodeURIComponent(CRM_NAMESPACE);
   _jsonpGet(url, function(state) {
     var now = Date.now();
@@ -1305,18 +1220,19 @@ function _sendLeadToCRM(lead) {
       var n = parseInt(String(g.id || "").replace("G-", ""), 10);
       return isNaN(n) ? m : Math.max(m, n);
     }, 1000);
+    var when = new Date(now).toLocaleString("en-US", { timeZone: "America/Mazatlan" });
     var newGuest = {
       id: "G-" + (maxId + 1),
-      name: lead.name,
-      email: lead.email || "",
-      phone: lead.phone,
+      name: "Website Lead — " + when,
+      email: "",
+      phone: "Check WhatsApp",
       hotel: "",
       room: "",
       checkIn: "",
       checkOut: "",
       guestsCount: 1,
       status: "Lead",
-      notes: "Website inquiry — " + (lead.source || "general"),
+      notes: "Website inquiry submitted " + when + ". Name and phone available in WhatsApp chat. Message sent: \"" + (inquiryMsg || "").replace(/"/g, "'") + "\"",
       source: "Website",
       updatedAt: now
     };
